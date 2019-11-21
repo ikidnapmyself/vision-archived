@@ -6,26 +6,39 @@ use Illuminate\Support\Str;
 
 trait HasUUID
 {
-
-    /**
-     * Generate UUID.
-     *
-     * @return string
-     */
-    private static function UUID()
-    {
-        return (string) Str::uuid();
-    }
-
     /**
      * Boot model class.
      */
-    protected static function boot()
+    protected static function bootHasUUID()
     {
-        parent::boot();
-
         static::creating(function ($model) {
-            $model->{$model->getKeyName()} = self::UUID();
+            /**
+             * @var \Illuminate\Database\Eloquent\Model $model
+             */
+            if (!$model->getKey())
+            {
+                $model->{$model->getKeyName()} = Str::uuid()->toString();
+            }
         });
+    }
+
+    /**
+     * Do not increment primary key.
+     *
+     * @return bool
+     */
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    /**
+     * Return primary key type.
+     *
+     * @return string
+     */
+    public function getKeyType()
+    {
+        return 'string';
     }
 }
