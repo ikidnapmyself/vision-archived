@@ -15,13 +15,6 @@ class User extends Authenticatable
     use HasUUID, Notifiable, SoftDeletes, HasRoles, CanResetPassword;
 
     /**
-     * Set auto incrementing for primary key.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
