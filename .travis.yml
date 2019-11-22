@@ -14,10 +14,12 @@ cache:
     - vendor
 
 before_script:
+  - mysql --version
   - cp .env.example .env
   - sudo mysql -e 'CREATE DATABASE laravel;'
   - composer self-update
   - composer install --no-interaction
+  - php artisan key:generate
   - php artisan migrate --no-interaction -vvv
 
 script:
