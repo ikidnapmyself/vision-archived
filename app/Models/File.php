@@ -17,15 +17,15 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'mime_type', 'path', 'size', 'source', 'user_id', 'parent_id', 'parent_type'
+        'name', 'mime_type', 'path', 'size', 'source', 'user_id', 'parent_id', 'parent_type',
     ];
 
-    #############################
-    ### ACCESSORS             ###
-    #############################
+    //############################
+    //## ACCESSORS             ###
+    //############################
 
     /**
-     * Get parent resource class
+     * Get parent resource class.
      *
      * @return string
      */

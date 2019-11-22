@@ -2,7 +2,7 @@
 
 namespace App\Abilities;
 
-use \Illuminate\Notifications\Notifiable as BaseNotifiable;
+use Illuminate\Notifications\Notifiable as BaseNotifiable;
 
 trait Notifiable
 {

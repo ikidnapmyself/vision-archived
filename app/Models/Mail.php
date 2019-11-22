@@ -12,6 +12,6 @@ class Mail extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'to', 'created_at', 'updated_at'
+        'id', 'name', 'to', 'created_at', 'updated_at',
     ];
 }

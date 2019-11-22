@@ -17,12 +17,12 @@ class Taggable extends Model
      */
     public $timestamps = false;
 
-    #############################
-    ### MUTATORS              ###
-    #############################
+    //############################
+    //## MUTATORS              ###
+    //############################
 
     /**
-     * Set type
+     * Set type.
      *
      * @param  string  $value
      * @return void

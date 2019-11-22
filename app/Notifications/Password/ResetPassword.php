@@ -3,9 +3,8 @@
 namespace App\Notifications\Password;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class ResetPassword extends Notification
 {
@@ -63,7 +62,7 @@ class ResetPassword extends Notification
             ->greeting(__('emails.greetings', ['full_name' => $notifiable->full_name]))
             ->subject(__('emails.password.sent.subject'))
             ->line(__('emails.password.sent.line_1'))
-            ->action(__('emails.password.sent.action_1'), url(config('app.preferred_url') . "/login?token={$this->token}"))
+            ->action(__('emails.password.sent.action_1'), url(config('app.preferred_url')."/login?token={$this->token}"))
             ->line(__('emails.password.sent.line_2'));
     }
 

@@ -18,7 +18,7 @@ class Note extends Model
      * @var array
      */
     protected $fillable = [
-        'notable_id', 'notable_type', 'body'
+        'notable_id', 'notable_type', 'body',
     ];
 
     /**
@@ -27,7 +27,7 @@ class Note extends Model
      * @var array
      */
     protected $with = [
-        'user'
+        'user',
     ];
 
     /**
@@ -46,25 +46,25 @@ class Note extends Model
         static::addGlobalScope(new NoteScope);
     }
 
-    #############################
-    ### ACCESSORS             ###
-    #############################
+    //############################
+    //## ACCESSORS             ###
+    //############################
 
     /**
-     * Get expected top_id for top level ids
+     * Get expected top_id for top level ids.
      *
      * @return string
      */
     public function getTypeNameAttribute()
     {
         $notableType = $this->notable_type;
-        $modelName   = last(explode('\\', $notableType));
+        $modelName = last(explode('\\', $notableType));
 
         return strtolower($modelName);
     }
 
     /**
-     * Get parent resource class
+     * Get parent resource class.
      *
      * @return string
      */
@@ -77,12 +77,12 @@ class Note extends Model
         return "\App\Http\Resources\\{$model}Resource";
     }
 
-    #############################
-    ### MUTATORS              ###
-    #############################
+    //############################
+    //## MUTATORS              ###
+    //############################
 
     /**
-     * Set the user's name
+     * Set the user's name.
      *
      * @param  string  $value
      * @return void
@@ -100,9 +100,9 @@ class Note extends Model
         return $this->morphTo();
     }
 
-    #############################
-    ### PARENT OF             ###
-    #############################
+    //############################
+    //## PARENT OF             ###
+    //############################
 
     /**
      * Get all files.
@@ -112,9 +112,9 @@ class Note extends Model
         return $this->morphMany('App\File', 'parent');
     }
 
-    #############################
-    ### CHILD OF              ###
-    #############################
+    //############################
+    //## CHILD OF              ###
+    //############################
 
     /**
      * Get parent data for the relation.

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 
-
 class Task extends Model
 {
     use HasUUID, SoftDeletes, HasRoles;
@@ -19,7 +18,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'name', 'body', 'status', 'starred'
+        'parent_id', 'name', 'body', 'status', 'starred',
     ];
 
     /**
@@ -38,12 +37,12 @@ class Task extends Model
         static::addGlobalScope(new TaskScope);
     }
 
-    #############################
-    ### ACCESSORS             ###
-    #############################
+    //############################
+    //## ACCESSORS             ###
+    //############################
 
     /**
-     * Get expected top_id for top level ids
+     * Get expected top_id for top level ids.
      *
      * @return string
      */
@@ -53,7 +52,7 @@ class Task extends Model
     }
 
     /**
-     * Get the class name
+     * Get the class name.
      *
      * @return string
      */
@@ -63,7 +62,7 @@ class Task extends Model
     }
 
     /**
-     * Get the class name
+     * Get the class name.
      *
      * @return string
      */
@@ -72,24 +71,24 @@ class Task extends Model
         return $this->status;
     }
 
-    #############################
-    ### SCOPES                ###
-    #############################
+    //############################
+    //## SCOPES                ###
+    //############################
 
     /**
-     * Local scope to retrieve top level records
+     * Local scope to retrieve top level records.
      */
     public static function scopeRoot()
     {
         return self::whereNull('top_id');
     }
 
-    #############################
-    ### CHILD OF              ###
-    #############################
+    //############################
+    //## CHILD OF              ###
+    //############################
 
     /**
-     * Get project
+     * Get project.
      */
     public function project()
     {
@@ -97,7 +96,7 @@ class Task extends Model
     }
 
     /**
-     * Get top task
+     * Get top task.
      */
     public function top()
     {
@@ -105,19 +104,19 @@ class Task extends Model
     }
 
     /**
-     * Get parent task
+     * Get parent task.
      */
     public function parent()
     {
         return $this->hasOne('App\Task', 'id', 'parent_id');
     }
 
-    #############################
-    ### PARENT OF             ###
-    #############################
+    //############################
+    //## PARENT OF             ###
+    //############################
 
     /**
-     * Get children variables
+     * Get children variables.
      */
     public function __children()
     {
@@ -125,7 +124,7 @@ class Task extends Model
     }
 
     /**
-     * Get children variables
+     * Get children variables.
      */
     public function _children()
     {
@@ -133,7 +132,7 @@ class Task extends Model
     }
 
     /**
-     * Get children tasks
+     * Get children tasks.
      */
     public function children()
     {

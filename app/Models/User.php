@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Traits\HasUUID;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -43,7 +43,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set the user's name
+     * Set the user's name.
      *
      * @param  string  $value
      * @return void

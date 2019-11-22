@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAssigneesTable extends Migration
 {
@@ -14,7 +14,7 @@ class CreateAssigneesTable extends Migration
     public function up()
     {
 
-        /**
+        /*
          * We can easily determine sibling records with unifier indexes
          * parent_id is no longer required.
          *
@@ -30,13 +30,13 @@ class CreateAssigneesTable extends Migration
             $table->dateTime('defer')->nullable();
             $table->unsignedInteger('estimated_time')->nullable();      // minutes
             $table->boolean('blocker')->default(0);
-            /**
+            /*
              * LABEL / STATUS / STATE
              */
             $table->timestamps();
             $table->softDeletes();
 
-            /**
+            /*
              * Indexes
              */
             $table->primary('id');

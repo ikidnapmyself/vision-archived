@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use \Spatie\Permission\Traits\HasRoles as BaseRoles;
+use Spatie\Permission\Traits\HasRoles as BaseRoles;
 
 trait HasRoles
 {

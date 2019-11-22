@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateFilesTable extends Migration
 {
@@ -30,7 +30,6 @@ class CreateFilesTable extends Migration
             $table->index(['morph_id', 'morph_type']);
             $table->foreign('user_id')->references('id')->on('users');
         });
-
     }
 
     /**
