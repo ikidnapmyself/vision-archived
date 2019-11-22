@@ -12,7 +12,7 @@ trait HasUUID
     protected static function bootHasUUID()
     {
         static::creating(function ($model) {
-            /**
+            /*
              * @var \Illuminate\Database\Eloquent\Model
              */
             if (! $model->getKey()) {
