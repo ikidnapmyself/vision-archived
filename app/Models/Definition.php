@@ -11,7 +11,7 @@ class Definition extends Model
 {
     use HasUUID, SoftDeletes, HasRoles;
 
-    const PROJECT  = 0;
+    const PROJECT = 0;
     const DOCUMENT = 1;
 
     /**
@@ -24,46 +24,44 @@ class Definition extends Model
     ];
 
     /**
-     * Get definition type
+     * Get definition type.
      *
      * @return string
      */
     public function getDefinitionTypeAttribute()
     {
-        if($this->type === self::PROJECT)
-        {
+        if ($this->type === self::PROJECT) {
             return 'project';
-        } else if($this->type === self::DOCUMENT) {
+        } elseif ($this->type === self::DOCUMENT) {
             return 'document';
         }
     }
 
-    #############################
-    ### MUTATORS              ###
-    #############################
+    //############################
+    //## MUTATORS              ###
+    //############################
 
     /**
-     * Remove whitespaces in JSON body
+     * Remove whitespaces in JSON body.
      *
      * @param  string  $value
      * @return void
      */
     public function setTypeAttribute($value)
     {
-        if($value === 'project')
-        {
+        if ($value === 'project') {
             $this->attributes['type'] = self::PROJECT;
         } else {
             $this->attributes['type'] = self::DOCUMENT;
         }
     }
 
-    #############################
-    ### SCOPES                ###
-    #############################
+    //############################
+    //## SCOPES                ###
+    //############################
 
     /**
-     * Local scope to retrieve top level records
+     * Local scope to retrieve top level records.
      */
     public static function scopeProject()
     {
@@ -71,7 +69,7 @@ class Definition extends Model
     }
 
     /**
-     * Local scope to retrieve top level records
+     * Local scope to retrieve top level records.
      */
     public static function scopeDocument()
     {
@@ -79,7 +77,7 @@ class Definition extends Model
     }
 
     /**
-     * Get top definition
+     * Get top definition.
      */
     public function top()
     {
@@ -87,7 +85,7 @@ class Definition extends Model
     }
 
     /**
-     * Get parent definition
+     * Get parent definition.
      */
     public function parent()
     {

@@ -11,12 +11,12 @@ class Category extends Model
 {
     use HasUUID, SoftDeletes, HasRoles;
 
-    #############################
-    ### ACCESSORS             ###
-    #############################
+    //############################
+    //## ACCESSORS             ###
+    //############################
 
     /**
-     * Get expected top_id for top level ids
+     * Get expected top_id for top level ids.
      *
      * @return string
      */
@@ -25,12 +25,12 @@ class Category extends Model
         return $this->top_id ? $this->top_id : $this->id;
     }
 
-    #############################
-    ### MUTATORS              ###
-    #############################
+    //############################
+    //## MUTATORS              ###
+    //############################
 
     /**
-     * Set the user's name
+     * Set the user's name.
      *
      * @param  string  $value
      * @return void
@@ -40,24 +40,24 @@ class Category extends Model
         $this->attributes['name'] = title_case($value);
     }
 
-    #############################
-    ### SCOPES                ###
-    #############################
+    //############################
+    //## SCOPES                ###
+    //############################
 
     /**
-     * Local scope to retrieve top level records
+     * Local scope to retrieve top level records.
      */
     public static function scopeRoot()
     {
         return self::whereNull('top_id');
     }
 
-    #############################
-    ### CHILD OF              ###
-    #############################
+    //############################
+    //## CHILD OF              ###
+    //############################
 
     /**
-     * Get top definition
+     * Get top definition.
      */
     public function top()
     {
@@ -65,19 +65,19 @@ class Category extends Model
     }
 
     /**
-     * Get parent definition
+     * Get parent definition.
      */
     public function parent()
     {
         return $this->belongsTo('App\Category', 'id', 'parent_id');
     }
 
-    #############################
-    ### PARENT OF             ###
-    #############################
+    //############################
+    //## PARENT OF             ###
+    //############################
 
     /**
-     * Get children variables
+     * Get children variables.
      */
     public function __children()
     {
@@ -85,7 +85,7 @@ class Category extends Model
     }
 
     /**
-     * Get children categories
+     * Get children categories.
      */
     public function _children()
     {
@@ -93,7 +93,7 @@ class Category extends Model
     }
 
     /**
-     * Get children categories recursively
+     * Get children categories recursively.
      */
     public function children()
     {

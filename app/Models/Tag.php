@@ -16,12 +16,12 @@ class Tag extends Model
      */
     public $timestamps = false;
 
-    #############################
-    ### MUTATORS              ###
-    #############################
+    //############################
+    //## MUTATORS              ###
+    //############################
 
     /**
-     * Set the user's name
+     * Set the user's name.
      *
      * @param  string  $value
      * @return void

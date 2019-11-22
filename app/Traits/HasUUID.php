@@ -13,10 +13,9 @@ trait HasUUID
     {
         static::creating(function ($model) {
             /**
-             * @var \Illuminate\Database\Eloquent\Model $model
+             * @var \Illuminate\Database\Eloquent\Model
              */
-            if (!$model->getKey())
-            {
+            if (! $model->getKey()) {
                 $model->{$model->getKeyName()} = Str::uuid()->toString();
             }
         });

@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use App\Traits\HasUUID;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
@@ -25,12 +25,12 @@ class Assignee extends Model
      * @var array
      */
     protected $fillable = [
-        'assigned_by', 'user_id', 'task_id', 'due', 'defer', 'estimated_time', 'blocker', 'flagged'
+        'assigned_by', 'user_id', 'task_id', 'due', 'defer', 'estimated_time', 'blocker', 'flagged',
     ];
 
-    #############################
-    ### ACCESSORS             ###
-    #############################
+    //############################
+    //## ACCESSORS             ###
+    //############################
 
     /**
      * Determine if assignation has been expired.
@@ -39,7 +39,7 @@ class Assignee extends Model
      */
     public function getExpiredAttribute(): bool
     {
-        $date   = new Carbon();
+        $date = new Carbon();
         $date->setToStringFormat('Y-m-d H:i:s');
         $expiry = (bool) ($this->due && $date > $this->due);
 
@@ -53,9 +53,8 @@ class Assignee extends Model
      */
     public function getMustStartUntilAttribute(): ?string
     {
-        if($this->due && $this->estimated_time)
-        {
-            $date   = new Carbon($this->due);
+        if ($this->due && $this->estimated_time) {
+            $date = new Carbon($this->due);
             $date->subMinutes($this->estimated_time)->setToStringFormat('Y-m-d H:i:s');
 
             return $date;
@@ -71,17 +70,16 @@ class Assignee extends Model
      */
     public function getDeferredAttribute(): bool
     {
-        if($this->defer)
-        {
+        if ($this->defer) {
             return new Carbon($this->defer) > Carbon::now();
         }
 
         return false;
     }
 
-    #############################
-    ### CHILD OF              ###
-    #############################
+    //############################
+    //## CHILD OF              ###
+    //############################
 
     /**
      * Get user data for the relation.
