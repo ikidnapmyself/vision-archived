@@ -137,7 +137,7 @@ checks:
     fix_php_opening_tag: true
     fix_line_ending: true
     fix_identation_4spaces: true
-    fix_doc_comments: true
+    fix_doc_comments: tru
     ensure_lower_case_builtin_functions: true
     encourage_postdec_operator: true
     classes_in_camel_caps: true
