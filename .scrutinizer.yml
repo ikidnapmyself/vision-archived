@@ -4,6 +4,10 @@ build:
       version: 7.3
   services:
     mysql: 5.7
+  project_setup:
+    after:
+      - command: 'php artisan key:generate'
+
 filter:
   paths:
     - 'app/*'
