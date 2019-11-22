@@ -6,7 +6,7 @@ php:
   - 7.3
 
 addons:
-  - mysql
+  - mysql: 5.7
 
 cache:
   directories:
@@ -15,7 +15,7 @@ cache:
 
 before_script:
   - cp .env.example .env
-  - sudo mysql -e 'CREATE DATABASE testing;'
+  - sudo mysql -e 'CREATE DATABASE laravel;'
   - composer self-update
   - composer install --no-interaction
   - php artisan migrate --no-interaction -vvv
