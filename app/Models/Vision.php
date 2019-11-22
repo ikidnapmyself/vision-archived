@@ -20,9 +20,9 @@ class Vision extends Model
         'id', 'name', 'body', 'created_by',
     ];
 
-    #############################
-    ### ACCESSORS             ###
-    #############################
+    //############################
+    //## ACCESSORS             ###
+    //############################
 
     /**
      * Return if it's defined by default.
@@ -34,12 +34,12 @@ class Vision extends Model
         return (bool) is_null($this->created_by);
     }
 
-    #############################
-    ### MUTATORS              ###
-    #############################
+    //############################
+    //## MUTATORS              ###
+    //############################
 
     /**
-     * Remove whitespaces in JSON body
+     * Remove whitespaces in JSON body.
      *
      * @param  string  $value
      * @return void
@@ -49,21 +49,21 @@ class Vision extends Model
         $this->attributes['body'] = json_encode(json_decode($value));
     }
 
-    #############################
-    ### SCOPES                ###
-    #############################
+    //############################
+    //## SCOPES                ###
+    //############################
 
     /**
-     * Local scope to retrieve top level records
+     * Local scope to retrieve top level records.
      */
     public static function scopeUserDefined()
     {
         return self::whereNotNull('created_by');
     }
 
-    #############################
-    ### CHILD OF              ###
-    #############################
+    //############################
+    //## CHILD OF              ###
+    //############################
 
     /**
      * Get user data for the relation.
@@ -72,5 +72,4 @@ class Vision extends Model
     {
         return $this->belongsTo('App\User', 'created_by', 'id');
     }
-
 }

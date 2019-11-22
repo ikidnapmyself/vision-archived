@@ -20,30 +20,28 @@ class Project extends Model
         'name',
     ];
 
-    #############################
-    ### PARENT OF             ###
-    #############################
+    //############################
+    //## PARENT OF             ###
+    //############################
 
     /**
-     * Get children tasks
+     * Get children tasks.
      */
     public function topChildren()
     {
         return $this->hasMany('App\Task', 'project_id', 'id')->whereNull('top_id');
     }
 
-
     /**
-     * Get children tasks
+     * Get children tasks.
      */
     public function children()
     {
         return $this->hasMany('App\Task', 'project_id', 'id')->whereNull('top_id')->with(['children', 'assignees']);
     }
 
-
     /**
-     * Get children tasks with assignees
+     * Get children tasks with assignees.
      */
     public function withAssignees()
     {
@@ -51,7 +49,7 @@ class Project extends Model
     }
 
     /**
-     * Get children tasks
+     * Get children tasks.
      */
     public function allRelations()
     {

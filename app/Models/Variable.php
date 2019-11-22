@@ -20,12 +20,12 @@ class Variable extends Model
         'parent_id', 'name', 'body',
     ];
 
-    #############################
-    ### ACCESSORS             ###
-    #############################
+    //############################
+    //## ACCESSORS             ###
+    //############################
 
     /**
-     * Get expected top_id for top level ids
+     * Get expected top_id for top level ids.
      *
      * @return string
      */
@@ -45,7 +45,7 @@ class Variable extends Model
     }
 
     /**
-     * Get the class name
+     * Get the class name.
      *
      * @return string
      */
@@ -55,14 +55,13 @@ class Variable extends Model
     }
 
     /**
-     * Get depth of a variable
+     * Get depth of a variable.
      *
      * @return int
      */
     public function getDepthAttribute()
     {
-        if(!$this->parent_name)
-        {
+        if (! $this->parent_name) {
             return 1;
         }
 
@@ -71,12 +70,12 @@ class Variable extends Model
         return $count;
     }
 
-    #############################
-    ### MUTATORS              ###
-    #############################
+    //############################
+    //## MUTATORS              ###
+    //############################
 
     /**
-     * Set the user's name
+     * Set the user's name.
      *
      * @param  string  $value
      * @return void
@@ -86,24 +85,24 @@ class Variable extends Model
         $this->attributes['name'] = strtolower($value);
     }
 
-    #############################
-    ### SCOPES                ###
-    #############################
+    //############################
+    //## SCOPES                ###
+    //############################
 
     /**
-     * Local scope to retrieve top level records
+     * Local scope to retrieve top level records.
      */
     public static function scopeRoot()
     {
         return self::whereNull('top_id');
     }
 
-    #############################
-    ### CHILD OF              ###
-    #############################
+    //############################
+    //## CHILD OF              ###
+    //############################
 
     /**
-     * Get top definition
+     * Get top definition.
      */
     public function top()
     {
@@ -111,19 +110,19 @@ class Variable extends Model
     }
 
     /**
-     * Get parent definition
+     * Get parent definition.
      */
     public function parent()
     {
         return $this->belongsTo('App\Variable', 'id', 'parent_id');
     }
 
-    #############################
-    ### PARENT OF             ###
-    #############################
+    //############################
+    //## PARENT OF             ###
+    //############################
 
     /**
-     * Get children variables
+     * Get children variables.
      */
     public function __children()
     {
@@ -131,7 +130,7 @@ class Variable extends Model
     }
 
     /**
-     * Get children variables
+     * Get children variables.
      */
     public function _children()
     {
@@ -139,7 +138,7 @@ class Variable extends Model
     }
 
     /**
-     * Get children variables recursively
+     * Get children variables recursively.
      */
     public function children()
     {
