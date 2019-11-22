@@ -6,6 +6,7 @@ build:
     mysql: 5.7
   project_setup:
     after:
+      - command: 'php -r "file_exists(\".env\") || copy(\".env.example\", \".env\");"'
       - command: 'php artisan key:generate'
 
 filter:
