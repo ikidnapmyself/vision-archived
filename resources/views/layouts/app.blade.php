@@ -36,7 +36,16 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bolder"
+                                   href="#"
+                                   role="button"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false" v-pre>
+                                    <img src="{{ Auth::user()->getUrlfriendlyAvatar() }}"
+                                         alt="{{ Auth::user()->full_name }}"
+                                         title="{{ Auth::user()->full_name }}"
+                                         class="rounded-sm" style="max-height: 30px;">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
