@@ -21,7 +21,7 @@ class CreateBoardsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->primary();
+            $table->primary('id');
         });
     }
 
