@@ -68,5 +68,6 @@
             <p>© {{ config('app.name') }} {{ date('Y') }}</p>
         </footer>
     </div>
+    <script src="//kit.fontawesome.com/{{ config('ui.font_awesome') }}.js" crossorigin="anonymous"></script>
 </body>
 </html>
