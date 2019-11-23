@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasAvatar;
 use App\Traits\HasUUID;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasUUID, Notifiable, SoftDeletes, HasRoles, CanResetPassword;
+    use HasAvatar, HasUUID, Notifiable, HasRoles, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +32,27 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get Gravatar.
+     *
+     * @param int $size
+     * @return string
+     */
+    public function getAvatar($size = 64)
+    {
+        return $this->getGravatar($this->email, $size);
+    }
+
+    /**
+     * Get avatar name key.
+     *
+     * @return string
+     */
+    public function getAvatarNameKey()
+    {
+        return 'full_name';
+    }
 
     /**
      * Get the user's full name.
