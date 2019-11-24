@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use App\Traits\HasAvatar;
+use App\Traits\HasRoles;
 use App\Traits\HasUUID;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasAvatar, HasUUID, Notifiable, HasRoles, CanResetPassword;
+    use CanResetPassword, HasAvatar, HasRoles, HasUUID, Notifiable;
 
     /**
      * The attributes that are mass assignable.

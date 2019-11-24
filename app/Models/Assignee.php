@@ -6,18 +6,10 @@ use App\Traits\HasUUID;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Permission\Traits\HasRoles;
 
 class Assignee extends Model
 {
-    use HasUUID, SoftDeletes, HasRoles;
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'assignees';
+    use HasUUID, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -25,22 +17,19 @@ class Assignee extends Model
      * @var array
      */
     protected $fillable = [
-        'assigned_by', 'user_id', 'task_id', 'due', 'defer', 'estimated_time', 'blocker', 'flagged',
+        'assigned_by', 'user_id', 'task_id', 'due', 'defer', 'estimated_time', 'blocker',
     ];
-
-    //############################
-    //## ACCESSORS             ###
-    //############################
 
     /**
      * Determine if assignation has been expired.
      *
      * @return bool
+     * @throws \Exception
      */
     public function getExpiredAttribute(): bool
     {
         $date = new Carbon();
-        $date->setToStringFormat('Y-m-d H:i:s');
+        $date->format('Y-m-d H:i:s');
         $expiry = (bool) ($this->due && $date > $this->due);
 
         return (bool) $expiry;
@@ -50,12 +39,13 @@ class Assignee extends Model
      * Calculates due date - estimated time.
      *
      * @return null|string
+     * @throws \Exception
      */
     public function getMustStartUntilAttribute(): ?string
     {
         if ($this->due && $this->estimated_time) {
             $date = new Carbon($this->due);
-            $date->subMinutes($this->estimated_time)->setToStringFormat('Y-m-d H:i:s');
+            $date->subMinutes($this->estimated_time)->format('Y-m-d H:i:s');
 
             return $date;
         }
@@ -67,6 +57,7 @@ class Assignee extends Model
      * Determine if assignation is deferred.
      *
      * @return bool
+     * @throws \Exception
      */
     public function getDeferredAttribute(): bool
     {
@@ -77,16 +68,12 @@ class Assignee extends Model
         return false;
     }
 
-    //############################
-    //## CHILD OF              ###
-    //############################
-
     /**
      * Get user data for the relation.
      */
     public function assignedBy()
     {
-        return $this->belongsTo('App\User', 'assigned_by', 'id');
+        return $this->belongsTo('App\Models\User', 'assigned_by', 'id');
     }
 
     /**
@@ -94,14 +81,14 @@ class Assignee extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
     /**
      * Get user data for the relation.
      */
-    public function assigned()
+    public function task()
     {
-        return $this->belongsTo('App\Task', 'task_id', 'id');
+        return $this->belongsTo('App\Models\Task', 'task_id', 'id');
     }
 }

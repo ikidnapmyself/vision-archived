@@ -1,15 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Permission\Traits\HasRoles;
 
 class Definition extends Model
 {
-    use HasUUID, SoftDeletes, HasRoles;
+    use HasUUID, SoftDeletes;
 
     const PROJECT = 0;
     const DOCUMENT = 1;

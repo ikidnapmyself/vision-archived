@@ -6,7 +6,7 @@ use App\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Variable extends Model
+class Team extends Model
 {
     use HasUUID, SoftDeletes;
 
@@ -16,17 +16,6 @@ class Variable extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'body',
+        'name', 'description', 'team',
     ];
-
-    /**
-     * Set the user's name.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = strtolower($value);
-    }
 }

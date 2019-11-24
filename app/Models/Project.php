@@ -1,15 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Permission\Traits\HasRoles;
 
 class Project extends Model
 {
-    use HasUUID, SoftDeletes, HasRoles;
+    use HasUUID, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,42 +16,30 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'type', 'due', 'defer', 'status', 'starred', 'flagged', 'last_action_complete', 'completed_at'
     ];
 
-    //############################
-    //## PARENT OF             ###
-    //############################
-
     /**
-     * Get children tasks.
+     * Get board of the project.
      */
-    public function topChildren()
+    public function board()
     {
-        return $this->hasMany('App\Task', 'project_id', 'id')->whereNull('top_id');
-    }
-
-    /**
-     * Get children tasks.
-     */
-    public function children()
-    {
-        return $this->hasMany('App\Task', 'project_id', 'id')->whereNull('top_id')->with(['children', 'assignees']);
+        return $this->belongsTo('App\Models\Board');
     }
 
     /**
      * Get children tasks with assignees.
      */
-    public function withAssignees()
+    public function tasks()
     {
-        return $this->hasMany('App\Task', 'project_id', 'id')->whereNull('top_id')->with(['children', 'assignees']);
+        return $this->hasMany('App\Models\Task', 'project_id');
     }
 
     /**
      * Get children tasks.
      */
-    public function allRelations()
+    public function assignees()
     {
-        return $this->hasManyThrough('App\Assignee', 'App\Task');
+        return $this->hasManyThrough('App\Models\Assignee', 'App\Task');
     }
 }
