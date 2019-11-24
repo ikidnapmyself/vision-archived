@@ -15,11 +15,11 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->uuid('id');
+            $table->uuid('board_id')->nullable();
             $table->string('name');
             $table->unsignedInteger('type');
             $table->dateTime('due')->nullable();
             $table->dateTime('defer')->nullable();
-            $table->dateTime('deadline')->nullable();
             $table->boolean('status')->default(0); // 0: Active 1: Completed
             $table->boolean('starred')->default(0); // 0: False 1: True
             $table->boolean('flagged')->default(0); // 0: False 1: True
@@ -32,6 +32,8 @@ class CreateProjectsTable extends Migration
              * Indexes
              */
             $table->primary('id');
+            $table->index('board_id');
+            $table->foreign('board_id')->references('id')->on('boards');
             $table->index('due');
             $table->index('defer');
             $table->index('starred');
