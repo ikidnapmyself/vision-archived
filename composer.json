@@ -13,6 +13,7 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
+        "prettus/l5-repository": "^2.6",
         "rackbeat/laravel-ui-avatars": "^0.8.4",
         "spatie/laravel-permission": "^3.2"
     },
