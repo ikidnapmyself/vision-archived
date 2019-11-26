@@ -22,7 +22,6 @@ class CreateTasksTable extends Migration
             $table->boolean('flagged')->default(0); // 0: False 1: True
             $table->unsignedInteger('order')->default(1);
             $table->uuid('completed_by')->nullable();
-            $table->timestamp('completed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -31,6 +30,7 @@ class CreateTasksTable extends Migration
              */
             $table->primary('id');
             $table->index('project_id')->foreign('project_id')->references('id')->on('projects');
+            $table->index('completed_by')->foreign('completed_by')->references('id')->on('assignees');
             $table->index('starred');
             $table->index('flagged');
         });

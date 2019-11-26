@@ -30,9 +30,7 @@ class CreateAssigneesTable extends Migration
             $table->dateTime('defer')->nullable();
             $table->unsignedInteger('estimated_time')->nullable();      // minutes
             $table->boolean('blocker')->default(0);
-            /*
-             * LABEL / STATUS / STATE
-             */
+            $table->dateTime('completed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

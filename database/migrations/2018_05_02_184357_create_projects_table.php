@@ -20,7 +20,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedInteger('type');
             $table->dateTime('due')->nullable();
             $table->dateTime('defer')->nullable();
-            $table->boolean('status')->default(0); // 0: Active 1: Completed
+            //$table->boolean('status')->default(0); // 0: Active 1: Completed
             $table->boolean('starred')->default(0); // 0: False 1: True
             $table->boolean('flagged')->default(0); // 0: False 1: True
             $table->boolean('last_action_complete')->default(0); // 0: False 1: True

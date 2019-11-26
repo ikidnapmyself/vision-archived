@@ -21,8 +21,8 @@ class CreateBoardsTable extends Migration
             $table->string('morph_type');
             $table->uuid('morph_id');
 
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->primary('id');
             $table->index(['morph_type', 'morph_id']); // User or Teams
