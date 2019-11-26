@@ -36,10 +36,6 @@ class Definition extends Model
         }
     }
 
-    //############################
-    //## MUTATORS              ###
-    //############################
-
     /**
      * Remove whitespaces in JSON body.
      *
@@ -54,10 +50,6 @@ class Definition extends Model
             $this->attributes['type'] = self::DOCUMENT;
         }
     }
-
-    //############################
-    //## SCOPES                ###
-    //############################
 
     /**
      * Local scope to retrieve top level records.
@@ -76,26 +68,11 @@ class Definition extends Model
     }
 
     /**
-     * Get top definition.
-     */
-    public function top()
-    {
-        return $this->belongsTo('App\Definition', 'id', 'top_id');
-    }
-
-    /**
-     * Get parent definition.
-     */
-    public function parent()
-    {
-        return $this->belongsTo('App\Definition', 'id', 'parent_id');
-    }
-
-    /**
+     * @todo make it trait
      * Get all files.
      */
     public function files()
     {
-        return $this->morphMany('App\File', 'parent');
+        return $this->morphMany('App\Models\File', 'parent');
     }
 }

@@ -16,7 +16,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'name', 'body', 'starred', 'flagged',
+        'project_id', 'name', 'body', 'starred', 'flagged', 'order', 'completed_by'
     ];
 
     /**
@@ -24,7 +24,7 @@ class Task extends Model
      */
     public function project()
     {
-        return $this->belongsTo('App\Models\Project', 'project_id', 'id');
+        return $this->belongsTo('App\Models\Project');
     }
 
     /**
@@ -32,7 +32,15 @@ class Task extends Model
      */
     public function assignees()
     {
-        return $this->hasMany('App\Models\Assignee', 'task_id', 'id');
+        return $this->hasMany('App\Models\Assignee', 'task_id');
+    }
+
+    /**
+     * Completed by.
+     */
+    public function completed_by()
+    {
+        return $this->hasOne('App\Models\Assignee', 'completed_by');
     }
 
     /**
@@ -41,13 +49,5 @@ class Task extends Model
     public function files()
     {
         return $this->morphMany('App\Models\File', 'parent');
-    }
-
-    /**
-     * Get completed by.
-     */
-    public function completedBy()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'completed_by');
     }
 }

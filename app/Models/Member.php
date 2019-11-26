@@ -6,7 +6,7 @@ use App\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Team extends Model
+class Member extends Model
 {
     use HasUUID, SoftDeletes;
 
@@ -16,7 +16,7 @@ class Team extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'description', 'slug',
+        'team_id', 'user_id',
     ];
 
     /**
@@ -28,11 +28,10 @@ class Team extends Model
     }
 
     /**
-     * Get members.
+     * Get teams.
      */
-    public function members()
+    public function teams()
     {
-        return $this->hasMany('App\Models\Member', 'team_id', 'id');
+        return $this->belongsTo('App\Models\Team', 'team_id', 'id');
     }
-
 }
