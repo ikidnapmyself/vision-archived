@@ -2,8 +2,26 @@
 
 namespace App\Providers;
 
+use App\Models\Assignee;
+use App\Models\Board;
+use App\Models\Definition;
+use App\Models\Member;
+use App\Models\Project;
+use App\Models\Task;
 use App\Models\Team;
+use App\Models\User;
+use App\Models\Variable;
+use App\Models\Vision;
+use App\Observers\AssigneeObserver;
+use App\Observers\BoardObserver;
+use App\Observers\DefinitionObserver;
+use App\Observers\MemberObserver;
+use App\Observers\ProjectObserver;
+use App\Observers\TaskObserver;
 use App\Observers\TeamObserver;
+use App\Observers\UserObserver;
+use App\Observers\VariableObserver;
+use App\Observers\VisionObserver;
 use Illuminate\Support\ServiceProvider;
 
 class ObserverServiceProvider extends ServiceProvider
@@ -25,6 +43,15 @@ class ObserverServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        Assignee::observe(AssigneeObserver::class);
+        Board::observe(BoardObserver::class);
+        Definition::observe(DefinitionObserver::class);
+        Member::observe(MemberObserver::class);
+        Project::observe(ProjectObserver::class);
+        Task::observe(TaskObserver::class);
+        Team::observe(TeamObserver::class);
+        User::observe(UserObserver::class);
+        Variable::observe(VariableObserver::class);
+        Vision::observe(VisionObserver::class);
     }
 }
