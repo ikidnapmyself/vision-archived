@@ -1,15 +1,16 @@
 <?php
+
 namespace App\Repositories;
 
-class VisionRepository extends Repository {
-
+class VisionRepository extends Repository
+{
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
-    function model()
+    public function model()
     {
-        return "App\\Models\\Vision";
+        return 'App\\Models\\Vision';
     }
 }
