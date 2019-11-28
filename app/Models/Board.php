@@ -16,7 +16,7 @@ class Board extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'is_public'
+        'name', 'description', 'is_public',
     ];
 
     /**
