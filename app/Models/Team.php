@@ -34,5 +34,4 @@ class Team extends Model
     {
         return $this->hasMany('App\Models\Member', 'team_id', 'id');
     }
-
 }
