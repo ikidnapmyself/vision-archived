@@ -1,15 +1,16 @@
 <?php
+
 namespace App\Repositories;
 
-class NotificationRepository extends Repository {
-
+class NotificationRepository extends Repository
+{
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
-    function model()
+    public function model()
     {
-        return "App\\Models\\Notification";
+        return 'App\\Models\\Notification';
     }
 }
