@@ -5,6 +5,6 @@ return [
         'Blocker'  => 'Blocker',
         'Deferred' => 'Deferred until :date',
         'Due'      => 'Due until :date',
-    ]
+    ],
 
 ];
