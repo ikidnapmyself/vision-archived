@@ -30,3 +30,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+jQuery(function () {
+    jQuery('[data-toggle="tooltip"]').tooltip()
+})
