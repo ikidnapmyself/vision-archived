@@ -83,6 +83,10 @@
                 <div class="title m-b-md">
                     {{ config('app.name') }}
                 </div>
+
+                <div class="links">
+                    <a href="{{ config('app.github') }}">GitHub</a>
+                </div>
             </div>
         </div>
     </body>
