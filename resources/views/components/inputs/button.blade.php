@@ -12,5 +12,5 @@
     @if(isset($icon))
         <i class="{{ $icon }}"></i>
     @endif
-    {{ $button ?? 'button' }}
+    {{ $value ?? 'button' }}
 </button>
