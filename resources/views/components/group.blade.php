@@ -16,7 +16,12 @@
             @component('components.inputs.textarea', $merge)
             @endcomponent
         @endif
-        @error('email')
+        @if(isset($inline))
+        <span>
+            <strong>{{ $inline }}</strong>
+        </span>
+        @endif
+        @error($code)
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
