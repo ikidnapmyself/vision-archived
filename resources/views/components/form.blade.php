@@ -5,5 +5,6 @@
     action="{{ $action }}"
     @component('components.html-attributes', ['attributes' => $attributes ?? []])
     @endcomponent>
+    @csrf
     {{ $form }}
 </form>
