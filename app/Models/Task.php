@@ -28,7 +28,7 @@ class Task extends Model
     }
 
     /**
-     * Get all of the post's assignees.
+     * Get all of the assignees (not users).
      */
     public function assignees()
     {
