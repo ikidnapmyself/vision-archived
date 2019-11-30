@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md {{ config('ui.dark') ? 'navbar-dark bg-dark' : 'navbar-light bg-light' }} {{ config('ui.shadow') ? 'shadow-sm' : '' }}">
+<nav class="navbar navbar-expand-md {{ config('ui.mode') === 'dark' ? 'navbar-dark bg-dark' : 'navbar-light bg-light' }} {{ config('ui.shadow') ? 'shadow-sm' : '' }}">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/home') }}">
             {{ config('app.name', 'Vision') }}

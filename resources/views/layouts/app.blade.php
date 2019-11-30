@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="{{ config('ui.mode') === 'dark' ? 'bg-secondary' : '' }}">
     <div id="app">
         @component('partials.navigation')
         @endcomponent
