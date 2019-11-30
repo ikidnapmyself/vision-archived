@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             VariablesTableSeeder::class,
             TasksTableSeeder::class,
             AssigneesTableSeeder::class,
+            VisionsTableSeeder::class,
         ]);
     }
 }
