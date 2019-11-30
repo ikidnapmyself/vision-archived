@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Vision;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class VisionsTableSeeder extends Seeder
 {
@@ -26,8 +28,8 @@ class VisionsTableSeeder extends Seeder
 
         foreach ($defaults as $key => $item)
         {
-            $vision = \App\Models\Vision::firstOrNew([
-                'id'         => str_slug($key), // IF THIS
+            $vision = Vision::firstOrNew([
+                'id'         => Str::slug($key), // IF THIS
                 'created_by' => null
             ],[
                 'name'       => $key,           // THEN THAT
@@ -38,7 +40,7 @@ class VisionsTableSeeder extends Seeder
                 'body'       => $item,
                 'created_by' => null
             ])->save();
-            $vision->id = str_slug($key);
+            $vision->id = Str::slug($key);
             $vision->save();
         }
     }
