@@ -4,12 +4,17 @@ namespace App\Services;
 
 use App\Repositories\TaskRepository;
 
-class TaskService implements ServiceInterface
+class TaskService extends BaseService
 {
     /**
-     * @var TaskRepository
+     * Validation base rules.
+     *
+     * @var array $rules
      */
-    private $repository;
+    protected $rules = [
+        'name' => 'required|min:6|max:255',
+        'body' => 'sometimes',
+    ];
 
     /**
      * TaskService constructor.
@@ -22,26 +27,6 @@ class TaskService implements ServiceInterface
     }
 
     /**
-     * Get repository.
-     *
-     * @return TaskRepository
-     */
-    public function repository()
-    {
-        return $this->repository;
-    }
-
-    /**
-     * List all the resources.
-     *
-     * @return mixed
-     */
-    public function index()
-    {
-        return $this->repository->paginate();
-    }
-
-    /**
      * Display model.
      *
      * @param string $id
@@ -50,20 +35,5 @@ class TaskService implements ServiceInterface
     public function show(string $id)
     {
         return $this->repository()->find($id)->load('assignees.user');
-    }
-
-    public function create()
-    {
-        // TODO: Implement.
-    }
-
-    public function update()
-    {
-        // TODO: Implement.
-    }
-
-    public function delete()
-    {
-        // TODO: Implement delete() method.
     }
 }
