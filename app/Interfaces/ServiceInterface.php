@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces;
 
 interface ServiceInterface
@@ -14,6 +15,7 @@ interface ServiceInterface
      * @return mixed
      */
     public function show(string $id);
+
     public function create();
 
     /**
@@ -24,5 +26,6 @@ interface ServiceInterface
      * @return mixed
      */
     public function update(array $attributes, string $id);
+
     public function delete();
 }

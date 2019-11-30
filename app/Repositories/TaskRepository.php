@@ -1,15 +1,16 @@
 <?php
+
 namespace App\Repositories;
 
-class TaskRepository extends Repository {
-
+class TaskRepository extends Repository
+{
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
-    function model()
+    public function model()
     {
-        return "App\\Models\\Task";
+        return 'App\\Models\\Task';
     }
 }
