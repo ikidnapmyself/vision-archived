@@ -15,10 +15,12 @@
                         </span>
                     @endif
                 </h5>
-                @if(true === $assignee->blocker)
-                <small class="text-danger"><i class="fa fa-ban"></i> @lang('partials.assignees.Blocker')</small>
-                @endif
+                <small class="text-danger"><i class="fa fa-times"></i> @lang('partials.assignees.Delete')</small>
             </div>
+            @if(true === $assignee->blocker)
+                <small class="text-danger"><i class="fa fa-ban"></i> @lang('partials.assignees.Blocker')</small>
+                <br>
+            @endif
             @if(!is_null($assignee->defer))
                 <small>
                     <i class="fa fa-calendar-o"></i> @lang('partials.assignees.Deferred', ['date' => $assignee->user->defer])
