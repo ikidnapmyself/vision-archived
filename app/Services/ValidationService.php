@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Validator;
@@ -8,7 +9,7 @@ class ValidationService
     /**
      * Validation rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [];
 
