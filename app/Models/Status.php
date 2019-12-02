@@ -5,6 +5,7 @@ use Spatie\ModelStatus\Status as BaseStatus;
 
 class Status extends BaseStatus
 {
+    const INBOX       = 'inbox';
     const BACKLOG     = 'backlog';
     const TODO        = 'todo';
     const PROGRESSING = 'progressing';

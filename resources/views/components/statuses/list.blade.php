@@ -13,3 +13,17 @@
         </a>
     @endif
 @endforeach
+@push('script')
+    <script>
+
+    </script>
+@endpush
+
+<a onclick="event.preventDefault();document.getElementById('delete-{{ $task->id }}-form').submit();" class="card-link text-danger">
+    <i class="fa fa-trash-alt"></i>
+    @lang('task.show.Delete')
+</a>
+<form id="delete-{{ $task->id }}-form" action="{{ route('task.destroy', ['task' => $task->id]) }}" method="POST" style="display: none;">
+    @method('DELETE')
+    @csrf
+</form>
