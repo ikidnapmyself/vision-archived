@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use Spatie\ModelStatus\HasStatuses as BaseTrait;
@@ -10,10 +11,10 @@ trait HasStatuses
     /**
      * Pre-defined statuses.
      *
-     * @var array $statuses
+     * @var array
      */
     private $statuses = [
-        'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
+        'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed',
     ];
 
     /**
