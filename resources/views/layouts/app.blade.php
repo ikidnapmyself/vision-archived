@@ -294,6 +294,7 @@
         ];
         @endif
     </script>
-    @stack('script')
+    @stack('scripts')
+    @stack('forms')
 </body>
 </html>

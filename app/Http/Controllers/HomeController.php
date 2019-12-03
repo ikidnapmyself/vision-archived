@@ -2,16 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\TaskService;
+use App\Services\VisionService;
+
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Task service.
      *
-     * @return void
+     * @var TaskService
      */
-    public function __construct()
+    private $service;
+
+    /**
+     * Vision service.
+     *
+     * @var VisionService
+     */
+    private $visionService;
+
+    /**
+     * TaskController constructor.
+     *
+     * @param TaskService $service
+     * @param VisionService $visionService
+     */
+    public function __construct(TaskService $service, VisionService $visionService)
     {
-        $this->middleware('auth');
+        $this->service = $service;
+        $this->visionService = $visionService;
     }
 
     /**
@@ -21,6 +40,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', ['visions' => $this->visionService->defaults()]);
     }
 }
