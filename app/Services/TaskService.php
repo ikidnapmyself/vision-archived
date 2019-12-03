@@ -9,7 +9,7 @@ class TaskService extends BaseService
     /**
      * Validation base rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [
         'name' => 'required|min:6|max:255',
