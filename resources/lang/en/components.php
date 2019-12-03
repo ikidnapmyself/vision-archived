@@ -17,4 +17,8 @@ return [
         ],
     ],
 
+    'statuses' => [
+        'Move to' => 'Move to',
+    ],
+
 ];

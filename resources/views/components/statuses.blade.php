@@ -1,2 +1,5 @@
-@component('components.statuses.' . ($type ?? 'dropdown'), ['model' => $model])
+@php
+    $type = $type ?? 'dropdown';
+@endphp
+@component("components.statuses.{$type}", ['type' => $type, 'model' => $model])
 @endcomponent
