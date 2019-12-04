@@ -8,6 +8,13 @@ require('./bootstrap');
 require('jQuery-QueryBuilder');
 
 window.Vue = require('vue');
+window.axios = require('axios');
+
+require('./axios');
+
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
 
 /**
  * The following block of code may be used to automatically register your
