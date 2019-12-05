@@ -31,7 +31,11 @@
         let Application = {
             location: "{{ url('/') }}",
             locale: "{{ config('app.locale') }}",
-            auth: {{ auth()->user() ? 'true' : 'false' }}
+            auth: {{ auth()->user() ? 'true' : 'false' }},
+            statuses: {
+                icons: @json(config('model-status.icons')),
+                colors: @json(config('model-status.colors'))
+            }
         };
         @if(auth()->user())
             Application.user = {
