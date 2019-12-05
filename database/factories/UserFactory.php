@@ -18,14 +18,14 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $name    = $faker->firstName;
+    $name = $faker->firstName;
     $surname = $faker->lastName;
-    $email   = Str::slug("{$name} {$surname}", '.');
+    $email = Str::slug("{$name} {$surname}", '.');
 
     return [
         'name'              => $name,
         'surname'           => $surname,
-        'email'             => $email. '@'. $faker->freeEmailDomain,
+        'email'             => $email.'@'.$faker->freeEmailDomain,
         'email_verified_at' => now(),
         'password'          => Hash::make('123456'),
         'remember_token'    => Str::random(10),
