@@ -12,9 +12,13 @@
         <div class="col-8">
             <div class="list-group mb-3">
                 @foreach($tasks as $task)
-                <a href="{{ route('task.show', [$task->id]) }}" class="list-group-item list-group-item-action">
+                <span class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{ $task->name }}</h5>
+                        <h5 class="mb-1">
+                            <b-link href="{{ route('task.show', [$task->id]) }}">
+                                {{ $task->name }}
+                            </b-link>
+                        </h5>
                         <div>
                             <span title="starred">
                                 <i class="fa fa-star{{ $task->starred ? ' text-primary' : '' }}"></i>
@@ -24,9 +28,17 @@
                             </span>
                         </div>
                     </div>
-                    <p class="mb-1">{{ \Illuminate\Support\Str::limit($task->body, 200) }}</p>
-                    <small>{{ $task->created_at }}</small>
-                </a>
+                    <p class="mb-1">
+                        {{ \Illuminate\Support\Str::limit($task->body, 200) }}
+                        <br>
+                        <small>{{ $task->created_at }}</small>
+                    </p>
+                    <status-component
+                        :model="{{ $task->toJson() }}"
+                        :current="{{ $task->status()->toJson() }}"
+                        :statuses="{{ json_encode($task->availableStatuses()) }}">
+                    </status-component>
+                </span>
                 @endforeach
             </div>
         </div>
