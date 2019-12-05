@@ -16,3 +16,4 @@ yarn-error.log
 /public/css
 /public/build
 /public/mix-manifest.json
+/resources/js/vue-i18n-locales.generated.js

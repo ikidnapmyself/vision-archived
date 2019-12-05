@@ -10,16 +10,16 @@
             <b-dropdown split :variant="$Application.statuses.colors[current.name]">
                 <template v-slot:button-content>
                     <i :class="$Application.statuses.icons[current.name]"></i>
-                   {{ current.name }}
+                    {{ $t('status.' + current.name) }}
                 </template>
-                <b class="px-3">components.statuses.Move to</b>
+                <b class="px-3">{{ $t('components.statuses.Move to') }}</b>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item
                     v-for="item in statuses"
                     v-bind:key="item"
                     href="#">
                     <i :class="$Application.statuses.icons[item]"></i>
-                    {{ item }}
+                    {{ $t('status.' + item) }}
                 </b-dropdown-item>
             </b-dropdown>
         </b-button-group>

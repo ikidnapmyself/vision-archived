@@ -12,6 +12,19 @@ window.axios = require('axios');
 
 require('./axios');
 
+import VueInternationalization from 'vue-i18n';
+import Locale from './vue-i18n-locales.generated';
+
+Vue.use(VueInternationalization);
+
+const lang = document.documentElement.lang.substr(0, 2);
+// or however you determine your current app locale
+
+const i18n = new VueInternationalization({
+    locale: lang,
+    messages: Locale
+});
+
 import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
@@ -37,6 +50,7 @@ Vue.prototype.$Application = Application;
 
 const app = new Vue({
     el: '#app',
+    i18n,
 });
 
 jQuery(function () {
