@@ -15,6 +15,7 @@
                 <b class="px-3">{{ $t('components.statuses.Move to') }}</b>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item
+                    :variant="$Application.statuses.colors[item]"
                     v-for="item in statuses"
                     v-bind:key="item"
                     href="#">
