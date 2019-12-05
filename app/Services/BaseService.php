@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Interfaces\ServiceInterface;
@@ -6,7 +7,7 @@ use App\Interfaces\ServiceInterface;
 class BaseService extends ValidationService implements ServiceInterface
 {
     /**
-     * @var mixed $repository
+     * @var mixed
      */
     protected $repository;
 
@@ -21,7 +22,7 @@ class BaseService extends ValidationService implements ServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index()
     {
@@ -29,7 +30,7 @@ class BaseService extends ValidationService implements ServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id)
     {
@@ -37,7 +38,7 @@ class BaseService extends ValidationService implements ServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function create(?array $attributes = [])
     {
@@ -49,7 +50,7 @@ class BaseService extends ValidationService implements ServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function update(string $id, ?array $attributes = [])
     {
@@ -61,7 +62,7 @@ class BaseService extends ValidationService implements ServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function delete(string $id)
     {
