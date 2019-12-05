@@ -1,15 +1,16 @@
 <?php
+
 namespace App\Repositories;
 
-class FileRepository extends Repository {
-
+class FileRepository extends Repository
+{
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
-    function model()
+    public function model()
     {
-        return "App\\Models\\File";
+        return 'App\\Models\\File';
     }
 }

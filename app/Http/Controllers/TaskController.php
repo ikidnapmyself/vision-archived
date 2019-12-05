@@ -43,7 +43,7 @@ class TaskController extends Controller
     {
         return view('task.index', [
             'visions' => $this->visionService->defaults(),
-            'tasks'   => $this->service->index()
+            'tasks'   => $this->service->index(),
         ]);
     }
 
@@ -81,7 +81,7 @@ class TaskController extends Controller
     public function show(string $id)
     {
         return view('task.show', [
-            'task'    => $this->service->show($id)
+            'task'    => $this->service->show($id),
         ]);
     }
 
