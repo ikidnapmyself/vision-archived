@@ -10,11 +10,13 @@ trait HasStatuses
     /**
      * Pre-defined statuses.
      *
-     * @var array $statuses
+     * @var array $allowedStatuses
      */
-    private $statuses = [
+    private $allowedStatuses = [
         'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
     ];
+
+    protected $append = ['status'];
 
     /**
      * Boot model class.
@@ -41,7 +43,7 @@ trait HasStatuses
      */
     public function isValidStatus(string $name, ?string $reason = null): bool
     {
-        return in_array($name, $this->statuses);
+        return in_array($name, $this->allowedStatuses);
     }
 
     /**
@@ -51,6 +53,6 @@ trait HasStatuses
      */
     public function availableStatuses(): array
     {
-        return $this->statuses;
+        return $this->allowedStatuses;
     }
 }

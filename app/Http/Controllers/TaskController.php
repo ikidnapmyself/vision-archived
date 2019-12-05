@@ -114,6 +114,46 @@ class TaskController extends Controller
     }
 
     /**
+     * Update status of a resource.
+     *
+     * @param  string  $task
+     * @param  string  $status
+     * @return \Illuminate\Http\Response
+     */
+    public function status(string $task, string $status)
+    {
+        $status = $this->service->status($task, $status);
+
+        return response($status);
+    }
+
+    /**
+     * Update flag of a resource.
+     *
+     * @param  string  $task
+     * @return \Illuminate\Http\Response
+     */
+    public function flag(string $task)
+    {
+        $status = $this->service->flag($task);
+
+        return response($status);
+    }
+
+    /**
+     * Update star of a resource.
+     *
+     * @param  string  $task
+     * @return \Illuminate\Http\Response
+     */
+    public function star(string $task)
+    {
+        $status = $this->service->star($task);
+
+        return response($status);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  string  $id

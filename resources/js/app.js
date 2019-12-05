@@ -47,6 +47,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
  */
 
 Vue.prototype.$Application = Application;
+Vue.prototype.$axios = window.axios;
 
 const app = new Vue({
     el: '#app',

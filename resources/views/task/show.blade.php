@@ -16,11 +16,11 @@
                             <h6 class="card-subtitle mb-2 text-muted">{{ $task->completed_by }}</h6>
                         @endif
                         <p class="card-text">{{ $task->body }}</p>
-                        <status-component
+                        <task-manager-component
                             :model="{{ $task->toJson() }}"
                             :current="{{ $task->status()->toJson() }}"
                             :statuses="{{ json_encode($task->availableStatuses()) }}">
-                        </status-component>
+                        </task-manager-component>
                     </div>
                 </div>
             </div>

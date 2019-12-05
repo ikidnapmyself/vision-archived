@@ -20,24 +20,17 @@
                             </b-link>
                         </h5>
                         <div>
-                            <span title="starred">
-                                <i class="fa fa-star{{ $task->starred ? ' text-primary' : '' }}"></i>
-                            </span>
-                            <span title="flagged">
-                                <i class="fa fa-flag{{ $task->flagged ? ' text-primary' : '' }}"></i>
-                            </span>
+                            <small>{{ $task->created_at }}</small>
                         </div>
                     </div>
                     <p class="mb-1">
                         {{ \Illuminate\Support\Str::limit($task->body, 200) }}
-                        <br>
-                        <small>{{ $task->created_at }}</small>
                     </p>
-                    <status-component
+                    <task-manager-component
                         :model="{{ $task->toJson() }}"
                         :current="{{ $task->status()->toJson() }}"
                         :statuses="{{ json_encode($task->availableStatuses()) }}">
-                    </status-component>
+                    </task-manager-component>
                 </span>
                 @endforeach
             </div>
