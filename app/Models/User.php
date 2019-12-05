@@ -32,6 +32,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = [
+        'avatar_url', 'full_name'
+    ];
+
     /**
      * Get Gravatar.
      *
@@ -51,6 +55,16 @@ class User extends Authenticatable
     public function getAvatarNameKey()
     {
         return 'full_name';
+    }
+
+    /**
+     * Get the user's avatar url.
+     *
+     * @return string
+     */
+    public function getAvatarUrlAttribute()
+    {
+        return (string) $this->getUrlfriendlyAvatar();
     }
 
     /**
