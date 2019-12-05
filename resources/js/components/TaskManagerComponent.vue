@@ -1,5 +1,27 @@
 <template>
     <div>
+        <b-modal ref="bv-status-reason-modal"
+                 @hidden="resetModal"
+                 @ok="handleOk">
+            <template v-slot:modal-title>
+                {{ $t('components.statuses.Add Your Reason', {From: status, New: newStatus}) }}
+            </template>
+            <div class="d-block text-center">
+                <form ref="form" @submit.stop.prevent="handleSubmit">
+                    <b-form-group
+                        :label="$t('components.statuses.Reason')"
+                        label-for="reason-input"
+                    >
+                        <b-form-input
+                            id="reason-input"
+                            v-model="newReason"
+                            required
+                        ></b-form-input>
+                    </b-form-group>
+                </form>
+            </div>
+        </b-modal>
+
         <b-button-group>
             <b-button v-on:click="toggleStar" :variant="(starred ? '' : 'outline-') + colors[status]">
                 <i class="fa fa-star"></i>
@@ -7,7 +29,7 @@
             <b-button v-on:click="toggleFlag" :variant="(flagged ? '' : 'outline-') + colors[status]">
                 <i class="fa fa-flag"></i>
             </b-button>
-            <b-button v-b-tooltip.hover :variant="colors[status]" v-if="current.reason" :title="current.reason">
+            <b-button v-b-tooltip.hover :variant="colors[status]" v-if="reason" :title="reason">
                 <i class="fa fa-question-circle"></i>
             </b-button>
             <b-dropdown v-b-tooltip.hover :title="$t('status.' + status)" :variant="colors[status]">
@@ -29,12 +51,15 @@
         props: ['model', 'current', 'statuses'],
         data: function() {
             return {
-                icons: this.$Application.statuses.icons,
                 colors: this.$Application.statuses.colors,
+                flagged: this.model.flagged,
+                icons: this.$Application.statuses.icons,
+                newReason: null,
+                newStatus: null,
+                reason: this.current.reason,
+                starred: this.model.starred,
                 status: this.current.name,
                 task: this.model.id,
-                starred: this.model.starred,
-                flagged: this.model.flagged
             }
         },
         mounted() {
@@ -42,13 +67,47 @@
         },
         methods: {
             setStatus: function (status) {
-                this.status = status;
-                this.$axios.put('task/' + this.task + '/status/' + status, {})
+                this.newStatus = status;
+                this.showModal();
+            },
+            showModal() {
+                this.$refs['bv-status-reason-modal'].show()
+            },
+            handleOk(bvModalEvt) {
+                // Prevent modal from closing
+                bvModalEvt.preventDefault()
+                // Trigger submit handler
+                this.handleSubmit()
+            },
+            handleSubmit() {
+                const object = this;
+                this.$nextTick(() => {
+                    this.$axios.put('task/' + object.task + '/status/' + object.newStatus, {reason: object.newReason})
+                        .then(function (response) {
+                            object.hideModal();
+                            object.reason = object.newReason;
+                            object.status = object.newStatus;
+                        })
+                        .catch(function (error) {
+                            alert('Status can not be updated!');
+                        });
+                })
+            },
+            hideModal() {
+                this.$refs['bv-status-reason-modal'].hide()
+            },
+            resetModal() {
+                this.newStatus = ''
+            },
+            toggleFlag: function () {
+                let object = this;
+                this.$axios.put('task/' + this.task + '/flag', {})
                     .then(function (response) {
-                        //
+                        object.flagged = response.data.flagged;
                     })
                     .catch(function (error) {
-                        alert('Status can not be updated!');
+                        console.log(error);
+                        alert('Flag can not be updated!');
                     });
             },
             toggleStar: function () {
@@ -60,17 +119,6 @@
                     .catch(function (error) {
                         console.log(error);
                         alert('Star can not be updated!');
-                    });
-            },
-            toggleFlag: function () {
-                let object = this;
-                this.$axios.put('task/' + this.task + '/flag', {})
-                    .then(function (response) {
-                        object.flagged = response.data.flagged;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert('Flag can not be updated!');
                     });
             },
         }

@@ -118,11 +118,13 @@ class TaskController extends Controller
      *
      * @param  string  $task
      * @param  string  $status
+     * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function status(string $task, string $status)
+    public function status(string $task, string $status, Request $request)
     {
-        $status = $this->service->status($task, $status);
+        $reason = $request->get('reason', null);
+        $status = $this->service->status($task, $status, $reason);
 
         return response($status);
     }
