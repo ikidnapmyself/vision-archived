@@ -13,7 +13,7 @@
 
 Auth::routes();
 Route::get('/', 'WelcomeController@welcome')->name('welcome');
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->group(function () {
 //    Route::resource('/board', 'BoardController');
     Route::get('/home', 'HomeController@index')->name('home');
 //    Route::resource('/project', 'ProjectController');
