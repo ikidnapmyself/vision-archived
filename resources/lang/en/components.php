@@ -37,7 +37,7 @@ return [
     'statuses' => [
         'Move to' => 'Move to',
         'Add Your Reason' => 'You may add your reason before you update the status from :From to :New',
-        'Reason' => 'Status update reason or note.'
+        'Reason' => 'Status update reason or note.',
     ],
 
 ];
