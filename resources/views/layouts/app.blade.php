@@ -38,13 +38,7 @@
             }
         };
         @if(auth()->user())
-            Application.user = {
-                id: "{{ auth()->user()->id }}",
-                uuid: "{{ auth()->user()->uuid }}",
-                name: "{{ auth()->user()->name }}",
-                surname: "{{ auth()->user()->surname }}",
-                email: "{{ auth()->user()->email }}"
-            };
+            Application.user = @json(auth()->user());
         let Operators = {
             'id': ['equal', 'not_equal', 'in', 'not_in'],
             'time': ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal', 'between', 'not_between'],

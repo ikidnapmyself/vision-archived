@@ -1,9 +1,8 @@
 <template>
-    <img :src="user.avatar_url"
-         :alt="user.name + ' ' + user.surname"
-         :title="user.name + ' ' + user.surname"
-         class="rounded-sm" style="max-height: 20px;">
-
+    <b-img :src="user.avatar_url"
+           :alt="user.name + ' ' + user.surname"
+           :title="user.name + ' ' + user.surname">
+    </b-img>
 </template>
 <script>
     export default {

@@ -19,18 +19,23 @@
                                 {{ $task->name }}
                             </b-link>
                         </h5>
-                        <div>
-                            <small>{{ $task->created_at }}</small>
-                        </div>
                     </div>
                     <p class="mb-1">
                         {{ \Illuminate\Support\Str::limit($task->body, 200) }}
                     </p>
-                    <task-manager-component
-                        :model="{{ $task->toJson() }}"
-                        :current="{{ $task->status()->toJson() }}"
-                        :statuses="{{ json_encode($task->availableStatuses()) }}">
-                    </task-manager-component>
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <task-manager-component
+                                :model="{{ $task->toJson() }}"
+                                :current="{{ $task->status()->toJson() }}"
+                                :statuses="{{ json_encode($task->availableStatuses()) }}">
+                            </task-manager-component>
+                        </div>
+                        <div>
+                            @component('components.date', ['date' => $task->created_at])
+                            @endcomponent
+                        </div>
+                    </div>
                 </span>
                 @endforeach
             </div>

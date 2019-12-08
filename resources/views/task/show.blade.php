@@ -25,8 +25,13 @@
                 </div>
             </div>
             <div class="col-4">
-                @component('partials.assignees', ['assignees' => $task->assignees])
-                @endcomponent
+                <!--
+                 BLADE VERSION
+                 resources/views/partials/assignees.blade.php
+                 //-->
+                <assignee-manager-component
+                    :assignees="{{ $task->assignees }}">
+                </assignee-manager-component>
             </div>
         </div>
     </div>
