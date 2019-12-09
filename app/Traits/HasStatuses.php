@@ -55,4 +55,14 @@ trait HasStatuses
     {
         return $this->allowedStatuses;
     }
+
+    /**
+     * Available statuses. (note: override if there is a workflow or business logic)
+     *
+     * @return array
+     */
+    public function getAvailableStatusesAttribute(): array
+    {
+        return $this->availableStatuses();
+    }
 }
