@@ -17,11 +17,11 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'project_id', 'name', 'body', 'starred', 'flagged', 'order', 'completed_by'
+        'project_id', 'name', 'body', 'starred', 'flagged', 'order', 'completed_by',
     ];
 
     protected $appends = [
-        'available_statuses', 'status'
+        'available_statuses', 'status',
     ];
 
     /**
