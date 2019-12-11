@@ -4,4 +4,4 @@
      */
     $formatted = date("j F Y, H:i", $date->timestamp);
 @endphp
-<date-component ago="{{ $date->diffForHumans() }}" date="{{ $date->toDateTimeString() }}" formatted="{{ $formatted }}"></date-component>
+<task-date-component ago="{{ $date->diffForHumans() }}" date="{{ $date->toDateTimeString() }}" formatted="{{ $formatted }}"></task-date-component>
