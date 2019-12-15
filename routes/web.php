@@ -19,7 +19,6 @@ Route::middleware('auth')->group(function (){
 //    Route::resource('/project', 'ProjectController');
     Route::resource('/task', 'TaskController');
     Route::put('/task/{task}/flag', 'TaskController@flag');
-    Route::put('/task/{task}/star', 'TaskController@star');
     Route::put('/task/{task}/status/{status}', 'TaskController@status');
 //    Route::resource('/team', 'TeamController');
 });

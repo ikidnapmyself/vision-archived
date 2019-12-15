@@ -261,14 +261,6 @@
                 values: Presets.bool
             },
             {
-                id: 'tasks.starred',
-                label: '{{ __('fields.tasks') }} > {{ __('fields.starred') }}',
-                type: 'boolean',
-                input: 'select',
-                values: Presets.bool,
-                operator: Operators.boolean
-            },
-            {
                 id: 'tasks.completed_at',
                 label: '{{ __('fields.tasks') }} > {{ __('fields.completed_at') }}',
                 format: 'datetime',
