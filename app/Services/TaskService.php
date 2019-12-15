@@ -72,18 +72,4 @@ class TaskService extends BaseService
         $task->save();
         return $task;
     }
-
-    /**
-     * Set star of a model.
-     *
-     * @param string $id
-     * @return mixed
-     */
-    public function star(string $id)
-    {
-        $task = $this->repository()->find($id);
-        $task->starred = ! $task->starred;
-        $task->save();
-        return $task;
-    }
 }

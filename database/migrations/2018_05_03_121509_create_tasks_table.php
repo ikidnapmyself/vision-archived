@@ -18,7 +18,6 @@ class CreateTasksTable extends Migration
             $table->uuid('project_id')->nullable();
             $table->string('name', 100);
             $table->text('body')->nullable();
-            $table->boolean('starred')->default(0); // 0: False 1: True
             $table->boolean('flagged')->default(0); // 0: False 1: True
             $table->unsignedInteger('order')->default(1);
             $table->uuid('completed_by')->nullable();
@@ -31,7 +30,6 @@ class CreateTasksTable extends Migration
             $table->primary('id');
             $table->index('project_id')->foreign('project_id')->references('id')->on('projects');
             $table->index('completed_by')->foreign('completed_by')->references('id')->on('assignees');
-            $table->index('starred');
             $table->index('flagged');
         });
     }
