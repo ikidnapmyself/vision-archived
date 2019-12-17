@@ -17,27 +17,38 @@ return [
         ],
     ],
 
-    'assignees' => [
-        'Assign Yourself' => 'Assign Yourself',
-        'Assign' => 'Assign',
-        'Assignee' => 'Assignee',
-        'Assignees' => 'Assignees',
-    ],
+    'task'  => [
 
-    'date'  => [
-        'Switch' => 'Switch',
-        'Update'   => 'Update Timing',
-        'Copy'   => 'Copy',
-        'Defer'  => 'Defer',
-        'Remind me today'  => 'Remind me today',
-        'Custom'  => 'Custom',
-        'Later'  => 'Later',
-    ],
+        'Read All' => 'Read All',
 
-    'statuses' => [
-        'Move to' => 'Move to',
-        'Add Your Reason' => 'You may add your reason before you update the status from :From to :New',
-        'Reason' => 'Status update reason or note.'
-    ],
+        'assignees' => [
+            'Assign Yourself' => 'Assign Yourself',
+            'Assign' => 'Assign',
+            'Assignee' => 'Assignee',
+            'Assignees' => 'Assignees',
+        ],
+
+        'card-header'  => [
+            'Overview' => 'Overview',
+            'Update'   => 'Update',
+            'Assignee' => 'Assignee',
+        ],
+
+        'date'  => [
+            'Switch' => 'Switch',
+            'Update'   => 'Update Timing',
+            'Copy'   => 'Copy',
+            'Defer'  => 'Defer',
+            'Remind me today'  => 'Remind me today',
+            'Custom'  => 'Custom',
+            'Later'  => 'Later',
+        ],
+
+        'statuses' => [
+            'Move to' => 'Move to',
+            'Add Your Reason' => 'You may add your reason before you update the status from :From to :New',
+            'Reason' => 'Status update reason or note.'
+        ],
+    ]
 
 ];
