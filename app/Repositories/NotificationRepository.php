@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\Notification;
+
 class NotificationRepository extends Repository {
 
     /**
@@ -10,6 +12,6 @@ class NotificationRepository extends Repository {
      */
     function model()
     {
-        return "App\\Models\\Notification";
+        return Notification::class;
     }
 }

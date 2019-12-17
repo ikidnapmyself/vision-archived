@@ -1,15 +1,18 @@
 <?php
 namespace App\Repositories;
 
-class VariableRepository extends Repository {
+use App\Models\Variable;
+
+class VariableRepository extends Repository
+{
 
     /**
      * Specify Model class name
      *
      * @return string
      */
-    function model()
+    public function model()
     {
-        return "App\\Models\\Variable";
+        return Variable::class;
     }
 }

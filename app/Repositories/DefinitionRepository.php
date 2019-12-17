@@ -1,15 +1,18 @@
 <?php
 namespace App\Repositories;
 
-class DefinitionRepository extends Repository {
+use App\Models\Definition;
+
+class DefinitionRepository extends Repository
+{
 
     /**
      * Specify Model class name
      *
      * @return string
      */
-    function model()
+    public function model()
     {
-        return "App\\Models\\Definition";
+        return Definition::class;
     }
 }

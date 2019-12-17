@@ -1,15 +1,18 @@
 <?php
 namespace App\Repositories;
 
-class AssigneeRepository extends Repository {
+use App\Models\Assignee;
+
+class AssigneeRepository extends Repository
+{
 
     /**
      * Specify Model class name
      *
      * @return string
      */
-    function model()
+    public function model()
     {
-        return "App\\Models\\Assignee";
+        return Assignee::class;
     }
 }
