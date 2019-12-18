@@ -11,6 +11,6 @@ class AssigneesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Assignee::class, 100)->create();
+        factory(\App\Models\Assignee::class, 1000)->create();
     }
 }
