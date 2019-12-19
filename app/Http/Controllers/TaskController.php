@@ -108,9 +108,7 @@ class TaskController extends Controller
     {
         $update = $this->service->update($id);
 
-        return redirect(
-            route('task.show', $update->id)
-        );
+        return response($update);
     }
 
     /**
