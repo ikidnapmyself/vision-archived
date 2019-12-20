@@ -3,46 +3,41 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-12">
-            @component('partials.vision')
-            @endcomponent
-        </div>
-        <div class="col-12">
             {!! $tasks->links() !!}
         </div>
-        <div class="col-8">
-            <div class="list-group mb-3">
-                @foreach($tasks as $task)
-                <span class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">
-                            <b-link href="{{ route('task.show', [$task->id]) }}">
-                                {{ $task->name }}
-                            </b-link>
-                        </h5>
-                    </div>
-                    <p class="mb-1">
-                        {{ \Illuminate\Support\Str::limit($task->body, 200) }}
-                    </p>
-                    <div class="d-flex w-100 justify-content-between">
-                        <div>
-                            <task-manager-component
-                                :model="{{ $task->toJson() }}"
-                                :current="{{ $task->status()->toJson() }}"
-                                :statuses="{{ json_encode($task->availableStatuses()) }}">
-                            </task-manager-component>
+        <div class="col-12">
+            @foreach($tasks as $task)
+                <div class="card mb-3">
+                    <task-card-header :task="{{ $task->toJson() }}"></task-card-header>
+                    <div class="card-body text-center tab-content" id="task-{{ $task->id }}">
+                        <div class="tab-pane fade show active" id="task-{{ $task->id }}-overview" role="tabpanel" aria-labelledby="task-{{ $task->id }}-overview-tab">
+                            <task-overview :task="{{ $task->toJson() }}"></task-overview>
                         </div>
-                        <div>
-                            @component('components.date', ['date' => $task->created_at])
-                            @endcomponent
+                        <div class="tab-pane fade" id="task-{{ $task->id }}-edit" role="tabpanel" aria-labelledby="task-{{ $task->id }}-edit-tab">
+                            <task-tab-edit :task="{{ $task->toJson() }}"></task-tab-edit>
+                        </div>
+                        <div class="tab-pane fade" id="task-{{ $task->id }}-assign" role="tabpanel" aria-labelledby="task-{{ $task->id }}-assign-tab">
+                            <task-assignees-component :assignees="{{ $task->assignees }}">
+                            </task-assignees-component>
                         </div>
                     </div>
-                </span>
-                @endforeach
-            </div>
-        </div>
-        <div class="col-4">
-            @component('partials.visions', ['visions' => $visions])
-            @endcomponent
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col col-xs-12">
+                                <task-manager-component
+                                    :model="{{ $task->toJson() }}"
+                                    :current="{{ $task->status()->toJson() }}"
+                                    :statuses="{{ json_encode($task->availableStatuses()) }}">
+                                </task-manager-component>
+                            </div>
+                            <div class="col col-xs-12 text-right">
+                                @component('components.date', ['date' => $task->created_at])
+                                @endcomponent
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
         <div class="col-12">
             {!! $tasks->links() !!}

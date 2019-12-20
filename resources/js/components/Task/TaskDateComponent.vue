@@ -4,20 +4,20 @@
             {{ is_formatted ? formatted : date }}
         </small>
         <b-button-group>
-            <b-button v-on:click="toggle"  v-b-tooltip.hover :title="$t('components.date.Switch')">
+            <b-button v-on:click="toggle"  v-b-tooltip.hover :title="$t('components.task.date.Switch')">
                 <i :class="'fa fa-toggle-' + switch_icon"></i>
             </b-button>
-            <b-button v-b-tooltip.hover :title="$t('components.date.Update')">
-                <i class="fa fa-user-edit"></i>
-            </b-button>
-            <b-button v-b-tooltip.hover :title="$t('components.date.Copy')">
+            <b-button v-b-tooltip.hover :title="$t('components.task.date.Copy')">
                 <i class="fa fa-copy"></i>
             </b-button>
-            <b-dropdown v-b-tooltip.hover :title="$t('components.date.Defer')">
+            <b-button v-b-tooltip.hover :title="$t('components.task.date.Update')">
+                <i class="fa fa-user-edit"></i>
+            </b-button>
+            <b-dropdown v-b-tooltip.hover :title="$t('components.task.date.Defer')">
                 <template v-slot:button-content>
                     <i class="fa fa-clock-o"></i>
                 </template>
-                <b class="px-3">{{ $t('components.date.Remind me today') }}</b>
+                <b class="px-3">{{ $t('components.task.date.Remind me today') }}</b>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item>
                     <i class="fa fa-stopwatch"></i>
@@ -36,7 +36,7 @@
                     This Night
                 </b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b class="px-3">{{ $t('components.date.Custom') }}</b>
+                <b class="px-3">{{ $t('components.task.date.Custom') }}</b>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item>
                     <i class="fa fa-user-tag"></i>
@@ -47,7 +47,7 @@
                     at Chill Hours
                 </b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b class="px-3">{{ $t('components.date.Later') }}</b>
+                <b class="px-3">{{ $t('components.task.date.Later') }}</b>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item>
                     <i class="fa fa-sun"></i>

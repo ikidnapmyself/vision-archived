@@ -4,23 +4,42 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-8">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <ul class="nav nav-pills card-header-pills">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Active</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body text-center">
                         <h5 class="card-title">
-                            @if($task->completed_by)
-                                <i class="fa fa-check text-success"></i>
-                            @endif
-                            {{ $task->name }}
+                            <b-link href="{{ route('task.show', [$task->id]) }}">
+                                {{ $task->name }}
+                            </b-link>
                         </h5>
-                        @if($task->completed_by)
-                            <h6 class="card-subtitle mb-2 text-muted">{{ $task->completed_by }}</h6>
-                        @endif
                         <p class="card-text">{{ $task->body }}</p>
-                        <task-manager-component
-                            :model="{{ $task->toJson() }}"
-                            :current="{{ $task->status()->toJson() }}"
-                            :statuses="{{ json_encode($task->availableStatuses()) }}">
-                        </task-manager-component>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col col-xs-12">
+                                <task-manager-component
+                                    :model="{{ $task->toJson() }}"
+                                    :current="{{ $task->status()->toJson() }}"
+                                    :statuses="{{ json_encode($task->availableStatuses()) }}">
+                                </task-manager-component>
+                            </div>
+                            <div class="col col-xs-12 text-right">
+                                @component('components.date', ['date' => $task->created_at])
+                                @endcomponent
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -29,9 +48,12 @@
                  BLADE VERSION
                  resources/views/partials/assignees.blade.php
                  //-->
-                <assignee-manager-component
+                <task-self-assign-component
                     :assignees="{{ $task->assignees }}">
-                </assignee-manager-component>
+                </task-self-assign-component>
+                <task-assignees-component
+                    :assignees="{{ $task->assignees }}">
+                </task-assignees-component>
             </div>
         </div>
     </div>

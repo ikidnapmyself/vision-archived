@@ -36,6 +36,14 @@ class TaskService extends BaseService
     }
 
     /**
+     * @inheritDoc
+     */
+    public function index()
+    {
+        return $this->repository->with('assignees.user')->paginate();
+    }
+
+    /**
      * Display model.
      *
      * @param string $id

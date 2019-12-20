@@ -62,13 +62,6 @@
             //
         },
         methods: {
-            setStatus: function (status) {
-                this.newStatus = status;
-                this.showModal();
-            },
-            showModal() {
-                this.$refs['bv-status-reason-modal'].show()
-            },
             handleOk(bvModalEvt) {
                 // Prevent modal from closing
                 bvModalEvt.preventDefault()
@@ -80,17 +73,32 @@
                 this.$nextTick(() => {
                     this.$axios.put('task/' + object.task + '/status/' + object.newStatus, {reason: object.newReason})
                         .then(function (response) {
+                            object.toaster('components.task.statuses.Updated', 'success')
                             object.hideModal();
                             object.reason = object.newReason;
                             object.status = object.newStatus;
                         })
                         .catch(function (error) {
-                            alert('Status can not be updated!');
+                            object.toaster('components.task.statuses.Failed', 'danger');
                         });
                 })
             },
             hideModal() {
                 this.$refs['bv-status-reason-modal'].hide()
+            },
+            setStatus: function (status) {
+                this.newStatus = status;
+                this.showModal();
+            },
+            showModal() {
+                this.$refs['bv-status-reason-modal'].show()
+            },
+            toaster(message, variant = null, title = null) {
+                this.$bvToast.toast(this.$t(message), {
+                    title: this.$t(`components.toaster.${variant || 'default'}`),
+                    variant: variant,
+                    solid: true
+                })
             },
             resetModal() {
                 this.newStatus = ''
