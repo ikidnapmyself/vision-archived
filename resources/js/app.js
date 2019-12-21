@@ -12,10 +12,10 @@ window.axios = require('axios');
 
 require('./axios');
 
-import VueInternationalization from 'vue-i18n';
+import BootstrapVue from 'bootstrap-vue'
+import Clipboard from 'v-clipboard'
 import Locale from './vue-i18n-locales.generated';
-
-Vue.use(VueInternationalization);
+import VueInternationalization from 'vue-i18n';
 
 const lang = document.documentElement.lang.substr(0, 2);
 // or however you determine your current app locale
@@ -25,9 +25,9 @@ const i18n = new VueInternationalization({
     messages: Locale
 });
 
-import BootstrapVue from 'bootstrap-vue'
-
 Vue.use(BootstrapVue)
+Vue.use(Clipboard)
+Vue.use(VueInternationalization);
 
 /**
  * The following block of code may be used to automatically register your

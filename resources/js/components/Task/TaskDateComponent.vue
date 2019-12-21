@@ -1,19 +1,19 @@
 <template>
     <div>
         <small class="font-weight-bolder mr-2" v-on:click="toggle" v-b-tooltip.hover :title="ago">
-            {{ is_formatted ? formatted : date }}
+            {{ is_formatted ? formatted : task.created_at }}
         </small>
         <b-button-group>
-            <b-button v-on:click="toggle"  v-b-tooltip.hover :title="$t('components.task.date.Switch')">
+            <b-button v-on:click="toggle"  variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Switch')">
                 <i :class="'fa fa-toggle-' + switch_icon"></i>
             </b-button>
-            <b-button v-b-tooltip.hover :title="$t('components.task.date.Copy')">
+            <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Copy')">
                 <i class="fa fa-copy"></i>
             </b-button>
-            <b-button v-b-tooltip.hover :title="$t('components.task.date.Update')">
+            <b-button variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Update')">
                 <i class="fa fa-user-edit"></i>
             </b-button>
-            <b-dropdown v-b-tooltip.hover :title="$t('components.task.date.Defer')">
+            <b-dropdown variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Defer')">
                 <template v-slot:button-content>
                     <i class="fa fa-clock-o"></i>
                 </template>
@@ -71,7 +71,7 @@
 </template>
 <script>
     export default {
-        props: ['ago', 'date', 'formatted'],
+        props: ['ago', 'date', 'formatted', 'task'],
         data: function (){
             return {
                 is_formatted: false,

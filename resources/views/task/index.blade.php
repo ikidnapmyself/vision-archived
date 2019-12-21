@@ -31,7 +31,7 @@
                                 </task-manager-component>
                             </div>
                             <div class="col col-xs-12 text-right">
-                                @component('components.date', ['date' => $task->created_at])
+                                @component('components.date', ['task' => $task])
                                 @endcomponent
                             </div>
                         </div>

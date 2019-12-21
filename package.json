@@ -26,6 +26,7 @@
     "dependencies": {
         "bootstrap-vue": "^2.1.0",
         "jQuery-QueryBuilder": "^2.5.2",
+        "v-clipboard": "^2.2.2",
         "vue-i18n": "^8.15.1"
     }
 }
