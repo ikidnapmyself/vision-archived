@@ -1,7 +1,7 @@
 <template>
     <div>
-        <small class="font-weight-bolder mr-2" v-on:click="toggle" v-b-tooltip.hover :title="ago">
-            {{ is_formatted ? formatted : task.created_at }}
+        <small class="font-weight-bolder mr-2" v-on:click="toggle" v-b-tooltip.hover :title="task.ago">
+            {{ is_formatted ? task.date : task.created_at }}
         </small>
         <b-button-group>
             <b-button v-on:click="toggle"  variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Switch')">
@@ -71,7 +71,7 @@
 </template>
 <script>
     export default {
-        props: ['ago', 'date', 'formatted', 'task'],
+        props: ['task'],
         data: function (){
             return {
                 is_formatted: false,
