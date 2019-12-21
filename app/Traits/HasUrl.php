@@ -7,13 +7,14 @@ use Illuminate\Support\Str;
 trait HasUrl
 {
     /**
-     * HasUrl constructor.
+     * This method is called upon instantiation of the Eloquent Model.
+     *
+     * @return void
      */
-    public function __construct()
+    public function initializeHasUrl()
     {
-        $this->append('url');
+        $this->append(['url']);
     }
-
     /**
      * Get URL of current model.
      *

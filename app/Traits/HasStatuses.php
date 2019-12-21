@@ -16,7 +16,15 @@ trait HasStatuses
         'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
     ];
 
-    protected $append = ['status'];
+    /**
+     * This method is called upon instantiation of the Eloquent Model.
+     *
+     * @return void
+     */
+    public function initializeHasStatuses()
+    {
+        $this->append(['available_statuses', 'status']);
+    }
 
     /**
      * Boot model class.
@@ -31,6 +39,9 @@ trait HasStatuses
              * @todo Reason on created might change
              */
             $model->setStatus('inbox', __('status.reasons.default'));
+        });
+        static::retrieved(function ($model) {
+            $model->fillable = array_merge($model->fillable, ['available_statuses', 'status']);
         });
     }
 

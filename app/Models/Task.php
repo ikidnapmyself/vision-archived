@@ -21,10 +21,6 @@ class Task extends Model
         'project_id', 'name', 'body', 'flagged', 'order', 'completed_by'
     ];
 
-    protected $appends = [
-        'available_statuses', 'status'
-    ];
-
     /**
      * Get project.
      */
