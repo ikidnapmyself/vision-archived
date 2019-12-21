@@ -7,7 +7,7 @@
             <b-button v-on:click="toggle"  variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Switch')">
                 <i :class="'fa fa-toggle-' + switch_icon"></i>
             </b-button>
-            <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Copy')">
+            <b-button v-clipboard="task.created_at" variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Copy')">
                 <i class="fa fa-copy"></i>
             </b-button>
             <b-button variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Update')">

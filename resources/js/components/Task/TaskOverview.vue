@@ -1,6 +1,9 @@
 <template>
     <div>
         <h5 class="card-title">
+            <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Copy')">
+                <i class="fa fa-link"></i>
+            </b-button>
             <b-link :href="'task/' + task.id">
                 {{ name }}
             </b-link>

@@ -44,6 +44,10 @@ return [
             'Later'  => 'Later',
         ],
 
+        'overview'  => [
+            'Copy'   => 'Copy Link',
+        ],
+
         'statuses' => [
             'Move to' => 'Move to',
             'Add Your Reason' => 'You may add your reason before you update the status from :From to :New',
