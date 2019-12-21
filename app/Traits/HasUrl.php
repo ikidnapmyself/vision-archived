@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Str;
-
 trait HasUrl
 {
     /**
