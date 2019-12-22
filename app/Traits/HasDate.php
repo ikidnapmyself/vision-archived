@@ -2,44 +2,63 @@
 
 namespace App\Traits;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 trait HasDate
 {
-    /**
-     * Base date field.
-     *
-     * @var string $field_name
-     */
-    private $field_name = 'created_at';
-
     /**
      * This method is called upon instantiation of the Eloquent Model.
      *
      * @return void
      */
-    public function initializeHasDate()
+    public function initializeHasDate(): void
     {
         $this->append(['ago', 'date']);
     }
 
     /**
-     * Get human readable difference of the date.
+     * Get date field name.
      *
      * @return string
      */
-    public function getAgoAttribute()
+    protected function getDateFieldName(): string
     {
-        return $this->{$this->field_name}->diffForHumans();
+        return $this->date_field ?? 'created_at';
+    }
+
+    /**
+     * Get chosen date field to modify.
+     *
+     * @return null|Carbon
+     */
+    protected function getDateField(): ?Carbon
+    {
+        $field = $this->getDateFieldName();
+
+        return $this->$field;
     }
 
     /**
      * Get human readable difference of the date.
      *
-     * @return string
+     * @return null|string
      */
-    public function getDateAttribute()
+    public function getAgoAttribute(): ?string
     {
-        return date("j F Y, H:i", $this->{$this->field_name}->timestamp);
+        $field = $this->getDateField();
+
+        return $field ? $field->diffForHumans() : null;
+    }
+
+    /**
+     * Get human readable difference of the date.
+     *
+     * @return null|string
+     */
+    public function getDateAttribute(): ?string
+    {
+        $field = $this->getDateField();
+
+        return $field ? date("j F Y, H:i", $field->timestamp) : null;
     }
 }
