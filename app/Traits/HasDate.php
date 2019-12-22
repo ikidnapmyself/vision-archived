@@ -2,14 +2,12 @@
 
 namespace App\Traits;
 
-use Carbon\Carbon;
-
 trait HasDate
 {
     /**
      * Base date field.
      *
-     * @var string $field_name
+     * @var string
      */
     private $field_name = 'created_at';
 
@@ -40,6 +38,6 @@ trait HasDate
      */
     public function getDateAttribute()
     {
-        return date("j F Y, H:i", $this->{$this->field_name}->timestamp);
+        return date('j F Y, H:i', $this->{$this->field_name}->timestamp);
     }
 }

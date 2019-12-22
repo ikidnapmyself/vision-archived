@@ -15,7 +15,7 @@ class TeamObserver
      */
     public function created(Team $team)
     {
-       Member::create([
+        Member::create([
             'team_id' => $team->id,
             'user_id' => $team->user_id,
        ]);
