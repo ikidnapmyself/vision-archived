@@ -1,40 +1,43 @@
 <template>
-    <div class="text-left">
+    <b-card-body>
+        <b-card-title>
+            {{ $t('components.task.tab-edit.title') }}
+        </b-card-title>
         <b-form @submit="onSubmit" @reset="onReset">
             <b-form-group
-                :label="$t('components.task.task-tab-edit.Task')"
+                :label="$t('components.task.tab-edit.Task')"
                 label-for="input-1"
-                :description="$t('components.task.task-tab-edit.Task Description')"
+                :description="$t('components.task.tab-edit.Task Description')"
             >
                 <b-form-input
                     v-model="form.name"
                     type="text"
                     :state="nameState"
                     required
-                    :placeholder="$t('components.task.task-tab-edit.Task')"
+                    :placeholder="$t('components.task.tab-edit.Task')"
                 ></b-form-input>
             </b-form-group>
 
             <b-form-group
-                :label="$t('components.task.task-tab-edit.Body')"
+                :label="$t('components.task.tab-edit.Body')"
                 label-for="input-1"
-                :description="$t('components.task.task-tab-edit.Body Description')"
+                :description="$t('components.task.tab-edit.Body Description')"
             >
                 <b-form-textarea
                     v-model="form.body"
-                    :placeholder="$t('components.task.task-tab-edit.Body')"
+                    :placeholder="$t('components.task.tab-edit.Body')"
                     rows="3"
                     max-rows="6"
                 ></b-form-textarea>
             </b-form-group>
             <b-button type="submit" variant="primary">
-                {{ $t('components.task.task-tab-edit.Update') }}
+                {{ $t('components.task.tab-edit.Update') }}
             </b-button>
             <b-button type="reset" variant="danger">
-                {{ $t('components.task.task-tab-edit.Reset') }}
+                {{ $t('components.task.tab-edit.Reset') }}
             </b-button>
         </b-form>
-    </div>
+    </b-card-body>
 </template>
 <script>
     export default {
@@ -61,11 +64,11 @@
                 this.$nextTick(() => {
                     object.$axios.put('task/' + object.task.id, this.form)
                         .then(function (response) {
-                            object.toaster('components.task.task-tab-edit.Updated', 'success')
+                            object.toaster('components.task.tab-edit.Updated', 'success')
                             object.$root.$emit('task-updated', response);
                         })
                         .catch(function (error) {
-                            object.toaster('components.task.task-tab-edit.Failed', 'danger')
+                            object.toaster('components.task.tab-edit.Failed', 'danger')
                         });
                 })
             },

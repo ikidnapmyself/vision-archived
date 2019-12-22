@@ -1,6 +1,6 @@
 <template>
     <div class="card-header">
-        <ul class="nav nav-pills" :id="'task-' + task.id" role="tablist">
+        <ul class="nav" :id="'task-' + task.id" role="tablist">
             <li class="nav-item" v-b-tooltip.hover :title="$t('components.task.card-header.Overview')">
                 <a class="nav-link active"
                    :id="'task-' + task.id + '-overview-tab'"
@@ -27,7 +27,7 @@
                     <i class="fa fa-wrench"></i>
                 </a>
             </li>
-            <li class="nav-item" v-b-tooltip.hover :title="$t('components.task.card-header.Assignee')">
+            <li class="nav-item" v-b-tooltip.hover :title="$t('components.task.card-header.Assignees')">
                 <a class="nav-link"
                    :id="'task-' + task.id + '-assign-tab'"
                    ref="navigationItem"

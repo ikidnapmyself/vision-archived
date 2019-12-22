@@ -1,23 +1,28 @@
 <template>
-    <div>
-        <h5 class="card-title">
+    <b-card-body>
+        <b-card-title>
+            <b-button @click="toggleBody" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Toggle')">
+                <i :class="'fa fa-toggle-' + switch_icon"></i>
+            </b-button>
             <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Copy')">
                 <i class="fa fa-link"></i>
             </b-button>
             <b-link :href="'task/' + task.id">
                 {{ name }}
             </b-link>
-        </h5>
-        <p class="card-text">{{ body }}</p>
-    </div>
+        </b-card-title>
+        <b-card-text v-if="toggle_body">{{ body }}</b-card-text>
+    </b-card-body>
 </template>
 <script>
     export default {
-        props: ['task'],
+        props: ['task', 'hide'],
         data() {
             return {
                 name: this.task.name,
                 body: this.task.body,
+                switch_icon: 'on',
+                toggle_body: true,
             }
         },
         mounted() {
@@ -28,6 +33,20 @@
                     object.name = response.data.name;
                 }
             })
-        }
+        },
+        methods: {
+            toggleBody()
+            {
+                this.toggle_body = ! this.toggle_body;
+                this.toggleIcon();
+            },
+            toggleIcon()
+            {
+                if(this.switch_icon === 'on')
+                    this.switch_icon = 'off';
+                else
+                    this.switch_icon = 'on';
+            }
+        },
     }
 </script>

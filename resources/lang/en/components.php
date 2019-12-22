@@ -25,13 +25,13 @@ return [
             'Assign Yourself' => 'Assign Yourself',
             'Assign' => 'Assign',
             'Assignee' => 'Assignee',
-            'Assignees' => 'Assignees',
+            'title' => 'Assignees of The Task',
         ],
 
         'card-header'  => [
-            'Overview' => 'Overview',
-            'Update'   => 'Update',
-            'Assignee' => 'Assignee',
+            'Overview'  => 'Overview',
+            'Update'    => 'Update',
+            'Assignees' => 'Assignees',
         ],
 
         'date'  => [
@@ -45,6 +45,7 @@ return [
         ],
 
         'overview'  => [
+            'Toggle' => 'Toggle Task Description',
             'Copy'   => 'Copy Link',
         ],
 
@@ -56,9 +57,10 @@ return [
             'Failed' => 'An error occurred while changing status.',
         ],
 
-        'task-tab-edit'  => [
+        'tab-edit'  => [
             'Task' => 'Task',
             'Task Description'   => 'Describe your task as lean as possible, it should contain at least six characters.',
+            'title' => 'Update This Task',
             'Body' => 'Task Description',
             'Body Description'   => 'A few words to provide details.',
             'Update' => 'Update',
