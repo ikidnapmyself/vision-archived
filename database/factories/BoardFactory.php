@@ -3,14 +3,13 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Board;
-use App\Models\Team;
 use App\Models\User;
 use Faker\Generator as Faker;
 
 $factory->define(Board::class, function (Faker $faker) {
     $model = collect([
         User::class,
-        Team::class
+        /** @TODO groups may have common boards */
     ])->random();
 
     return [

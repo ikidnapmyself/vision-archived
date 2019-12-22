@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         try {
             factory(User::class, 200)->create();
         } catch (PDOException $e) {
-            dump("'PDOException: [{$e->getCode()}] '{$e->getMessage()}'");
+            dump("PDOException: SQLSTATE[{$e->getCode()}] Ignored");
         }
     }
 }
