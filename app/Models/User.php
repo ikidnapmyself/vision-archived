@@ -34,7 +34,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'avatar_url', 'full_name'
+        'avatar_url', 'full_name',
     ];
 
     /**

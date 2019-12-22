@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use Spatie\ModelStatus\HasStatuses as BaseTrait;
@@ -10,10 +11,10 @@ trait HasStatuses
     /**
      * Pre-defined statuses.
      *
-     * @var array $allowedStatuses
+     * @var array
      */
     private $allowedStatuses = [
-        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
+        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed',
     ];
 
     /**
@@ -35,7 +36,7 @@ trait HasStatuses
             /*
              * @var \Illuminate\Database\Eloquent\Model
              */
-            /**
+            /*
              * @todo Reason on created might change
              */
             $model->setStatus('inbox', __('status.reasons.default'));
@@ -58,7 +59,7 @@ trait HasStatuses
     }
 
     /**
-     * Available statuses. (note: override if there is a workflow or business logic)
+     * Available statuses. (note: override if there is a workflow or business logic).
      *
      * @return array
      */
@@ -68,7 +69,7 @@ trait HasStatuses
     }
 
     /**
-     * Available statuses. (note: override if there is a workflow or business logic)
+     * Available statuses. (note: override if there is a workflow or business logic).
      *
      * @return array
      */
