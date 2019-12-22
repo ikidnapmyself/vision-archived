@@ -17,6 +17,11 @@ class UsersTableSeeder extends Seeder
             'surname' => 'User',
             'email'   => 'test@test.com',
         ]);
-        factory(User::class, 200)->create();
+
+        try {
+            factory(User::class, 200)->create();
+        } catch (PDOException $e) {
+            dump("'PDOException: [{$e->getCode()}] '{$e->getMessage()}'");
+        }
     }
 }
