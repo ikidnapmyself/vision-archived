@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasDate;
 use App\Traits\HasUUID;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Assignee extends Model
 {
-    use HasUUID, SoftDeletes;
+    use HasDate, HasUUID, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,27 @@ class Assignee extends Model
     protected $fillable = [
         'assigned_by', 'user_id', 'task_id', 'due', 'defer', 'estimated_time', 'blocker',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'due',
+        'defer',
+        'completed_at',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    /**
+     * Make the field human readable.
+     *
+     * @var string $date_field
+     */
+    protected $date_field = 'due';
 
     /**
      * Determine if assignation has been expired.
@@ -73,7 +95,7 @@ class Assignee extends Model
      */
     public function assignedBy()
     {
-        return $this->belongsTo('App\Models\User', 'assigned_by', 'id');
+        return $this->belongsTo(User::class, 'assigned_by', 'id');
     }
 
     /**
@@ -81,7 +103,7 @@ class Assignee extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     /**
@@ -89,6 +111,6 @@ class Assignee extends Model
      */
     public function task()
     {
-        return $this->belongsTo('App\Models\Task', 'task_id', 'id');
+        return $this->belongsTo(Task::class, 'task_id', 'id');
     }
 }
