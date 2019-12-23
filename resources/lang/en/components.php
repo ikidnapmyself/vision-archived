@@ -18,20 +18,22 @@ return [
     ],
 
     'task'  => [
+        'Assignees' => 'Assignees',
+        'Assign'    => 'Assign',
+        'Overview'  => 'Overview',
+        'Read All'  => 'Read All',
+        'Update'    => 'Update',
 
-        'Read All' => 'Read All',
+        'assign' => [
+            'Assign Yourself' => 'Assign Yourself',
+            'title' => 'Assign Friends',
+        ],
 
         'assignees' => [
             'Assign Yourself' => 'Assign Yourself',
             'Assign' => 'Assign',
             'Assignee' => 'Assignee',
             'title' => 'Assignees of The Task',
-        ],
-
-        'card-header'  => [
-            'Overview'  => 'Overview',
-            'Update'    => 'Update',
-            'Assignees' => 'Assignees',
         ],
 
         'date'  => [
