@@ -14,7 +14,7 @@ class FriendshipsTableSeeder extends Seeder
     {
         for ($count = 0; $count < 350; $count++) {
             /** @var User $sender */
-            $sender    = User::inRandomOrder()->first();
+            $sender = User::inRandomOrder()->first();
             /** @var User $recipient */
             $recipient = User::inRandomOrder()->first();
 
@@ -24,7 +24,6 @@ class FriendshipsTableSeeder extends Seeder
 
             $sender->befriend($recipient);
             $sender->acceptFriendRequest($recipient);
-
         }
     }
 }

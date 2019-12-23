@@ -13,8 +13,7 @@
 
 Auth::routes();
 Route::get('/', 'WelcomeController@welcome')->name('welcome');
-Route::middleware('auth')->group(function ()
-{
+Route::middleware('auth')->group(function () {
 //    Route::resource('/board', 'BoardController');
     Route::resource('/assignee', 'AssigneeController');
     Route::resource('/friendship', 'FriendshipController');

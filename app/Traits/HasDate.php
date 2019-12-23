@@ -59,6 +59,6 @@ trait HasDate
     {
         $field = $this->getDateField();
 
-        return $field ? date("j F Y, H:i", $field->timestamp) : null;
+        return $field ? date('j F Y, H:i', $field->timestamp) : null;
     }
 }
