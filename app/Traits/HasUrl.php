@@ -15,13 +15,18 @@ trait HasUrl
     {
         $this->append(['url']);
     }
+
     /**
      * Get URL of current model.
      *
-     * @return bool
+     * @return string
+     * @throws \ReflectionException
      */
     public function getUrlAttribute()
     {
-        return route('task.show', ['task' => $this->id]);
+        $class = (new \ReflectionClass($this))->getShortName();
+        $key   = Str::lower($class);
+
+        return route("{$key}.show", [$key => $this->id]);
     }
 }
