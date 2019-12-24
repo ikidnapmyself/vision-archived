@@ -19,7 +19,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'project_id', 'name', 'body', 'flagged', 'order', 'completed_by'
+        'project_id', 'name', 'body', 'flagged', 'order', 'created_by', 'completed_by'
     ];
 
     /**
@@ -39,9 +39,17 @@ class Task extends Model
     }
 
     /**
+     * Created by.
+     */
+    public function createdBy()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'created_by');
+    }
+
+    /**
      * Completed by.
      */
-    public function completed_by()
+    public function completedBy()
     {
         return $this->hasOne('App\Models\Assignee', 'completed_by');
     }

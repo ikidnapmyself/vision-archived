@@ -40,7 +40,12 @@ class TaskService extends BaseService
      */
     public function index()
     {
-        return $this->repository->with('assignees.user')->paginate();
+        return $this->repository
+            ->with([
+                'assignees.user',
+                'createdBy',
+            ])
+            ->paginate();
     }
 
     /**
