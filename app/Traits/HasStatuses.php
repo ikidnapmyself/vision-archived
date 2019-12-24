@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Models\Status;
 use Spatie\ModelStatus\HasStatuses as BaseTrait;
 
 trait HasStatuses
@@ -23,7 +24,7 @@ trait HasStatuses
      */
     public function initializeHasStatuses()
     {
-        $this->append(['available_statuses', 'status']);
+        $this->append(['available_statuses', 'current_status']);
     }
 
     /**
@@ -75,5 +76,15 @@ trait HasStatuses
     public function getAvailableStatusesAttribute(): array
     {
         return $this->availableStatuses();
+    }
+
+    /**
+     * Return current status.
+     *
+     * @return Status|null
+     */
+    public function getCurrentStatusAttribute(): ?Status
+    {
+        return $this->latestStatus();
     }
 }
