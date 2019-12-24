@@ -2,7 +2,7 @@
 
 return [
     'reasons' => [
-        'default'  => 'System generated.',
+        'default'  => 'Generated automatically by system.',
         'imported' => 'Imported.',
     ],
 
