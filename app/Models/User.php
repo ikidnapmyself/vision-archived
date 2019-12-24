@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Abilities\Friendable;
 use App\Traits\HasAvatar;
 use App\Traits\HasRoles;
+use App\Traits\HasUrl;
 use App\Traits\HasUUID;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use CanResetPassword, Friendable, HasAvatar, HasRoles, HasUUID, Notifiable;
+    use CanResetPassword, Friendable, HasAvatar, HasRoles, HasUrl, HasUUID, Notifiable;
 
     /**
      * The attributes that are mass assignable.
