@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Vision;
 
 class VisionRepository extends Repository
 {
-
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
