@@ -20,6 +20,7 @@ return [
     'task'  => [
         'Assignees' => 'Assignees',
         'Assign'    => 'Assign',
+        'Timeline'    => 'Timeline',
         'Overview'  => 'Overview',
         'Read All'  => 'Read All',
         'Update'    => 'Update',
@@ -69,6 +70,10 @@ return [
             'Updated' => 'The task has been updated successfully.',
             'Failed' => 'An error occurred while updating status.',
             'Reset'  => 'Reset',
+        ],
+
+        'timeline' => [
+            'title' => 'Activity Timeline',
         ],
     ],
 

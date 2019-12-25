@@ -10,7 +10,7 @@
             <b-button v-clipboard="task.created_at" variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Copy')">
                 <i class="fa fa-copy"></i>
             </b-button>
-            <b-button variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Update')">
+            <b-button :hidden="false" variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Update')">
                 <i class="fa fa-user-edit"></i>
             </b-button>
             <b-dropdown variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Defer')">

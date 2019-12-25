@@ -1,9 +1,6 @@
 <template>
     <b-card-body>
         <b-card-title>
-            <b-button @click="toggleBody" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Toggle')">
-                <i :class="'fa fa-toggle-' + switch_icon"></i>
-            </b-button>
             <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Copy')">
                 <i class="fa fa-link"></i>
             </b-button>
