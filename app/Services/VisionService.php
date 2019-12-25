@@ -28,7 +28,7 @@ class VisionService extends BaseService implements ServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id)
     {
