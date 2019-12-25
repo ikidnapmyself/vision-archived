@@ -65,7 +65,7 @@
                     object.$axios.put('task/' + object.task.id, this.form)
                         .then(function (response) {
                             object.toaster('components.task.tab-edit.Updated', 'success')
-                            object.$root.$emit('task-updated', response);
+                            object.$root.$emit('task-updated-' + object.task.id, response);
                         })
                         .catch(function (error) {
                             object.toaster('components.task.tab-edit.Failed', 'danger')

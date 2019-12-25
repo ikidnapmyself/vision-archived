@@ -23,15 +23,20 @@
             }
         },
         mounted() {
-            const object = this;
-            this.$root.$on('task-updated', (response) => {
-                if(object.id === response.data.id)
-                {
-                    object.name = response.data.name;
-                }
-            })
+            this.onTaskUpdate();
         },
         methods: {
+            onTaskUpdate()
+            {
+                const object = this;
+                this.$root.$on('task-updated-' + this.task.id, (response) => {
+                    if(object.task.id === response.data.id)
+                    {
+                        object.name = response.data.name;
+                        object.body = response.data.body;
+                    }
+                })
+            },
             toggleBody()
             {
                 this.toggle_body = ! this.toggle_body;

@@ -2,7 +2,7 @@
     <div :class="'mb-1 border-right border-' + colors[status]">
         <b-link v-b-toggle="'collapse-' + task.id" variant="muted" @click="toggleBody" class="d-md-block d-lg-none">
             <b-badge>New</b-badge>
-            {{ task.name }}
+            {{ taskName }}
         </b-link>
         <b-navbar toggleable="lg" type="light" variant="muted">
                 <b-navbar-brand :href="task.created_by.url">
@@ -13,18 +13,22 @@
                         <i class="fa fa-flag" :class="'text-' + (flagged ? 'danger' : 'secondary')"></i>
                     </b-nav-item>
                     <b-nav-item v-b-toggle="'collapse-' + task.id" variant="muted" @click="toggleBody">
-                        <i :class="'fa fa-toggle-' + switch_icon"></i>
+                        <i :class="'fa fa-toggle-' + switchIcon"></i>
                         <span class="d-none d-lg-inline">
                             <b-badge>New</b-badge>
-                            {{ task.name }}
+                            {{ taskName }}
                         </span>
                     </b-nav-item>
                 </b-navbar-nav>
                 <b-collapse is-nav>
                     <b-navbar-nav class="ml-auto">
-                        <b-nav-text class="mr-2" variant="muted" right>
+                        <b-nav-item class="mr-2" variant="muted" right v-if="task.assignees.length > 0">
+                            <b>{{ task.assignees.length }}</b>
                             <i :class="'fa fa-' + (task.assignees.length < 2 ? 'user' : 'users')"></i>
-                        </b-nav-text>
+                        </b-nav-item>
+                        <b-nav-item class="mr-2" variant="muted" right v-else-if="task.assignees.length === 0">
+                            <i class="fa fa-user-plus"></i>
+                        </b-nav-item>
                         <b-nav-text v-b-tooltip.hover variant="muted" v-if="reason" :title="reason" right>
                             <i class="fa fa-info-circle"></i>
                         </b-nav-text>
@@ -89,7 +93,7 @@
                             </span>
                         </template>
                         <b-card-text>
-                            <task-tab-edit-component :task="task"></task-tab-edit-component>
+                            <task-update-component :task="task"></task-update-component>
                         </b-card-text>
                     </b-tab>
                     <b-tab>
@@ -158,12 +162,13 @@
                 newStatus: null,
                 reason: this.task.current_status.reason,
                 status: this.task.current_status.name,
-                switch_icon: 'off',
+                switchIcon: 'off',
+                taskName: this.task.name,
                 user: this.$Application.user,
             }
         },
-        mounted(){
-            //
+        mounted() {
+            this.onTaskUpdate();
         },
         methods: {
             handleOk(bvModalEvt) {
@@ -190,6 +195,16 @@
             hideModal() {
                 this.$refs['bv-status-reason-modal'].hide()
             },
+            onTaskUpdate()
+            {
+                const object = this;
+                this.$root.$on('task-updated-' + this.task.id, (response) => {
+                    if(object.task.id === response.data.id)
+                    {
+                        object.taskName = response.data.name;
+                    }
+                })
+            },
             setStatus: function (status) {
                 this.newStatus = status;
                 this.showModal();
@@ -214,10 +229,10 @@
             },
             toggleIcon()
             {
-                if(this.switch_icon === 'on')
-                    this.switch_icon = 'off';
+                if(this.switchIcon === 'on')
+                    this.switchIcon = 'off';
                 else
-                    this.switch_icon = 'on';
+                    this.switchIcon = 'on';
             },
             toggleFlag: function () {
                 let object = this;
