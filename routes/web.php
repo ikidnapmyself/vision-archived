@@ -13,13 +13,13 @@
 
 Auth::routes();
 Route::get('/', 'WelcomeController@welcome')->name('welcome');
-Route::middleware('auth')->group(function ()
-{
+Route::middleware('auth')->group(function () {
 //    Route::resource('/board', 'BoardController');
     Route::resource('/assignee', 'AssigneeController');
     Route::resource('/friendship', 'FriendshipController');
     Route::get('/home', 'HomeController@index')->name('home');
 //    Route::resource('/project', 'ProjectController');
+    Route::get('/task/list', 'TaskController@list')->name('task.list');
     Route::resource('/task', 'TaskController');
     Route::put('/task/{task}/flag', 'TaskController@flag');
     Route::put('/task/{task}/status/{status}', 'TaskController@status');

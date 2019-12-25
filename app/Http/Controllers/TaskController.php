@@ -42,9 +42,20 @@ class TaskController extends Controller
     public function index()
     {
         return view('task.index', [
-            'visions' => $this->visionService->defaults(),
             'tasks'   => $this->service->index()
         ]);
+    }
+
+    /**
+     * Return listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        $tasks = $this->service->index();
+
+        return response($tasks);
     }
 
     /**
