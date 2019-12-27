@@ -1,6 +1,6 @@
 <template>
     <div class="overflow-auto">
-        <connection-error-component :show="connectionError"></connection-error-component>
+        <connection-error-component :times="connectionErrorRetry" :url="url"></connection-error-component>
         <b-pagination
             v-model="currentPage"
             :total-rows="tasks.total"
@@ -10,8 +10,11 @@
             @change="onChange"
         ></b-pagination>
 
+        <task-sketelon-component v-if="preload" v-for="index in 15" :key="index"></task-sketelon-component>
+
         <task-component
             id="tasks-table"
+            v-if="!preload"
             v-for="task in items"
             :key="task.id"
             :task="task">
@@ -31,42 +34,53 @@
     export default {
         props: ['tasks'],
         created() {
-            this.$root.$on('bv::pagination::change', this.onChange)
+            this.$root.$on('refresh-tasks', (response) => {
+                this.load(this.currentPage)
+            })
         },
         data: function() {
             return {
-                connectionError: false,
+                connectionErrorRetry: 0,
                 currentPage: this.tasks.current_page,
                 items: this.tasks.data,
+                preload: true,
+                url: '',
             }
         },
         mounted(){
-            this.load(1)
+            this.load()
         },
         methods: {
+            pagination(page) {
+                if('undefined' !== typeof page)
+                    this.currentPage = parseInt(page);
+                else
+                    this.currentPage = 1;
+
+                return this.currentPage;
+            },
             load(page) {
-                this.connectionError = ! this.connectionError;
-                if(typeof page === undefined)
-                    page = 1;
+                this.getUrl(page);
+                this.preload = true;
                 let object = this;
-
-                console.log(page)
-                console.log('task/list?page=' + page)
-
-                this.$axios.get('task/list?page=' + page)
+                this.$axios.get(this.url)
                        .then(function (response) {
-                        console.log(response)
-                        console.log('current page: '+response.data.current_page)
                         object.currentPage = response.data.current_page;
                         object.items = response.data.data;
+                        object.preload = false;
                     })
                     .catch(function (error) {
-                        object.toaster('components.task.tasks.Could not load', 'danger');
+                        object.connectionErrorRetry++;
                     });
             },
             onChange(page) {
                 this.load(page)
-            }
-        }
+            },
+            getUrl(page) {
+                let currentUrl = this.pagination(page);
+
+                this.url = 'task/list?page=' + currentUrl;
+            },
+        },
     }
 </script>

@@ -14,7 +14,9 @@ require('./axios');
 
 import BootstrapVue from 'bootstrap-vue'
 import Clipboard from 'v-clipboard'
+import Grid from 'simple-xgrid'
 import Locale from './vue-i18n-locales.generated';
+import Skeleton from 'tb-skeleton'
 import VueInternationalization from 'vue-i18n';
 
 const lang = document.documentElement.lang.substr(0, 2);
@@ -27,7 +29,9 @@ const i18n = new VueInternationalization({
 
 Vue.use(BootstrapVue)
 Vue.use(Clipboard)
-Vue.use(VueInternationalization);
+Vue.use(Grid)
+Vue.use(Skeleton)
+Vue.use(VueInternationalization)
 
 /**
  * The following block of code may be used to automatically register your

@@ -5,6 +5,12 @@ return [
         'Vision' => 'Vision',
     ],
 
+    'shared' => [
+        'connection-error' => [
+            'message' => 'It will try to fetch data :second seconds...',
+        ],
+    ],
+
     'inputs' => [
         'button' => [
             'find'   => 'Find',

@@ -110,7 +110,6 @@
                         object.flagged = response.data.flagged;
                     })
                     .catch(function (error) {
-                        console.log(error);
                         alert('Flag can not be updated!');
                     });
             },

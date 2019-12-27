@@ -8,7 +8,7 @@
                 {{ name }}
             </b-link>
         </b-card-title>
-        <b-card-text v-if="toggle_body">{{ body }}</b-card-text>
+        <b-card-text>{{ body }}</b-card-text>
     </b-card-body>
 </template>
 <script>
@@ -19,7 +19,6 @@
                 name: this.task.name,
                 body: this.task.body,
                 switch_icon: 'on',
-                toggle_body: true,
             }
         },
         mounted() {
@@ -36,11 +35,6 @@
                         object.body = response.data.body;
                     }
                 })
-            },
-            toggleBody()
-            {
-                this.toggle_body = ! this.toggle_body;
-                this.toggleIcon();
             },
             toggleIcon()
             {
