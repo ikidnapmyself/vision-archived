@@ -5,26 +5,28 @@
             v-model="currentPage"
             :total-rows="tasks.total"
             :per-page="tasks.per_page"
-            aria-controls="tasks-table"
+            aria-controls="tasks-list"
             align="center"
             @change="onChange"
         ></b-pagination>
 
-        <task-sketelon-component v-if="preload" v-for="index in 15" :key="index"></task-sketelon-component>
+        <div id="tasks-list">
+            <task-sketelon-component v-if="preload" v-for="index in 15" :key="index"></task-sketelon-component>
 
-        <task-component
-            id="tasks-table"
-            v-if="!preload"
-            v-for="task in items"
-            :key="task.id"
-            :task="task">
-        </task-component>
+            <task-component
+                v-if="!preload"
+                v-for="task in items"
+                :key="task.id"
+                :collapse="true"
+                :task="task">
+            </task-component>
+        </div>
 
         <b-pagination
             v-model="currentPage"
             :total-rows="tasks.total"
             :per-page="tasks.per_page"
-            aria-controls="tasks-table"
+            aria-controls="tasks-list"
             align="center"
             @change="onChange"
         ></b-pagination>
