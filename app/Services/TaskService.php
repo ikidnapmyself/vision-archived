@@ -56,7 +56,12 @@ class TaskService extends BaseService
      */
     public function show(string $id)
     {
-        return $this->repository()->find($id)->load('assignees.user');
+        return $this->repository
+            ->with([
+                'assignees.user',
+                'createdBy',
+            ])
+            ->find($id);
     }
 
     /**
