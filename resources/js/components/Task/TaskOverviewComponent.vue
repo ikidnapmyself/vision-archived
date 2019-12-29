@@ -1,13 +1,26 @@
 <template>
     <b-card-body>
         <b-card-title>
-            <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Copy')">
-                <i class="fa fa-link"></i>
-            </b-button>
-            <b-link :href="'task/' + task.id">
-                {{ name }}
-            </b-link>
+            <b-media>
+                <template v-slot:aside>
+                    <qriously :value="task.url" :size="100" />
+                </template>
+                <h5 class="mt-0">
+                    <b-link :href="'task/' + task.id">
+                        {{ name }}
+                    </b-link>
+                </h5>
+                <p>
+                    <b-button :href="task.url" variant="muted" v-b-tooltip.hover :title="name">
+                        <i class="fa fa-link"></i>
+                    </b-button>
+                    <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Copy')">
+                        <i class="fa fa-copy"></i>
+                    </b-button>
+                </p>
+            </b-media>
         </b-card-title>
+        <hr v-if="body">
         <b-card-text>{{ body }}</b-card-text>
     </b-card-body>
 </template>

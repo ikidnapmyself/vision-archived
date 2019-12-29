@@ -18,6 +18,7 @@ import Grid from 'simple-xgrid'
 import Locale from './vue-i18n-locales.generated';
 import Skeleton from 'tb-skeleton'
 import VueInternationalization from 'vue-i18n';
+import VueQriously from 'vue-qriously'
 
 const lang = document.documentElement.lang.substr(0, 2);
 // or however you determine your current app locale
@@ -32,6 +33,7 @@ Vue.use(Clipboard)
 Vue.use(Grid)
 Vue.use(Skeleton)
 Vue.use(VueInternationalization)
+Vue.use(VueQriously)
 
 /**
  * The following block of code may be used to automatically register your
