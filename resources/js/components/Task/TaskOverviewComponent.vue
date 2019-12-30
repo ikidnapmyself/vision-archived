@@ -3,7 +3,7 @@
         <b-card-title>
             <b-media>
                 <template v-slot:aside>
-                    <qriously :value="task.url" :size="100" />
+                    <qriously :value="task.url" :size="100" class="d-none d-lg-inline" />
                 </template>
                 <h5 class="mt-0">
                     <b-link :href="'task/' + task.id">
