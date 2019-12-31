@@ -19,7 +19,7 @@ class FriendshipsTableSeeder extends Seeder
              * @var User $user
              */
             $check = $test->befriend($user);
-            $check === true ? $test->acceptFriendRequest($user) : false;
+            $check !== false ? $user->acceptFriendRequest($test) : false;
         });
 
         for ($count = 0; $count < 350; $count++) {
