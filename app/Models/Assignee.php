@@ -43,6 +43,20 @@ class Assignee extends Model
     protected $date_field = 'due';
 
     /**
+     * Boot model class.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (null === $model->assigned_by) {
+                $model->assigned_by = \Auth::user()->id;
+            }
+        });
+    }
+
+    /**
      * Determine if assignation has been expired.
      *
      * @return bool
