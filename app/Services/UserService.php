@@ -9,7 +9,7 @@ class UserService extends BaseService
     /**
      * Validation base rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [
         //
@@ -26,7 +26,7 @@ class UserService extends BaseService
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index()
     {
@@ -34,7 +34,7 @@ class UserService extends BaseService
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id)
     {

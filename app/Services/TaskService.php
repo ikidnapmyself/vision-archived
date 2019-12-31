@@ -9,7 +9,7 @@ class TaskService extends BaseService
     /**
      * Validation base rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [
         'name' => 'required|min:6|max:255',
@@ -36,7 +36,7 @@ class TaskService extends BaseService
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index()
     {
@@ -88,6 +88,7 @@ class TaskService extends BaseService
         $task = $this->repository()->find($id);
         $task->flagged = ! $task->flagged;
         $task->save();
+
         return $task;
     }
 }
