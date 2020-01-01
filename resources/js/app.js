@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-require('jQuery-QueryBuilder');
 
 window.Vue = require('vue');
 window.axios = require('axios');
@@ -18,7 +17,8 @@ import Grid from 'simple-xgrid'
 import Locale from './vue-i18n-locales.generated';
 import Skeleton from 'tb-skeleton'
 import VueInternationalization from 'vue-i18n';
-import VueQriously from 'vue-qriously'
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+import VueQriously from 'vue-qriously';
 
 const lang = document.documentElement.lang.substr(0, 2);
 // or however you determine your current app locale
@@ -27,6 +27,8 @@ const i18n = new VueInternationalization({
     locale: lang,
     messages: Locale
 });
+
+Vue.component('b-typeahead', VueBootstrapTypeahead)
 
 Vue.use(BootstrapVue)
 Vue.use(Clipboard)

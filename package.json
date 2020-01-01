@@ -26,10 +26,12 @@
     "dependencies": {
         "bootstrap-vue": "^2.1.0",
         "jQuery-QueryBuilder": "^2.5.2",
+        "moment": "^2.24.0",
         "simple-grid": "^1.0.1",
         "simple-xgrid": "^1.2.5",
         "tb-skeleton": "^0.3.6",
         "v-clipboard": "^2.2.2",
+        "vue-bootstrap-typeahead": "^0.2.6",
         "vue-i18n": "^8.15.1",
         "vue-qriously": "^1.1.1"
     }
