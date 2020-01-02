@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use App\Models\Status;
@@ -11,10 +12,10 @@ trait HasStatuses
     /**
      * Pre-defined statuses.
      *
-     * @var array $allowedStatuses
+     * @var array
      */
     private $allowedStatuses = [
-        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
+        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed',
     ];
 
     /**
@@ -59,7 +60,7 @@ trait HasStatuses
     }
 
     /**
-     * Available statuses. (note: override if there is a workflow or business logic)
+     * Available statuses. (note: override if there is a workflow or business logic).
      *
      * @return array
      */
@@ -69,7 +70,7 @@ trait HasStatuses
     }
 
     /**
-     * Available statuses. (note: override if there is a workflow or business logic)
+     * Available statuses. (note: override if there is a workflow or business logic).
      *
      * @return array
      */

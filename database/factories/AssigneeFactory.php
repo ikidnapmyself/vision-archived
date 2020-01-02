@@ -3,16 +3,16 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Assignee;
-use App\Models\User;
 use App\Models\Task;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 $factory->define(Assignee::class, function (Faker $faker) {
     /**
      * @todo Users can only assign themselves until we use teams actively
      */
-    $user    = User::inRandomOrder()->first();
-    $task    = Task::inRandomOrder()->first();
+    $user = User::inRandomOrder()->first();
+    $task = Task::inRandomOrder()->first();
     /**
      * @todo Generate due and defer dates regarding to project limitations.
      */
@@ -33,7 +33,7 @@ $factory->define(Assignee::class, function (Faker $faker) {
         'due'            => $due ?? null,
         'defer'          => $defer ?? null,
         'estimated_time' => null,
-        'blocker'        => ! (boolean) rand(0, 5),
+        'blocker'        => ! (bool) rand(0, 5),
         'completed_at'   => null,
     ];
 });
