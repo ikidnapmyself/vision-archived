@@ -8,14 +8,14 @@ use App\Repositories\TaskRepository;
 class TaskService extends BaseService
 {
     /**
-     * @var AssigneeService $assigneeService
+     * @var AssigneeService
      */
     public $assigneeService;
 
     /**
      * Validation base rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [
         'name' => 'sometimes|required|min:6|max:255',
@@ -45,7 +45,7 @@ class TaskService extends BaseService
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index()
     {
@@ -96,9 +96,10 @@ class TaskService extends BaseService
     public function unassign(string $task, string $user)
     {
         /**
-         * @var Task $task
+         * @var Task
          */
         $task = $this->repository()->find($task);
+
         return $task->assignees()->where([
             'user_id' => $user,
         ])->delete();
@@ -128,6 +129,7 @@ class TaskService extends BaseService
         $task = $this->repository()->find($id);
         $task->flagged = ! $task->flagged;
         $task->save();
+
         return $task;
     }
 }
