@@ -31,13 +31,13 @@ class Assignee extends Model
         'completed_at',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
      * Make the field human readable.
      *
-     * @var string $date_field
+     * @var string
      */
     protected $date_field = 'due';
 
