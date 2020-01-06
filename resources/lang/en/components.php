@@ -26,21 +26,56 @@ return [
     'task'  => [
         'Assignees' => 'Assignees',
         'Assign'    => 'Assign',
-        'Timeline'    => 'Timeline',
+        'Timeline'  => 'Timeline',
         'Overview'  => 'Overview',
         'Read All'  => 'Read All',
         'Update'    => 'Update',
-
-        'assign' => [
-            'Assign Yourself' => 'Assign Yourself',
-            'title' => 'Assign Friends',
-        ],
+        'Share'     => 'Share',
+        'Flagged'   => '":task_name" is not important anymore.',
+        'No Flag'   => '":task_name" is marked as important.',
+        'Flag Failed'   => 'Unable to update flag status. Please try again later.',
 
         'assignees' => [
             'Assign Yourself' => 'Assign Yourself',
+            'Already Assigned' => 'Unassign Yourself',
             'Assign' => 'Assign',
             'Assignee' => 'Assignee',
-            'title' => 'Assignees of The Task',
+            'Assigned' => ':full_name successfully assigned to ":task_name".',
+            'Assignee Failed' => 'Unable to assign. Please try again later.',
+            'Blocker'   => 'Blocker',
+            'Blocker Sub Title'   => 'Blocking may prevent completion of a project.',
+            'Defer'   => 'Defer',
+            'Defer Sub Title'   => 'Deferring will hide it for a clear vision until the time, you set.',
+            'Due'   => 'Due',
+            'Due Sub Title'   => 'Blocking may prevent completion of a project.',
+            'Copy'   => 'Copy E-mail',
+            'Difficulty'   => 'Task Difficulty',
+            'Difficulty Sub Title'   => 'Task difficulty defines compatibility of this assignee and the task.',
+            'Difficulty DevNote'   => 'Any task may hard or easy. 
+                                       But on the another hand an easy task may hard if it is badly engaged. 
+                                       Negative direction referring lower qualification with too much attachments.',
+            'Estimated Time'   => 'Estimated Time',
+            'Estimated Time Sub Title'   => 'An objective time estimation will help you to measure project with better assignments.',
+            'Estimated Time Unit'   => 'min.',
+            'Friends Failed' => 'Unable to fetch your friend list. Please try again later.',
+            'Mail To'   => 'Send E-mail',
+            'No Friend' => 'You have no friends',
+            'title' => 'Assignees',
+
+            'Updated' => 'Assignee successfully updated.',
+            'Update Failed' => 'Unable to assign. Please try again later.',
+
+            'New Assignee' => 'Assignable Friends (:friendsLeft)',
+            'No Assignee Body' => 'You can assign yourself or someone else who is in your network as your friend.',
+            'Assign Your Friends' => 'Assign Your Friends',
+            'No Assignee Lead' => 'You have no assignee for this task. Assignees are useful to track you work and collaborations. To assign this task, you might use shortcut buttons below.',
+
+            'No' => 'No',
+            'Yes' => 'Yes',
+
+            'Update' => 'Update',
+            'Failed' => 'An error occurred while updating assignation.',
+            'Reset'  => 'Reset',
         ],
 
         'date'  => [
@@ -51,6 +86,11 @@ return [
             'Remind me today'  => 'Remind me today',
             'Custom'  => 'Custom',
             'Later'  => 'Later',
+        ],
+
+        'developers-note'  => [
+            'Developers Note' => 'Developer\'s Note',
+            'Contribute' => 'Contribute',
         ],
 
         'overview'  => [

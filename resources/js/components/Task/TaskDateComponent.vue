@@ -1,19 +1,13 @@
 <template>
     <div>
-        <small class="font-weight-bolder mr-2" v-on:click="toggle" v-b-tooltip.hover :title="task.ago">
-            {{ is_formatted ? task.date : task.created_at }}
-        </small>
         <b-button-group>
-            <b-button v-on:click="toggle"  variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Switch')">
-                <i :class="'fa fa-toggle-' + switch_icon"></i>
-            </b-button>
             <b-button v-clipboard="task.created_at" variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Copy')">
                 <i class="fa fa-copy"></i>
             </b-button>
             <b-button :hidden="false" variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Update')">
                 <i class="fa fa-user-edit"></i>
             </b-button>
-            <b-dropdown variant="muted" v-b-tooltip.hover :title="$t('components.task.date.Defer')">
+            <b-dropdown variant="muted" right v-b-tooltip.hover :title="$t('components.task.date.Defer')">
                 <template v-slot:button-content>
                     <i class="fa fa-clock-o"></i>
                 </template>

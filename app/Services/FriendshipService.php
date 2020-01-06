@@ -41,8 +41,9 @@ class FriendshipService extends BaseService
         /**
          * @var User $user
          */
-        $user = $this->userService->repository()->find($id);
+        $user   = $this->userService->repository->find($id);
+        $models = $user->getFriends();
 
-        return $user->getFriends();
+        return $models;
     }
 }

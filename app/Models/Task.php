@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\HasDate;
 use App\Traits\HasStatuses;
 use App\Traits\HasUrl;
 use App\Traits\HasUUID;
@@ -11,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-    use HasStatuses, HasDate, HasUrl, HasUUID, SoftDeletes;
+    use HasStatuses, HasUrl, HasUUID, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

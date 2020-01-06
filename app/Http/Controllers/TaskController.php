@@ -123,6 +123,35 @@ class TaskController extends Controller
     }
 
     /**
+     * Assing the specified resource in storage.
+     *
+     * @param string $task
+     * @param string $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function assign(string $task, string $user)
+    {
+        $assign = $this->service->assign($task, $user);
+
+        return response($assign);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  string $task
+     * @param  string $user
+     * @return \Illuminate\Http\Response
+     */
+    public function unassign(string $task, string $user)
+    {
+        $unassign = $this->service->unassign($task, $user);
+
+        return response($unassign);
+    }
+
+    /**
      * Update status of a resource.
      *
      * @param  string  $task
@@ -134,32 +163,6 @@ class TaskController extends Controller
     {
         $reason = $request->get('reason', null);
         $status = $this->service->status($task, $status, $reason);
-
-        return response($status);
-    }
-
-    /**
-     * Update flag of a resource.
-     *
-     * @param  string  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function flag(string $task)
-    {
-        $status = $this->service->flag($task);
-
-        return response($status);
-    }
-
-    /**
-     * Update star of a resource.
-     *
-     * @param  string  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function star(string $task)
-    {
-        $status = $this->service->star($task);
 
         return response($status);
     }

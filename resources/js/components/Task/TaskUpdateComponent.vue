@@ -1,6 +1,7 @@
 <template>
     <b-card-body>
         <b-card-title>
+            <i class="fa fa-wrench"></i>
             {{ $t('components.task.tab-edit.title') }}
         </b-card-title>
         <b-form @submit="onSubmit" @reset="onReset">

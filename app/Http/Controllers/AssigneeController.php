@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\FriendshipService;
+use App\Models\Assignee;
+use App\Services\AssigneeService;
 use Illuminate\Http\Request;
 
-class FriendshipController extends Controller
+class AssigneeController extends Controller
 {
     /**
-     * Friendship service.
+     * Assignee service.
      *
-     * @var FriendshipService
+     * @var AssigneeService
      */
     private $service;
 
     /**
-     * FriendshipController constructor.
+     * AssigneeController constructor.
      *
-     * @param FriendshipService $service
+     * @param AssigneeService $service
      */
-    public function __construct(FriendshipService $service)
+    public function __construct(AssigneeService $service)
     {
         $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,21 +32,7 @@ class FriendshipController extends Controller
      */
     public function index()
     {
-        return view('friendship.index', [
-            'friendships' => $this->service->index()
-        ]);
-    }
-
-    /**
-     * Return listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list()
-    {
-        $models = $this->service->index();
-
-        return response($models);
+        //
     }
 
     /**
@@ -71,35 +59,21 @@ class FriendshipController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string $id
+     * @param  \App\Models\Assignee  $assignee
      * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show(Assignee $assignee)
     {
-        $collection = $this->service->show($id);
-
-        return response($collection);
-    }
-
-    /**
-     * Return related listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showList(string $user)
-    {
-        $models = $this->service->show($user);
-
-        return response($models);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Assignee  $assignee
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Assignee $assignee)
     {
         //
     }
@@ -107,22 +81,23 @@ class FriendshipController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Assignee  $assignee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(string $assignee)
     {
-        //
+        $update = $this->service->update($assignee);
+
+        return response($update);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Assignee  $assignee
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Assignee $assignee)
     {
         //
     }

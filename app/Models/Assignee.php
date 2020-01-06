@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\HasDate;
 use App\Traits\HasUUID;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Assignee extends Model
 {
-    use HasDate, HasUUID, SoftDeletes;
+    use HasUUID, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +17,7 @@ class Assignee extends Model
      * @var array
      */
     protected $fillable = [
-        'assigned_by', 'user_id', 'task_id', 'due', 'defer', 'estimated_time', 'blocker',
+        'assigned_by', 'user_id', 'task_id', 'due', 'defer', 'difficulty', 'estimated_time', 'blocker', 'completed_at',
     ];
 
     /**

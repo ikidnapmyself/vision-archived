@@ -2,18 +2,25 @@
 
 namespace App\Services;
 
+use App\Models\Task;
 use App\Repositories\TaskRepository;
 
 class TaskService extends BaseService
 {
+    /**
+     * @var AssigneeService $assigneeService
+     */
+    public $assigneeService;
+
     /**
      * Validation base rules.
      *
      * @var array $rules
      */
     protected $rules = [
-        'name' => 'required|min:6|max:255',
-        'body' => 'sometimes',
+        'name' => 'sometimes|required|min:6|max:255',
+        'body' => 'sometimes|required',
+        'flagged' => 'sometimes|boolean',
     ];
 
     /**
@@ -29,10 +36,12 @@ class TaskService extends BaseService
      * TaskService constructor.
      *
      * @param TaskRepository $repository
+     * @param AssigneeService $assigneeService
      */
-    public function __construct(TaskRepository $repository)
+    public function __construct(TaskRepository $repository, AssigneeService $assigneeService)
     {
         $this->repository = $repository;
+        $this->assigneeService = $assigneeService;
     }
 
     /**
@@ -62,6 +71,37 @@ class TaskService extends BaseService
                 'createdBy',
             ])
             ->find($id);
+    }
+
+    /**
+     * Assign a model.
+     *
+     * @param string $task
+     * @param string $user
+     * @return mixed
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function assign(string $task, string $user)
+    {
+        return $this->assigneeService->assign($task, $user);
+    }
+
+    /**
+     * Unassign a model.
+     *
+     * @param string $task
+     * @param string $user
+     * @return mixed
+     */
+    public function unassign(string $task, string $user)
+    {
+        /**
+         * @var Task $task
+         */
+        $task = $this->repository()->find($task);
+        return $task->assignees()->where([
+            'user_id' => $user,
+        ])->delete();
     }
 
     /**
