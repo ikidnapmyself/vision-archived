@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Validator;
+use Request;
 
 class ValidationService
 {
@@ -13,13 +14,19 @@ class ValidationService
     protected $rules = [];
 
     /**
-     * Request instance.
+     * Add rule.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|mixed
+     * @param string $key
+     * @param string $value
+     * @return $this
      */
-    public function request()
+    public function addRule(string $key, string $value): self
     {
-        return app('request');
+        $this->rules = array_merge($this->rules, [
+            $key => $value
+        ]);
+
+        return $this;
     }
 
     /**
@@ -28,7 +35,7 @@ class ValidationService
      * @param array $rules
      * @return $this
      */
-    public function addRule(array $rules): self
+    public function addRules(array $rules): self
     {
         $this->rules = array_merge($this->rules, $rules);
 
@@ -36,12 +43,15 @@ class ValidationService
     }
 
     /**
-     * @param array $data
-     * @param array $rules
+     * @param array|null $data
+     * @param array|null $rules
      * @return array
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function validate(?array $data = null, ?array $rules = null): array
     {
-        return Validator::make($data ?? $this->request()->all(), $rules ?? $this->rules)->validate();
+        $fields = Request::all();
+
+        return Validator::make($data ?? $fields, $rules ?? $this->rules)->validate();
     }
 }
