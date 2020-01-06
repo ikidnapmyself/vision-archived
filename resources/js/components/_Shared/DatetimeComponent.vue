@@ -10,16 +10,6 @@
             v-model="time"
             v-on:input="updateTime"
         ></b-form-input>
-        <b-form-input
-            type="date"
-            v-model="date"
-            v-on:input="updateDate"
-        ></b-form-input>
-        <b-form-input
-            type="time"
-            v-model="time"
-            v-on:input="updateTime"
-        ></b-form-input>
     </b-input-group>
 </template>
 
