@@ -28,7 +28,8 @@ class CreateAssigneesTable extends Migration
             $table->uuid('task_id');     // Unifier II
             $table->dateTime('due')->nullable();
             $table->dateTime('defer')->nullable();
-            $table->unsignedInteger('estimated_time')->nullable();      // minutes
+            $table->integer('difficulty')->nullable(); // -10 to 10
+            $table->unsignedInteger('estimated_time')->nullable(); // minutes
             $table->boolean('blocker')->default(0);
             $table->dateTime('completed_at')->nullable();
             $table->timestamps();

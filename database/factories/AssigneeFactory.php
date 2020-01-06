@@ -27,12 +27,12 @@ $factory->define(Assignee::class, function (Faker $faker) {
 //    }
 
     return [
-        'assigned_by'    => $user->id,
         'user_id'        => $user->id,
         'task_id'        => $task->id,
         'due'            => $due ?? null,
         'defer'          => $defer ?? null,
-        'estimated_time' => null,
+        'difficulty'     => $faker->boolean ? rand(-10, 10) : null,
+        'estimated_time' => rand(15, 15 * 1000),
         'blocker'        => ! (boolean) rand(0, 5),
         'completed_at'   => null,
     ];

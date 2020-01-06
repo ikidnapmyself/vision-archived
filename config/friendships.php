@@ -3,8 +3,8 @@
 return [
 
     'tables' => [
-        'fr_pivot' => 'user_friendships',
-        'fr_groups_pivot' => 'user_friendship_groups'
+        'fr_pivot' => 'friendships',
+        'fr_groups_pivot' => 'friendship_groups'
     ],
 
     'groups' => [

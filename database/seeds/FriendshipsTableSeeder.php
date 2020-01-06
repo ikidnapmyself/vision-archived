@@ -29,7 +29,7 @@ class FriendshipsTableSeeder extends Seeder
             $recipient = User::inRandomOrder()->first();
 
             if (false === $sender->canBefriend($recipient)) {
-                $recipient = factory(User::class)->create();
+                continue;
             }
 
             $sender->befriend($recipient);
