@@ -1,8 +1,5 @@
 <template>
-    <b-img :src="user.avatar_url"
-           :alt="user.name + ' ' + user.surname"
-           :title="user.name + ' ' + user.surname">
-    </b-img>
+    <b-img :src="user.avatar_url" :alt="user.full_name" rounded="circle" thumbnail></b-img>
 </template>
 <script>
     export default {
