@@ -42,7 +42,7 @@ class TaskController extends Controller
     public function index()
     {
         return view('task.index', [
-            'tasks'   => $this->service->index()
+            'tasks'   => $this->service->index(),
         ]);
     }
 
@@ -92,7 +92,7 @@ class TaskController extends Controller
     public function show(string $id)
     {
         return view('task.show', [
-            'task'    => $this->service->show($id)
+            'task'    => $this->service->show($id),
         ]);
     }
 
