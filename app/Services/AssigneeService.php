@@ -9,13 +9,12 @@ class AssigneeService extends BaseService
     /**
      * Validation base rules.
      *
-     * @todo improve
      * @var array $rules
      */
     protected $rules = [
         'due'            => 'sometimes|nullable|date_format:Y-m-d H:i:s',
         'defer'          => 'sometimes|nullable|date_format:Y-m-d H:i:s',
-        'difficulty'     => 'sometimes|nullable|digits_between:-10,10',
+        'difficulty'     => 'sometimes|nullable|between:-10,10',
         'estimated_time' => 'sometimes|nullable|integer',
         'blocker'        => 'boolean',
     ];
