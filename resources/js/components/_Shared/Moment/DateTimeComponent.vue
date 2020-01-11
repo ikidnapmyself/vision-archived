@@ -1,5 +1,5 @@
 <template>
-    <span @click="toggle" :class="textClass">
+    <span @click="toggle">
         {{ display }}
     </span>
 </template>
@@ -8,59 +8,29 @@
     import Moment from 'moment';
 
     export default {
-        props: ['class', 'date'],
+        props: ['date'],
         data: function () {
             return {
-                active: 1,
+                active: 0,
                 display: this.date,
-                textClass: null,
-                type1: null,
-                type2: null,
-                type3: null,
-                type4: null,
-                type5: null,
+                types: [],
             }
         },
         mounted() {
-            this.textClass = this.class;
-            this.type1 = this.date;
-            this.type2 = Moment(this.date).format('L');
-            this.type3 = Moment(this.date).format('LL');
-            this.type4 = Moment(this.date).format('LLL');
-            this.type5 = Moment(this.date).format('LLLL');
-            this.display = this.type5;
+            this.types[0] = Moment(this.date).fromNow();
+            this.types[1] = Moment(this.date).format('YYYY-MM-DD');
+            this.types[2] = Moment(this.date).format('LL');
+            this.types[3] = Moment(this.date).format('LLL');
+            this.types[4] = Moment(this.date).format('LLLL');
+            this.toggle();
         },
         methods: {
             toggle() {
-                /**
-                 * @todo solve it on an elegant way
-                 */
-                switch (this.active) {
-                    case 1:
-                        this.display = this.type1;
-                        this.active++;
-                        break;
-                    case 2:
-                        this.display = this.type2;
-                        this.active++;
-                        break;
-                    case 3:
-                        this.display = this.type3;
-                        this.active++;
-                        break;
-                    case 4:
-                        this.display = this.type5;
-                        this.active++;
-                        break;
-                    case 5:
-                        this.display = this.type5;
-                        this.active++;
-                        break;
-                    default:
-                        this.active = 1;
-                        this.display = this.type1;
-                        break;
-                }
+                if(this.types.length <= this.active)
+                    this.active = 0;
+
+                this.display = this.types[this.active];
+                this.active++;
             }
         }
     }
