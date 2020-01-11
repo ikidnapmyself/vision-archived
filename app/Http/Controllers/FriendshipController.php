@@ -23,6 +23,7 @@ class FriendshipController extends Controller
     {
         $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +32,7 @@ class FriendshipController extends Controller
     public function index()
     {
         return view('friendship.index', [
-            'friendships' => $this->service->index()
+            'friendships' => $this->service->index(),
         ]);
     }
 
