@@ -1,5 +1,5 @@
 <template>
-    <span @click="toggle">
+    <span @click="toggle" :class="textClass">
         {{ display }}
     </span>
 </template>
@@ -8,11 +8,12 @@
     import Moment from 'moment';
 
     export default {
-        props: ['date'],
+        props: ['class', 'date'],
         data: function () {
             return {
                 active: 1,
                 display: this.date,
+                textClass: null,
                 type1: null,
                 type2: null,
                 type3: null,
@@ -21,6 +22,7 @@
             }
         },
         mounted() {
+            this.textClass = this.class;
             this.type1 = this.date;
             this.type2 = Moment(this.date).format('L');
             this.type3 = Moment(this.date).format('LL');
