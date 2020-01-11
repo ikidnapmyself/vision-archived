@@ -8,9 +8,12 @@ return [
         'Due'      => 'Due until :date',
     ],
     'navigation' => [
-        'Teams'    => 'Teams',
-        'Projects' => 'Projects',
         'Boards'   => 'Boards',
+        'Groups'   => 'Groups',
+        'Login'    => 'Login',
+        'Logout'   => 'Logout',
+        'Projects' => 'Projects',
+        'Register' => 'Register',
         'Tasks'    => 'Tasks',
     ],
     'search' => [

@@ -11,8 +11,8 @@
                     <b-nav-item href="/board">{{ $t('partials.navigation.Boards') }}</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav v-else>
-                    <b-nav-item href="/login">{{ $t('Login') }}</b-nav-item>
-                    <b-nav-item href="/register">{{ $t('Register') }}</b-nav-item>
+                    <b-nav-item href="/login">{{ $t('partials.navigation.Login') }}</b-nav-item>
+                    <b-nav-item href="/register">{{ $t('partials.navigation.Register') }}</b-nav-item>
                 </b-navbar-nav>
 
                 <!-- Right aligned nav items -->
@@ -36,7 +36,7 @@
                             <em>{{ user.name }}</em>
                         </template>
                         <b-dropdown-item :href="user.url">{{ user.name }}</b-dropdown-item>
-                        <b-dropdown-item href="logout">{{ $t('Logout') }}</b-dropdown-item>
+                        <b-dropdown-item href="logout">{{ $t('partials.navigation.Logout') }}</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
