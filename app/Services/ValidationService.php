@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Validator;
@@ -9,7 +10,7 @@ class ValidationService
     /**
      * Validation rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [];
 
@@ -23,7 +24,7 @@ class ValidationService
     public function addRule(string $key, string $value): self
     {
         $this->rules = array_merge($this->rules, [
-            $key => $value
+            $key => $value,
         ]);
 
         return $this;
