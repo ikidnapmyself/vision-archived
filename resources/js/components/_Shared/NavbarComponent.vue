@@ -6,9 +6,13 @@
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
-                <b-navbar-nav>
+                <b-navbar-nav v-if="auth">
                     <b-nav-item href="/task">{{ $t('partials.navigation.Tasks') }}</b-nav-item>
                     <b-nav-item href="/board">{{ $t('partials.navigation.Boards') }}</b-nav-item>
+                </b-navbar-nav>
+                <b-navbar-nav v-else>
+                    <b-nav-item href="/login">{{ $t('Login') }}</b-nav-item>
+                    <b-nav-item href="/register">{{ $t('Register') }}</b-nav-item>
                 </b-navbar-nav>
 
                 <!-- Right aligned nav items -->
@@ -44,11 +48,13 @@
     export default {
         data: () => {
             return {
+                auth: false,
                 user: null,
             }
         },
         mounted() {
-            if(Application.auth)
+            this.auth = Application.auth;
+            if(this.auth)
                 this.user = Application.user;
         },
     }
