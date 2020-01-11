@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md {{ config('ui.mode') === 'dark' ? 'navbar-dark bg-dark' : 'navbar-light bg-light' }} {{ config('ui.shadow') ? 'shadow-sm' : '' }}">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/home') }}">
             {{ config('app.name', 'Vision') }}
@@ -15,12 +15,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('board.index') }}">{{ __('partials.navigation.Boards') }}</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('task.index') }}">{{ __('partials.navigation.Tasks') }}</a>
                     </li>

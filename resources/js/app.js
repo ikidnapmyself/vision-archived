@@ -7,9 +7,6 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.axios = require('axios');
-
-require('./axios');
 
 import BootstrapVue from 'bootstrap-vue'
 import Clipboard from 'v-clipboard'
