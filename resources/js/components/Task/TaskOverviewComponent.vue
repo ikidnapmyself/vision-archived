@@ -10,7 +10,7 @@
                         {{ name }}
                     </b-link>
                 </h5>
-                <p>
+                <p class="mb-0">
                     <b-button v-on:click="toggleFlag" variant="muted">
                         <i class="fa fa-flag" :class="'text-' + (flagged ? 'danger' : 'secondary')"></i>
                     </b-button>
@@ -19,6 +19,14 @@
                     </b-button>
                     <b-button v-clipboard="task.url" variant="muted" v-b-tooltip.hover :title="$t('components.task.overview.Copy')">
                         <i class="fa fa-copy"></i>
+                    </b-button>
+                </p>
+                <p class="mt-0">
+                    <b-button variant="muted">
+                        <date-time-component
+                            :date="task.updated_at"
+                        >
+                        </date-time-component>
                     </b-button>
                 </p>
             </b-media>
