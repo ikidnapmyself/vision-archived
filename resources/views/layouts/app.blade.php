@@ -13,13 +13,7 @@
 </head>
 <body class="{{ config('ui.mode') === 'dark' ? 'bg-secondary' : '' }}">
     <div id="app">
-        @component('partials.navigation')
-        @endcomponent
-        @if (session('status'))
-            <div class="alert alert-success m-0 py-3 px-lg-5" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
+        <navbar-component></navbar-component>
         <main>
             @yield('content')
         </main>

@@ -16,11 +16,13 @@ Route::get('/', 'WelcomeController@welcome')->name('welcome');
 Route::middleware('auth')->group(function () {
 //    Route::resource('/board', 'BoardController');
     Route::resource('/assignee', 'AssigneeController');
+    Route::resource('/board', 'BoardController');
     Route::get('/friendship/list', 'FriendshipController@list')->name('friend.list');
     Route::get('/friendship/{user}/list', 'FriendshipController@showList')->name('friend.user.list');
     Route::resource('/friendship', 'FriendshipController');
     Route::get('/home', 'HomeController@index')->name('home');
 //    Route::resource('/project', 'ProjectController');
+    Route::get('logout', 'Auth\LoginController@logout');
     Route::get('/task/list', 'TaskController@list')->name('task.list');
     Route::resource('/task', 'TaskController');
     Route::post('/task/{task}/assign/{user}', 'TaskController@assign');
