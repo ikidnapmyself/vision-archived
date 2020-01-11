@@ -18,6 +18,8 @@ import Locale from './vue-i18n-locales.generated';
 import Skeleton from 'tb-skeleton'
 import VueInternationalization from 'vue-i18n';
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+import VueLetterAvatar from 'vue-letter-avatar';
+import VueUniqIds from 'vue-uniq-ids'
 import VueQriously from 'vue-qriously';
 
 const lang = document.documentElement.lang.substr(0, 2);
@@ -35,7 +37,9 @@ Vue.use(Clipboard)
 Vue.use(Grid)
 Vue.use(Skeleton)
 Vue.use(VueInternationalization)
+Vue.use(VueLetterAvatar)
 Vue.use(VueQriously)
+Vue.use(VueUniqIds)
 
 /**
  * The following block of code may be used to automatically register your

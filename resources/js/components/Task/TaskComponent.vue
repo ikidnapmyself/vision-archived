@@ -1,113 +1,58 @@
 <template>
     <div>
-        <div class="d-md-block d-lg-none">
-            <b-navbar toggleable="lg" type="dark">
-
-                <b-navbar-nav>
-                    <b-nav-item @click="toggleFlag">
-                        <i class="fa fa-flag" :class="'text-' + (flagged ? 'danger' : 'secondary')"></i>
-                    </b-nav-item>
-                    <b-nav-item :href="task.url">
-                        <i class="fa fa-link"></i>
-                    </b-nav-item>
-                    <b-nav-item v-b-toggle="'collapse-' + task.id" variant="muted" v-if="true === collapse">
-                        <span class="when-opened">
-                            <i class="fa fa-toggle-on"></i>
-                        </span>
-                        <span class="when-closed">
-                            <i class="fa fa-toggle-off"></i>
-                        </span>
-                        <span class="d-none d-lg-inline">
-                            <b-badge>New</b-badge>
-                            {{ taskName }}
-                        </span>
-                    </b-nav-item>
-                    <b-nav-text variant="muted" v-if="collapse !== true">
-                        {{ taskName }}
-                    </b-nav-text>
-                </b-navbar-nav>
-                <b-collapse is-nav>
-                    <b-navbar-nav class="ml-auto">
-                        <b-nav-item class="mr-2" variant="muted" right v-if="assigneesNum > 0" @click="showAssigneesTab">
-                            <b>{{ assigneesNum }}</b>
-                            <i :class="'fa fa-' + (assigneesNum < 2 ? 'user' : 'users')"></i>
-                        </b-nav-item>
-                        <b-nav-item class="mr-2" variant="muted" right v-else-if="assigneesNum === 0">
-                            <i class="fa fa-user-plus"></i>
-                        </b-nav-item>
-                        <b-nav-text v-b-tooltip.hover variant="muted" v-if="reason" :title="reason" right>
-                            <i class="fa fa-info-circle"></i>
-                        </b-nav-text>
-                        <b-nav-item-dropdown  v-b-tooltip.hover variant="muted"  right>
-                            <template v-slot:button-content>
-                                <i :class="icons[status] + ' text-' + colors[status]"></i>
-                            </template>
-                            <b class="px-3">{{ $t('components.task.statuses.Move to') }}</b>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            <b-dropdown-item :variant="colors[item]" v-for="item in task.available_statuses" v-bind:key="item" @click="setStatus(item)">
-                                <i :class="icons[item]"></i>
-                                {{ $t('status.' + item) }}
-                            </b-dropdown-item>
-                        </b-nav-item-dropdown>
-                    </b-navbar-nav>
-                </b-collapse>
-            </b-navbar>
-        </div>
-        <div class="d-md-none d-lg-block">
-            <b-navbar toggleable="lg" type="light" variant="muted">
-                <b-navbar-brand :href="task.created_by.url">
-                    <avatar-component :user="task.created_by"></avatar-component>
-                </b-navbar-brand>
-                <b-navbar-nav>
-                    <b-nav-item @click="toggleFlag">
-                        <i class="fa fa-flag" :class="'text-' + (flagged ? 'danger' : 'secondary')"></i>
-                    </b-nav-item>
-                    <b-nav-item :href="task.url">
-                        <i class="fa fa-link"></i>
-                    </b-nav-item>
-                    <b-nav-item v-b-toggle="'collapse-' + task.id" variant="muted" v-if="true === collapse">
+        <b-navbar type="light" variant="muted">
+            <b-navbar-brand class="d-xs-none d-md-inline" :href="task.created_by.url">
+                <avatar-component :user="task.created_by"></avatar-component>
+            </b-navbar-brand>
+            <b-navbar-nav>
+                <b-nav-item @click="toggleFlag">
+                    <i class="fa fa-flag" :class="'text-' + (flagged ? 'danger' : 'secondary')"></i>
+                </b-nav-item>
+                <b-nav-item :href="task.url">
+                    <i class="fa fa-link"></i>
+                </b-nav-item>
+                <b-nav-item v-b-toggle="'collapse-' + task.id" variant="muted" v-if="true === collapsed">
                     <span class="when-opened">
                         <i class="fa fa-toggle-on"></i>
                     </span>
-                        <span class="when-closed">
+                    <span class="when-closed">
                         <i class="fa fa-toggle-off"></i>
                     </span>
-                        <span class="d-none d-lg-inline">
-                        <b-badge>New</b-badge>
+                    <span>
+                        <b-badge v-if="isNew()">{{ $t('components.task.New') }}</b-badge>
                         {{ taskName }}
                     </span>
+                </b-nav-item>
+                <b-nav-text variant="muted" v-if="collapsed !== true">
+                    {{ taskName }}
+                </b-nav-text>
+            </b-navbar-nav>
+            <b-collapse is-nav>
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item class="mr-2" variant="muted" right v-if="assigneesNum > 0" @click="showAssigneesTab">
+                        <b>{{ assigneesNum }}</b>
+                        <i :class="'fa fa-' + (assigneesNum < 2 ? 'user' : 'users')"></i>
                     </b-nav-item>
-                    <b-nav-text variant="muted" v-if="collapse !== true">
-                        {{ taskName }}
+                    <b-nav-item class="mr-2" variant="muted" right v-else-if="assigneesNum === 0">
+                        <i class="fa fa-user-plus"></i>
+                    </b-nav-item>
+                    <b-nav-text v-b-tooltip.hover variant="muted" v-if="reason" :title="reason" right>
+                        <i class="fa fa-info-circle"></i>
                     </b-nav-text>
+                    <b-nav-item-dropdown  v-b-tooltip.hover variant="muted"  right>
+                        <template v-slot:button-content>
+                            <i :class="icons[status] + ' text-' + colors[status]"></i>
+                        </template>
+                        <b class="px-3">{{ $t('components.task.statuses.Move to') }}</b>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item :variant="colors[item]" v-for="item in task.available_statuses" v-bind:key="item" @click="setStatus(item)">
+                            <i :class="icons[item]"></i>
+                            {{ $t('status.' + item) }}
+                        </b-dropdown-item>
+                    </b-nav-item-dropdown>
                 </b-navbar-nav>
-                <b-collapse is-nav>
-                    <b-navbar-nav class="ml-auto">
-                        <b-nav-item class="mr-2" variant="muted" right v-if="assigneesNum > 0" @click="showAssigneesTab">
-                            <b>{{ assigneesNum }}</b>
-                            <i :class="'fa fa-' + (assigneesNum < 2 ? 'user' : 'users')"></i>
-                        </b-nav-item>
-                        <b-nav-item class="mr-2" variant="muted" right v-else-if="assigneesNum === 0">
-                            <i class="fa fa-user-plus"></i>
-                        </b-nav-item>
-                        <b-nav-text v-b-tooltip.hover variant="muted" v-if="reason" :title="reason" right>
-                            <i class="fa fa-info-circle"></i>
-                        </b-nav-text>
-                        <b-nav-item-dropdown  v-b-tooltip.hover variant="muted"  right>
-                            <template v-slot:button-content>
-                                <i :class="icons[status] + ' text-' + colors[status]"></i>
-                            </template>
-                            <b class="px-3">{{ $t('components.task.statuses.Move to') }}</b>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            <b-dropdown-item :variant="colors[item]" v-for="item in task.available_statuses" v-bind:key="item" @click="setStatus(item)">
-                                <i :class="icons[item]"></i>
-                                {{ $t('status.' + item) }}
-                            </b-dropdown-item>
-                        </b-nav-item-dropdown>
-                    </b-navbar-nav>
-                </b-collapse>
-            </b-navbar>
-        </div>
+            </b-collapse>
+        </b-navbar>
 
         <b-modal ref="bv-status-reason-modal"
                  @hidden="resetModal"
@@ -133,7 +78,7 @@
         <b-collapse
             :id="'collapse-' + task.id"
             :class="'mt-2 border-top border-' + colors[status]"
-            :visible="!collapse"
+            :visible="!collapsed"
         >
             <b-card no-body class="mb-0 border-0">
                 <b-tabs v-model="tabIndex" small pills card>
@@ -208,24 +153,29 @@
                 </b-card-footer>
             </b-card>
         </b-collapse>
-        <hr :class="'mb-0 d-block d-lg-none bg-' + colors[status]">
     </div>
 </template>
 <script>
+    import Moment from 'moment';
     export default {
         props: ['collapse', 'task'],
         data: function() {
             return {
                 assigneesNum: this.task.assignees.length,
+                collapsed: this.collapse,
                 colors: this.$Application.statuses.colors,
                 flagged: this.task.flagged,
                 icons: this.$Application.statuses.icons,
                 newReason: null,
                 newStatus: null,
                 reason: this.task.current_status.reason,
+                relation: {
+                    reportedByMe: false,
+                    assignedToMe: false,
+                },
                 status: this.task.current_status.name,
                 taskName: this.task.name,
-                tabIndex: 1,
+                tabIndex: 0,
                 user: this.$Application.user,
             }
         },
@@ -257,6 +207,10 @@
             },
             hideModal() {
                 this.$refs['bv-status-reason-modal'].hide()
+            },
+            isNew() {
+                let created_at = Moment(this.task.created_at);
+                return Math.abs(created_at.diff(Moment.now(), 'h')) < 5;
             },
             linkClass(idx) {
                 let bg = this.colors[this.status];
@@ -300,7 +254,7 @@
                 this.showModal();
             },
             showAssigneesTab() {
-                this.collapse = false;
+                this.collapsed = false;
                 this.tabIndex = 2;
             },
             showModal() {
