@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Abilities\Friendable;
-use App\Traits\HasAvatar;
 use App\Traits\HasRoles;
 use App\Traits\HasUrl;
 use App\Traits\HasUUID;
@@ -14,7 +13,7 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use CanResetPassword, Friendable, HasAvatar, HasRoles, HasUrl, HasUUID, Notifiable;
+    use CanResetPassword, Friendable, HasRoles, HasUrl, HasUUID, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -35,39 +34,8 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'avatar_url', 'full_name'
+        'full_name'
     ];
-
-    /**
-     * Get Gravatar.
-     *
-     * @param int $size
-     * @return string
-     */
-    public function getAvatar($size = 64)
-    {
-        return $this->getGravatar($this->email, $size);
-    }
-
-    /**
-     * Get avatar name key.
-     *
-     * @return string
-     */
-    public function getAvatarNameKey()
-    {
-        return 'full_name';
-    }
-
-    /**
-     * Get the user's avatar url.
-     *
-     * @return string
-     */
-    public function getAvatarUrlAttribute()
-    {
-        return (string) $this->getUrlfriendlyAvatar();
-    }
 
     /**
      * Get the user's full name.
