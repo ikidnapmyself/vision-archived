@@ -6,12 +6,12 @@
             </b-navbar-brand>
             <b-navbar-nav>
                 <b-nav-item @click="toggleFlag">
-                    <i class="fa fa-flag" :class="'text-' + (flagged ? 'danger' : 'secondary')"></i>
+                    <i class="fa fa-flag" :class="'text-' + (model.flagged ? 'danger' : 'secondary')"></i>
                 </b-nav-item>
-                <b-nav-item :href="task.url">
+                <b-nav-item :href="model.url">
                     <i class="fa fa-link"></i>
                 </b-nav-item>
-                <b-nav-item v-b-toggle="'collapse-' + task.id" variant="muted" v-if="true === collapsed">
+                <b-nav-item v-b-toggle="'collapse-' + model.id" variant="muted">
                     <span class="when-opened">
                         <i class="fa fa-toggle-on"></i>
                     </span>
@@ -20,26 +20,23 @@
                     </span>
                     <span>
                         <b-badge v-if="isNew()">{{ $t('components.task.New') }}</b-badge>
-                        {{ taskName }}
+                        {{ model.name }}
                     </span>
                 </b-nav-item>
-                <b-nav-text variant="muted" v-if="collapsed !== true">
-                    {{ taskName }}
-                </b-nav-text>
             </b-navbar-nav>
             <b-collapse is-nav>
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item class="mr-2" variant="muted" right v-if="assigneesNum > 0" @click="showAssigneesTab">
-                        <b>{{ assigneesNum }}</b>
-                        <i :class="'fa fa-' + (assigneesNum < 2 ? 'user' : 'users')"></i>
+                    <b-nav-item :class="'mr-2 ' + assignedToMe ? 'text-success' : ''" variant="muted" right v-if="assignees.length > 0" @click="showAssigneesTab">
+                        <b>{{ assignees.length }}</b>
+                        <i :class="'fa fa-' + (assignees.length < 2 ? 'user' : 'users')"></i>
                     </b-nav-item>
-                    <b-nav-item class="mr-2" variant="muted" right v-else-if="assigneesNum === 0">
+                    <b-nav-item :class="'mr-2 ' + assignedToMe ? 'text-success' : ''" variant="muted" right v-else-if="assignees.length === 0" @click="showAssigneesTab">
                         <i class="fa fa-user-plus"></i>
                     </b-nav-item>
                     <b-nav-text v-b-tooltip.hover variant="muted" v-if="reason" :title="reason" right>
                         <i class="fa fa-info-circle"></i>
                     </b-nav-text>
-                    <b-nav-item-dropdown  v-b-tooltip.hover variant="muted"  right>
+                    <b-nav-item-dropdown  v-b-tooltip.hover variant="muted" :title="$t('status.' + status)" right>
                         <template v-slot:button-content>
                             <i :class="icons[status] + ' text-' + colors[status]"></i>
                         </template>
@@ -111,13 +108,13 @@
                     <b-tab :title-link-class="linkClass(2)" lazy>
                         <template v-slot:title>
                             <span class="d-md-none d-lg-inline">
-                                <i :class="'fa fa-' + (assigneesNum < 2 ? 'user' : 'users')"></i>
+                                <i :class="'fa fa-' + (assignees.length < 2 ? 'user' : 'users')"></i>
                             </span>
                             <span class="d-none d-md-inline">
                                 {{ $t('components.task.Assignees') }}
                             </span>
-                            <b-badge variant="light" v-if="assigneesNum">
-                                {{ assigneesNum }}
+                            <b-badge variant="light" v-if="assignees.length">
+                                {{ assignees.length }}
                                 <span class="sr-only">{{ $t('components.task.Assignees') }}</span>
                             </b-badge>
                         </template>
@@ -161,11 +158,12 @@
         props: ['collapse', 'task'],
         data: function() {
             return {
-                assigneesNum: this.task.assignees.length,
+                assignees: this.task.assignees,
                 collapsed: this.collapse,
                 colors: this.$Application.statuses.colors,
                 flagged: this.task.flagged,
                 icons: this.$Application.statuses.icons,
+                model: this.task,
                 newReason: null,
                 newStatus: null,
                 reason: this.task.current_status.reason,
@@ -174,14 +172,12 @@
                     assignedToMe: false,
                 },
                 status: this.task.current_status.name,
-                taskName: this.task.name,
                 tabIndex: 0,
                 user: this.$Application.user,
             }
         },
         mounted() {
-            this.onAssign();
-            this.onTaskUpdate();
+            this.events();
         },
         methods: {
             handleOk(bvModalEvt) {
@@ -191,17 +187,18 @@
                 this.handleSubmit()
             },
             handleSubmit() {
-                const object = this;
                 this.$nextTick(() => {
-                    this.$axios.put('task/' + object.task.id + '/status/' + object.newStatus, {reason: object.newReason})
-                        .then(function (response) {
-                            object.toaster('components.task.statuses.Updated', 'success')
-                            object.hideModal();
-                            object.reason = object.newReason;
-                            object.status = object.newStatus;
+                    this.$axios.put('/task/' + this.task.id + '/status/' + this.newStatus, {reason: this.newReason})
+                        .then((response) => {
+                            this.model = response.data;
+                            this.$root.$emit('task-' + this.model.id, this.model);
+                            this.toaster('components.task.statuses.Updated', 'success')
+                            this.hideModal();
+                            this.reason = this.newReason;
+                            this.status = this.newStatus;
                         })
                         .catch(function (error) {
-                            object.toaster('components.task.statuses.Failed', 'danger');
+                            this.toaster('components.task.statuses.Failed', 'danger');
                         });
                 })
             },
@@ -209,7 +206,7 @@
                 this.$refs['bv-status-reason-modal'].hide()
             },
             isNew() {
-                let created_at = Moment(this.task.created_at);
+                let created_at = Moment(this.model.created_at);
                 return Math.abs(created_at.diff(Moment.now(), 'h')) < 5;
             },
             linkClass(idx) {
@@ -227,24 +224,28 @@
                         text = 'dark';
                 }
 
-
                 if (this.tabIndex === idx) {
                     return ['bg-' + bg, 'text-' + text]
                 } else {
                     return ['bg-light', 'text-' + text]
                 }
             },
-            onAssign() {
-                this.$root.$on('task-assigned-' + this.task.id, (count) => {
-                    this.assigneesNum = count;
-                })
-            },
-            onTaskUpdate() {
-                const object = this;
-                this.$root.$on('task-updated-' + this.task.id, (response) => {
-                    object.taskName = response.data.name;
-                    object.flagged = response.data.flagged;
-                })
+            events() {
+                this.$root.$on('task-' + this.task.id, (response) => {
+                    this.model = response;
+                    this.status = response.current_status.name
+                });
+                this.$root.$on('unassigned-' + this.task.id, (assignee) => {
+                    for(var i = this.assignees.length - 1; i >= 0; i--) {
+                        if(this.assignees[i].id === assignee.id) {
+                            this.assignees.splice(i, 1);
+                        }
+                    }
+
+                });
+                this.$root.$on('assigned-' + this.task.id, (assignee) => {
+                    this.assignees.push(assignee);
+                });
             },
             resetModal() {
                 this.newStatus = ''
@@ -268,18 +269,17 @@
                 })
             },
             toggleFlag: function () {
-                let object = this;
-                this.$axios.put('task/' + this.task.id, {flagged: !this.flagged})
-                    .then(function (response) {
-                        object.flagged = response.data.flagged;
-                        let message = object.flagged ? 'components.task.No Flag' : 'components.task.Flagged';
-                        object.$root.$emit('task-updated-' + object.task.id, response);
-                        object.toaster(message, 'info', {
-                            task_name: object.task.name
+                this.$axios.put('/task/' + this.task.id, {flagged: !this.model.flagged})
+                    .then((response) => {
+                        this.model = response.data;
+                        let message = this.model.flagged ? 'components.task.No Flag' : 'components.task.Flagged';
+                        this.$root.$emit('task-' + this.model.id, this.model);
+                        this.toaster(message, 'info', {
+                            task_name: this.model.name
                         });
                     })
-                    .catch(function (error) {
-                        object.toaster('components.task.Flag Failed', 'danger');
+                    .catch((error) => {
+                        this.toaster('components.task.Flag Failed', 'danger');
                     });
             },
         }

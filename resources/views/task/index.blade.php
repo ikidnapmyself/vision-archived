@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <tasks-component :tasks="{{ $tasks->toJson() }}"></tasks-component>
+            <tasks-component></tasks-component>
         </div>
     </div>
 </div>

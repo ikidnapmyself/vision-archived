@@ -45,13 +45,18 @@
         props: ['task'],
         data() {
             return {
-                form: {
-                    name: this.task.name,
-                    body: this.task.body,
-                },
+                form: this.task,
             }
         },
+        mounted() {
+            this.events();
+        },
         methods: {
+            events() {
+                this.$root.$on('task-' + this.task.id, (response) => {
+                    this.form = response;
+                });
+            },
             toaster(message, variant = null, title = null) {
                 this.$bvToast.toast(this.$t(message), {
                     title: this.$t(`components.toaster.${variant || 'default'}`),
@@ -61,15 +66,15 @@
             },
             onSubmit(evt) {
                 evt.preventDefault()
-                const object = this;
                 this.$nextTick(() => {
-                    object.$axios.put('task/' + object.task.id, this.form)
+                    this.$axios.put('/task/' + this.task.id, this.form)
                         .then(function (response) {
-                            object.toaster('components.task.tab-edit.Updated', 'success')
-                            object.$root.$emit('task-updated-' + object.task.id, response);
+                            this.form = response.data;
+                            this.toaster('components.task.tab-edit.Updated', 'success')
+                            this.$root.$emit('task-' + this.task.id, this.form);
                         })
                         .catch(function (error) {
-                            object.toaster('components.task.tab-edit.Failed', 'danger')
+                            this.toaster('components.task.tab-edit.Failed', 'danger')
                         });
                 })
             },

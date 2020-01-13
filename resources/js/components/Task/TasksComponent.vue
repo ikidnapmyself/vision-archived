@@ -1,10 +1,10 @@
 <template>
-    <div class="overflow-auto">
+    <div>
         <connection-error-component :times="connectionErrorRetry" :url="url"></connection-error-component>
         <b-pagination
             v-model="currentPage"
-            :total-rows="tasks.total"
-            :per-page="tasks.per_page"
+            :total-rows="items.total"
+            :per-page="items.per_page"
             aria-controls="tasks-list"
             align="center"
             @change="onChange"
@@ -15,7 +15,7 @@
 
             <task-component
                 v-if="!preload"
-                v-for="task in items"
+                v-for="task in items.data"
                 :key="task.id"
                 :collapse="true"
                 :task="task">
@@ -24,8 +24,8 @@
 
         <b-pagination
             v-model="currentPage"
-            :total-rows="tasks.total"
-            :per-page="tasks.per_page"
+            :total-rows="items.total"
+            :per-page="items.per_page"
             aria-controls="tasks-list"
             align="center"
             @change="onChange"
@@ -34,7 +34,6 @@
 </template>
 <script>
     export default {
-        props: ['tasks'],
         created() {
             this.$root.$on('refresh-tasks', (response) => {
                 this.load(this.currentPage)
@@ -43,8 +42,8 @@
         data: function() {
             return {
                 connectionErrorRetry: 0,
-                currentPage: this.tasks.current_page,
-                items: this.tasks.data,
+                currentPage: 1,
+                items: [],
                 preload: true,
                 url: '',
             }
@@ -64,15 +63,14 @@
             load(page) {
                 this.getUrl(page);
                 this.preload = true;
-                let object = this;
                 this.$axios.get(this.url)
-                       .then(function (response) {
-                        object.currentPage = response.data.current_page;
-                        object.items = response.data.data;
-                        object.preload = false;
+                       .then((response) => {
+                        this.currentPage = response.data.current_page;
+                        this.items = response.data;
+                        this.preload = false;
                     })
-                    .catch(function (error) {
-                        object.connectionErrorRetry++;
+                    .catch((error) => {
+                        this.connectionErrorRetry++;
                     });
             },
             onChange(page) {
