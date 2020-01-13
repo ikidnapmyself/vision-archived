@@ -7,7 +7,6 @@ use App\Interfaces\TaskServiceInterface;
 use App\Models\Assignee;
 use App\Repositories\AssigneeRepository;
 use Carbon\Carbon;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class AssigneeService implements AssigneeServiceInterface
 {

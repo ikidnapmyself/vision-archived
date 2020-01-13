@@ -85,14 +85,6 @@ class User extends Authenticatable
      */
     public function boards()
     {
-        return $this->hasManyThrough('App\Models\Board', 'App\Models\User');
-    }
-
-    /**
-     * Get all of the teams for the user.
-     */
-    public function teams()
-    {
-        return $this->hasManyThrough('App\Models\Team', 'App\Models\User');
+        return $this->morphMany('App\Models\Board', 'morph');
     }
 }

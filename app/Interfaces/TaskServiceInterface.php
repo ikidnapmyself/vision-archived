@@ -1,6 +1,7 @@
 <?php
 namespace App\Interfaces;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -24,19 +25,21 @@ interface TaskServiceInterface
     /**
      * Utilize repository to create a model.
      *
+     * @param TaskRequest $taskRequest,
      * @param array|null $attributes
      * @return Task
      */
-    public function create(?array $attributes = []): Task;
+    public function create(TaskRequest $taskRequest, ?array $attributes = []): Task;
 
     /**
      * Update a model.
      *
+     * @param TaskRequest $taskRequest
      * @param string $id
      * @param array|null $attributes
      * @return Task
      */
-    public function update(string $id, ?array $attributes = []): Task;
+    public function update(TaskRequest $taskRequest, string $id, ?array $attributes = []): Task;
 
     /**
      * Flag a task to mark as important.

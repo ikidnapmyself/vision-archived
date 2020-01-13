@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Providers\Project;
 
 use App\Interfaces\TaskServiceInterface;
 use App\Repositories\AssigneeRepository;

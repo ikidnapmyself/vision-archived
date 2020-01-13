@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Interfaces\TaskServiceInterface;
 use Illuminate\Http\Request;
 
@@ -65,11 +66,12 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @param TaskRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store()
+    public function store(TaskRequest $request)
     {
-        $store = $this->service->create();
+        $store = $this->service->create($request);
 
         return redirect(
             route('task.show', $store->id)
@@ -105,12 +107,13 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  TaskRequest $request
      * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(string $id)
+    public function update(TaskRequest $request, string $id)
     {
-        $update = $this->service->update($id);
+        $update = $this->service->update($request, $id);
 
         return response($update);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\TaskRequest;
 use App\Interfaces\TaskServiceInterface;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
@@ -13,17 +14,6 @@ class TaskService implements TaskServiceInterface
      * @var TaskRepository $repository
      */
     public $repository;
-
-    /**
-     * Validation base rules.
-     *
-     * @var array $rules
-     */
-    protected $rules = [
-        'name' => 'sometimes|required|min:6|max:255',
-        'body' => 'sometimes|required',
-        'flagged' => 'sometimes|boolean',
-    ];
 
     /**
      * The accessors to append to the model's array form.
@@ -103,13 +93,14 @@ class TaskService implements TaskServiceInterface
     /**
      * Utilize repository to create a model.
      *
+     * @param TaskRequest $taskRequest
      * @param array|null $attributes
      * @return mixed
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function create(?array $attributes = []): Task
+    public function create(TaskRequest $taskRequest, ?array $attributes = []): Task
     {
-        $validated = $this->validate();
+        $validated = $taskRequest->validated();
 
         $attributes = array_merge($attributes, $validated);
 
@@ -119,14 +110,15 @@ class TaskService implements TaskServiceInterface
     /**
      * Update a model.
      *
+     * @param TaskRequest $taskRequest
      * @param string $id
      * @param array|null $attributes
      * @return Task
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(string $id, ?array $attributes = []): Task
+    public function update(TaskRequest $taskRequest, string $id, ?array $attributes = []): Task
     {
-        $validated = $this->validate();
+        $validated = $taskRequest->validated();
 
         $attributes = array_merge($attributes, $validated);
 
