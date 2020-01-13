@@ -7,8 +7,11 @@
             </i-col>
             <i-col :span="16">
                 <row>
-                    <i-col :span="16" class="ml-4" duration=".6">
-                        <tb-skeleton :aspect-ratio=".1"></tb-skeleton>
+                    <i-col :span="3" class="ml-4 mt-2" duration=".6">
+                        <tb-skeleton :aspect-ratio=".265"></tb-skeleton>
+                    </i-col>
+                    <i-col :span="16" class="ml-4 mt-2" duration=".6">
+                        <tb-skeleton :aspect-ratio=".05"></tb-skeleton>
                     </i-col>
                 </row>
             </i-col>
