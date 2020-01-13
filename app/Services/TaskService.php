@@ -2,15 +2,17 @@
 
 namespace App\Services;
 
+use App\Interfaces\TaskServiceInterface;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-class TaskService extends BaseService
+class TaskService implements TaskServiceInterface
 {
     /**
-     * @var AssigneeService $assigneeService
+     * @var TaskRepository $repository
      */
-    public $assigneeService;
+    public $repository;
 
     /**
      * Validation base rules.
@@ -36,18 +38,16 @@ class TaskService extends BaseService
      * TaskService constructor.
      *
      * @param TaskRepository $repository
-     * @param AssigneeService $assigneeService
      */
-    public function __construct(TaskRepository $repository, AssigneeService $assigneeService)
+    public function __construct(TaskRepository $repository)
     {
         $this->repository = $repository;
-        $this->assigneeService = $assigneeService;
     }
 
     /**
      * @inheritDoc
      */
-    public function index()
+    public function index(): LengthAwarePaginator
     {
         return $this->repository
             ->with([
@@ -63,7 +63,7 @@ class TaskService extends BaseService
      * @param string $id
      * @return mixed
      */
-    public function show(string $id)
+    public function show(string $id): Task
     {
         return $this->repository
             ->with([
@@ -71,37 +71,6 @@ class TaskService extends BaseService
                 'createdBy',
             ])
             ->find($id);
-    }
-
-    /**
-     * Assign a model.
-     *
-     * @param string $task
-     * @param string $user
-     * @return mixed
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function assign(string $task, string $user)
-    {
-        return $this->assigneeService->assign($task, $user);
-    }
-
-    /**
-     * Unassign a model.
-     *
-     * @param string $task
-     * @param string $user
-     * @return mixed
-     */
-    public function unassign(string $task, string $user)
-    {
-        /**
-         * @var Task $task
-         */
-        $task = $this->repository()->find($task);
-        return $task->assignees()->where([
-            'user_id' => $user,
-        ])->delete();
     }
 
     /**
@@ -114,7 +83,7 @@ class TaskService extends BaseService
      */
     public function status(string $id, string $name, ?string $reason = null)
     {
-        return $this->repository()->find($id)->setStatus($name, $reason);
+        return $this->repository->find($id)->setStatus($name, $reason);
     }
 
     /**
@@ -125,9 +94,95 @@ class TaskService extends BaseService
      */
     public function flag(string $id)
     {
-        $task = $this->repository()->find($id);
+        $task = $this->repository->find($id);
         $task->flagged = ! $task->flagged;
         $task->save();
         return $task;
+    }
+
+    /**
+     * Utilize repository to create a model.
+     *
+     * @param array|null $attributes
+     * @return mixed
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function create(?array $attributes = []): Task
+    {
+        $validated = $this->validate();
+
+        $attributes = array_merge($attributes, $validated);
+
+        return $this->repository->create($attributes);
+    }
+
+    /**
+     * Update a model.
+     *
+     * @param string $id
+     * @param array|null $attributes
+     * @return Task
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function update(string $id, ?array $attributes = []): Task
+    {
+        $validated = $this->validate();
+
+        $attributes = array_merge($attributes, $validated);
+
+        return $this->repository->update($attributes, $id);
+    }
+
+    /**
+     * Delete a model.
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function delete(string $id): Task
+    {
+        // TODO: Implement delete() method.
+    }
+
+    /**
+     * Flag a task to mark as important.
+     *
+     * @param string $task
+     * @param string $assignee
+     * @return Task
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function complete(string $task, string $assignee): Task
+    {
+        $complete = $this->repository->update([
+            'completed_by' => $assignee
+        ], $task);
+
+        /**
+         * @todo 'completed' must be const.
+         */
+        $complete->setStatus('completed', 'No reason yet.');
+
+        return $complete;
+    }
+
+    /**
+     * Remove the flag of a task to mark as important.
+     *
+     * @param string $task
+     * @return Task
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function incomplete(string $task): Task
+    {
+        $complete = $this->repository->update([
+            'completed_by' => null
+        ], $task);
+
+        dd($complete->status());
+
+        $complete->setStatus('completed', 'No reason yet.');
+
+        return $complete;
     }
 }

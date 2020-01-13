@@ -189,6 +189,13 @@ return [
         App\Providers\ObserverServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Project Service Providers
+         */
+        App\Providers\AssigneeServiceProvider::class,
+        App\Providers\TaskServiceProvider::class,
+
+
     ],
 
     /*

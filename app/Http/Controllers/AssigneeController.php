@@ -3,24 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignee;
-use App\Services\AssigneeService;
-use Illuminate\Http\Request;
+use App\Interfaces\AssigneeServiceInterface;
 
 class AssigneeController extends Controller
 {
     /**
      * Assignee service.
      *
-     * @var AssigneeService
+     * @var AssigneeServiceInterface
      */
     private $service;
 
     /**
      * AssigneeController constructor.
      *
-     * @param AssigneeService $service
+     * @param AssigneeServiceInterface $service
      */
-    public function __construct(AssigneeService $service)
+    public function __construct(AssigneeServiceInterface $service)
     {
         $this->service = $service;
     }
@@ -42,18 +41,20 @@ class AssigneeController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Assign the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $assign = $this->service->create();
+
+        return response($assign);
     }
 
     /**
@@ -64,7 +65,7 @@ class AssigneeController extends Controller
      */
     public function show(Assignee $assignee)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -75,13 +76,26 @@ class AssigneeController extends Controller
      */
     public function edit(Assignee $assignee)
     {
-        //
+        abort(404);
+    }
+
+    /**
+     * Complete the specified task.
+     *
+     * @param  string  $assignee
+     * @return \Illuminate\Http\Response
+     */
+    public function complete(string $assignee)
+    {
+        $update = $this->service->complete($assignee);
+
+        return response($update);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\Assignee  $assignee
+     * @param  string  $assignee
      * @return \Illuminate\Http\Response
      */
     public function update(string $assignee)
@@ -94,11 +108,15 @@ class AssigneeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Assignee  $assignee
+     * @param  string $assignee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Assignee $assignee)
+    public function destroy(string $assignee)
     {
-        //
+        $destroy = $this->service->show($assignee);
+
+        $destroy->delete();
+
+        return response($destroy);
     }
 }

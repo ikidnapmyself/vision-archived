@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Services\TaskService;
-use App\Services\VisionService;
+use App\Interfaces\TaskServiceInterface;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -11,7 +9,7 @@ class TaskController extends Controller
     /**
      * Task service.
      *
-     * @var TaskService
+     * @var TaskServiceInterface
      */
     private $service;
 
@@ -25,13 +23,11 @@ class TaskController extends Controller
     /**
      * TaskController constructor.
      *
-     * @param TaskService $service
-     * @param VisionService $visionService
+     * @param TaskServiceInterface $service
      */
-    public function __construct(TaskService $service, VisionService $visionService)
+    public function __construct(TaskServiceInterface $service)
     {
         $this->service = $service;
-        $this->visionService = $visionService;
     }
 
     /**
@@ -41,9 +37,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('task.index', [
-            'tasks'   => $this->service->index()
-        ]);
+        return view('task.index');
     }
 
     /**
@@ -71,10 +65,9 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $store = $this->service->create();
 
@@ -120,35 +113,6 @@ class TaskController extends Controller
         $update = $this->service->update($id);
 
         return response($update);
-    }
-
-    /**
-     * Assing the specified resource in storage.
-     *
-     * @param string $task
-     * @param string $user
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function assign(string $task, string $user)
-    {
-        $assign = $this->service->assign($task, $user);
-
-        return response($assign);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  string $task
-     * @param  string $user
-     * @return \Illuminate\Http\Response
-     */
-    public function unassign(string $task, string $user)
-    {
-        $unassign = $this->service->unassign($task, $user);
-
-        return response($unassign);
     }
 
     /**

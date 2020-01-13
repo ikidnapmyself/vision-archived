@@ -1,7 +1,7 @@
 <template>
     <b-card-body>
         <b-card-title>
-            <i :class="'fa fa-' + (assigneesNum < 2 ? 'user' : 'users')"></i>
+            <i :class="'fa fa-' + (assignees.length < 2 ? 'user' : 'users')"></i>
             {{ $t('components.task.assignees.title') }}
         </b-card-title>
 
@@ -105,7 +105,6 @@
         data: function () {
             return {
                 assignees: [],
-                assigneesNum: 0,
                 blockerOptions: [
                     { text: this.$t('components.task.assignees.No'), value: 0 },
                     { text: this.$t('components.task.assignees.Yes'), value: 1 }
@@ -128,19 +127,16 @@
         mounted() {
             this.assignees = this.task.assignees;
             this.getFriends();
-            this.onUpdated();
-            // Enable / Disable Self Assign
-            let getAssignees = this.getAssignees();
-            this.self = getAssignees.indexOf(this.user.id) !== -1;
+            this.events();
+            this.selfAssignable();
         },
         methods: {
             async assignUser(assigned) {
-                this.$axios.post('task/' + this.task.id + '/assign/' + assigned.id)
+                this.$axios.post('/assignee/', {task_id: this.task.id, user_id: assigned.id})
                 .then(response => {
                     let assignee = response.data;
                     assignee.user = assigned;
-                    this.assignees.push(assignee);
-                    this.$root.$emit('task-assigned-' + this.task.id, this.task.assignees.length);
+                    this.$root.$emit('assigned-' + this.task.id, assignee);
                     this.friendSearch = '';
                     this.remainingFriends();
                     this.toaster('components.task.assignees.Assigned', 'success', {
@@ -162,7 +158,7 @@
                 });
             },
             async getFriends() {
-                this.$axios.get('friendship/' + this.user.id + '/list')
+                this.$axios.get('/friendship/' + this.user.id + '/list')
                 .then(response => {
                     this.friends = response.data;
                     this.remainingFriends();
@@ -171,10 +167,15 @@
                     this.toaster('components.task.assignees.Friends Failed', 'danger');
                 });
             },
-            onAssign() {
-                this.$root.$on('task-assigned-' + this.task.id, (count) => {
-                    this.assigneesNum = count;
-                })
+            events() {
+                this.$root.$on('unassigned-' + this.task.id, (assignee) => {
+                    for(var i = this.assignees.length - 1; i >= 0; i--) {
+                        if(this.assignees[i].id === assignee.id) {
+                            this.assignees.splice(i, 1);
+                        }
+                    }
+                    this.selfAssignable();
+                });
             },
             onReset(evt) {
                 evt.preventDefault()
@@ -194,25 +195,21 @@
                 this.form.due = formData.get('due');
                 this.form.estimated_time = formData.get('estimated_time');
 
-                this.$axios.put('assignee/' + formData.get('assignee_id'), this.form)
+                this.$axios.put('/assignee/' + formData.get('assignee_id'), this.form)
                     .then(response => {
-                        this.$root.$emit('task-assignee-updated-' + formData.get('assignee_id'), response);
+                        this.$root.$emit('assignee-' + formData.get('assignee_id'), response);
                         this.toaster('components.task.assignees.Updated', 'success');
                     })
                     .catch(error => {
-                        this.toaster('components.task.assignees.Update Failed', 'danger');
+                        this.toaster('componentss.task.assignees.Update Failed', 'danger');
                     });
 
-            },
-            onUpdated() {
-                console.log('hello updated')
             },
             remainingFriends() {
                 let assignees = this.getAssignees();
 
                 // Enable / Disable Self Assign
-                /** @note repeating line 105 */
-                this.self = assignees.indexOf(this.user.id) !== -1;
+                this.selfAssignable();
 
                 // If already assigned, remove from the data object
                 // Avoid double assignment.
@@ -221,17 +218,17 @@
                 });
 
             },
+            selfAssignable() {
+                // Enable / Disable Self Assign
+                let getAssignees = this.getAssignees();
+                this.self = getAssignees.indexOf(this.user.id) !== -1;
+            },
             toaster(message, variant = null, vars = null, title = null) {
                 this.$bvToast.toast(this.$t(message, vars), {
                     title: this.$t(`components.toaster.${variant || 'default'}`),
                     variant: variant,
                     solid: true
                 })
-            },
-        },
-        watch: {
-            assignees: function (val) {
-                this.assigneesNum = val.length;
             },
         },
     }
