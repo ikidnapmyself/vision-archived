@@ -10,14 +10,14 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class TaskService implements TaskServiceInterface
 {
     /**
-     * @var TaskRepository $repository
+     * @var TaskRepository
      */
     public $repository;
 
     /**
      * Validation base rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [
         'name' => 'sometimes|required|min:6|max:255',
@@ -45,7 +45,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -97,6 +97,7 @@ class TaskService implements TaskServiceInterface
         $task = $this->repository->find($id);
         $task->flagged = ! $task->flagged;
         $task->save();
+
         return $task;
     }
 
@@ -155,7 +156,7 @@ class TaskService implements TaskServiceInterface
     public function complete(string $task, string $assignee): Task
     {
         $complete = $this->repository->update([
-            'completed_by' => $assignee
+            'completed_by' => $assignee,
         ], $task);
 
         /**
@@ -176,7 +177,7 @@ class TaskService implements TaskServiceInterface
     public function incomplete(string $task): Task
     {
         $complete = $this->repository->update([
-            'completed_by' => null
+            'completed_by' => null,
         ], $task);
 
         dd($complete->status());

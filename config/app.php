@@ -195,7 +195,6 @@ return [
         App\Providers\AssigneeServiceProvider::class,
         App\Providers\TaskServiceProvider::class,
 
-
     ],
 
     /*

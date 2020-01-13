@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Interfaces\TaskServiceInterface;
@@ -85,7 +86,7 @@ class TaskController extends Controller
     public function show(string $id)
     {
         return view('task.show', [
-            'task'    => $this->service->show($id)
+            'task'    => $this->service->show($id),
         ]);
     }
 

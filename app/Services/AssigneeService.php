@@ -7,24 +7,23 @@ use App\Interfaces\TaskServiceInterface;
 use App\Models\Assignee;
 use App\Repositories\AssigneeRepository;
 use Carbon\Carbon;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class AssigneeService implements AssigneeServiceInterface
 {
     /**
-     * @var AssigneeRepository $repository
+     * @var AssigneeRepository
      */
     public $repository;
 
     /**
-     * @var TaskServiceInterface $taskService
+     * @var TaskServiceInterface
      */
     public $taskService;
 
     /**
      * Validation base rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [
         'due'            => 'sometimes|nullable|date_format:Y-m-d H:i:s',
@@ -115,7 +114,7 @@ class AssigneeService implements AssigneeServiceInterface
     public function complete(string $assignee): Assignee
     {
         $complete = $this->repository->update([
-            'completed_at' => Carbon::now()
+            'completed_at' => Carbon::now(),
         ], $assignee);
 
         $task = $this->taskService->complete($complete->task_id, $complete->id);
@@ -135,7 +134,7 @@ class AssigneeService implements AssigneeServiceInterface
     public function incomplete(string $assignee): Assignee
     {
         $incomplete = $this->repository->update([
-            'completed_at' => null
+            'completed_at' => null,
         ], $assignee);
 
         $task = $this->taskService->incomplete($incomplete->task_id);
