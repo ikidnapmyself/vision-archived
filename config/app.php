@@ -192,10 +192,8 @@ return [
         /*
          * Project Service Providers
          */
-        App\Providers\AssigneeServiceProvider::class,
-        App\Providers\TaskServiceProvider::class,
-
-
+        App\Providers\Project\AssigneeServiceProvider::class,
+        App\Providers\Project\TaskServiceProvider::class,
     ],
 
     /*

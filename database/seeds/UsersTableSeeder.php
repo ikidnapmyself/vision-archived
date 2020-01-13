@@ -19,7 +19,12 @@ class UsersTableSeeder extends Seeder
         ]);
 
         try {
-            factory(User::class, 200)->create();
+            factory(User::class, 200)->create()->each(function ($s) {
+                $s->boards()->create([
+                    'name' => __('board.Introduction Board'),
+                    'description' => __('board.Introduction Board Description'),
+                ]);
+            });
         } catch (PDOException $e) {
             dump("PDOException: SQLSTATE[{$e->getCode()}] Ignored");
         }
