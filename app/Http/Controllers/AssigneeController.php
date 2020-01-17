@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assignee;
 use App\Interfaces\AssigneeServiceInterface;
+use App\Models\Assignee;
 
 class AssigneeController extends Controller
 {
