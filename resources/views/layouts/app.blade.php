@@ -11,15 +11,17 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="{{ config('ui.mode') === 'dark' ? 'bg-secondary' : '' }}">
-    <div id="app">
+<body>
+    <div id="app" class="p-0 m-0">
         <navbar-component></navbar-component>
-        <main>
-            @yield('content')
-        </main>
-        <footer class="container py-4 text-center">
-            <p>© {{ config('app.name') }} {{ date('Y') }} | <a href="{{ config('app.github') }}">GitHub</a></p>
-        </footer>
+        <b-container fluid>
+            <main>
+                @yield('content')
+            </main>
+            <footer class="container py-4 text-center">
+                <p>© {{ config('app.name') }} {{ date('Y') }} | <a href="{{ config('app.github') }}">GitHub</a></p>
+            </footer>
+        </b-container>
     </div>
     <script src="//kit.fontawesome.com/{{ config('ui.font_awesome') }}.js" crossorigin="anonymous"></script>
     <script>
