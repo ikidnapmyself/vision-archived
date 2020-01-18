@@ -1,56 +1,82 @@
 <template>
     <div>
-        <b-navbar type="light" variant="muted">
-            <b-navbar-brand class="d-xs-none d-md-inline" :href="task.created_by.url">
-                <avatar-component :user="task.created_by"></avatar-component>
-            </b-navbar-brand>
-            <b-navbar-nav>
-                <b-nav-item @click="toggleFlag">
-                    <i class="fa fa-flag" :class="'text-' + (model.flagged ? 'danger' : 'secondary')"></i>
-                </b-nav-item>
-                <b-nav-item :href="model.url">
-                    <i class="fa fa-link"></i>
-                </b-nav-item>
-                <b-nav-item v-b-toggle="'collapse-' + model.id" variant="muted">
-                    <span class="when-opened">
-                        <i class="fa fa-toggle-on"></i>
-                    </span>
-                    <span class="when-closed">
-                        <i class="fa fa-toggle-off"></i>
-                    </span>
-                    <span>
+        <grid-layout
+            :class="'text-center border-5-left border-left border-' + colors[status]"
+            :col-num="12"
+            :is-draggable="true"
+            :is-resizable="true"
+            :margin="[2, 2]"
+            :layout.sync="layout"
+            :responsive="true"
+            :row-height="70"
+            :use-css-transforms="false"
+            :vertical-compact="true"
+        >
+            <grid-item
+                v-for="item in layout"
+                :x="item.x"
+                :y="item.y"
+                :w="item.w"
+                :h="item.h"
+                :i="item.i"
+                :key="item.i"
+            >
+                <b-card border-top-variant="danger" body-class="text-center" class="border-0 h-100">
+                    <b-link :href="model.created_by.url" v-if="item.i === 'avatar'">
+                        <avatar-component size="35" :user="model.created_by"></avatar-component>
+                    </b-link>
+                    <b-button-group :href="model.url" class="d-block text-left" v-else-if="item.i === 'task.name'">
                         <b-badge v-if="isNew()">{{ $t('components.task.New') }}</b-badge>
-                        {{ model.name }}
-                    </span>
-                </b-nav-item>
-            </b-navbar-nav>
-            <b-collapse is-nav>
-                <b-navbar-nav class="ml-auto">
-                    <b-nav-item :class="'mr-2 ' + assignedToMe ? 'text-success' : ''" variant="muted" right v-if="assignees.length > 0" @click="showAssigneesTab">
-                        <b>{{ assignees.length }}</b>
-                        <i :class="'fa fa-' + (assignees.length < 2 ? 'user' : 'users')"></i>
-                    </b-nav-item>
-                    <b-nav-item :class="'mr-2 ' + assignedToMe ? 'text-success' : ''" variant="muted" right v-else-if="assignees.length === 0" @click="showAssigneesTab">
-                        <i class="fa fa-user-plus"></i>
-                    </b-nav-item>
-                    <b-nav-text v-b-tooltip.hover variant="muted" v-if="reason" :title="reason" right>
-                        <i class="fa fa-info-circle"></i>
-                    </b-nav-text>
-                    <b-nav-item-dropdown  v-b-tooltip.hover variant="muted" :title="$t('status.' + status)" right>
-                        <template v-slot:button-content>
+                        <b-dropdown block split :text="model.name" menu-class="text-left" variant="muted" right>
+                            <b-dropdown-item>
+                                <i class="fa fa-link"></i>
+                                {{ $t('components.task.Go to task') }}
+                            </b-dropdown-item>
+                            <b-dropdown-divider></b-dropdown-divider>
+                            <b-dropdown-item>...</b-dropdown-item>
+                        </b-dropdown>
+                    </b-button-group>
+                    <b-button-group size="sm" v-else-if="item.i === 'status'">
+                        <b-button variant="muted">
                             <i :class="icons[status] + ' text-' + colors[status]"></i>
-                        </template>
-                        <b class="px-3">{{ $t('components.task.statuses.Move to') }}</b>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item :variant="colors[item]" v-for="item in task.available_statuses" v-bind:key="item" @click="setStatus(item)">
-                            <i :class="icons[item]"></i>
-                            {{ $t('status.' + item) }}
-                        </b-dropdown-item>
-                    </b-nav-item-dropdown>
-                </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
-
+                        </b-button>
+                        <b-dropdown variant="muted" :text="$t('status.' + status)" right>
+                            <b class="px-3">{{ $t('components.task.statuses.Move to') }}</b>
+                            <b-dropdown-divider></b-dropdown-divider>
+                            <b-dropdown-item :variant="colors[available_status]" v-for="available_status in model.available_statuses" v-bind:key="available_status" @click="setStatus(available_status)">
+                                <i :class="icons[available_status]"></i>
+                                {{ $t('status.' + available_status) }}
+                            </b-dropdown-item>
+                        </b-dropdown>
+                    </b-button-group>
+                    <span v-else-if="item.i === 'assignees'">
+                        <b-button class="mr-2" variant="muted" right v-if="assignees.length > 0" @click="showAssigneesTab">
+                            <b>{{ assignees.length }}</b>
+                            <i :class="'fa fa-' + (assignees.length < 2 ? 'user' : 'users')"></i>
+                        </b-button>
+                        <b-button class="mr-2" variant="muted" right v-else-if="assignees.length === 0" @click="showAssigneesTab">
+                            <i class="fa fa-user-plus"></i>
+                        </b-button>
+                    </span>
+                    <b-button v-else-if="item.i === 'flag'" variant="muted">
+                        <b-link @click="toggleFlag">
+                            <i class="fa fa-flag" :class="'text-' + (model.flagged ? 'danger' : 'secondary')"></i>
+                        </b-link>
+                    </b-button>
+                    <b-button v-else-if="item.i === 'toggle'" v-b-toggle="'collapse-' + model.id" variant="muted">
+                        <span class="when-opened">
+                            <i class="fa fa-toggle-on"></i>
+                        </span>
+                        <span class="when-closed">
+                            <i class="fa fa-toggle-off"></i>
+                        </span>
+                    </b-button>
+                    <span v-else>
+                        {{ item.i }}
+                    </span>
+                </b-card>
+            </grid-item>
+        </grid-layout>
         <b-modal ref="bv-status-reason-modal"
                  @hidden="resetModal"
                  @ok="handleOk">
@@ -167,13 +193,22 @@
                 newReason: null,
                 newStatus: null,
                 reason: this.task.current_status.reason,
-                relation: {
-                    reportedByMe: false,
-                    assignedToMe: false,
+                relation: { // My relation with this task
+                    reporter: false, // @todo If I reported, make it true
+                    assignee: false, // @todo If I'm an assignee, make it true
+                    assigned: false, // @todo If I assigned this task to a person, make it true
                 },
                 status: this.task.current_status.name,
                 tabIndex: 0,
                 user: this.$Application.user,
+                layout : [
+                    {"x":0,"y":0,"w":1,"h":1,"i":"avatar"},
+                    {"x":1,"y":0,"w":1,"h":1,"i":"flag"},
+                    {"x":2,"y":0,"w":6,"h":1,"i":"task.name"},
+                    {"x":8,"y":0,"w":2,"h":1,"i":"status"},
+                    {"x":10,"y":0,"w":1,"h":1,"i":"assignees"},
+                    {"x":11,"y":0,"w":1,"h":1,"i":"toggle"},
+                ],
             }
         },
         mounted() {
@@ -286,8 +321,10 @@
     }
 </script>
 <style>
-    .collapsed > .nav-link > .when-opened,
-    :not(.collapsed) > .nav-link > .when-closed {
+    .collapsed > .btn > .when-opened,
+    :not(.collapsed) > .btn > .when-closed {
         display: none;
     }
+    .border-5-left { border-left-width: 5px !important;}
+    .border-5-right { border-right-width: 5px !important;}
 </style>

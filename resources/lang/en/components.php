@@ -27,6 +27,7 @@ return [
         'Assignees' => 'Assignees',
         'Assign'    => 'Assign',
         'Timeline'  => 'Timeline',
+        'Go to task'=> 'Go to task',
         'New'       => 'New',
         'Overview'  => 'Overview',
         'Read All'  => 'Read All',

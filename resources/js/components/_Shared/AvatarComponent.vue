@@ -2,7 +2,7 @@
     <span>
         <vue-letter-avatar :name="user.full_name" :size="resize" :rounded="true" :id="'letter-avatar-popover-' + id">
         </vue-letter-avatar>
-        <b-popover triggers="hover" delay="500" :target="'letter-avatar-popover-' + id" :title="user.full_name">
+        <b-popover triggers="hover" :target="'letter-avatar-popover-' + id" :title="user.full_name">
             <b-list-group horizontal>
                 <b-list-group-item>
                     <b-link :href="user.url">
@@ -29,7 +29,7 @@
         },
         mounted() {
             if(typeof this.size !== 'undefined')
-                this.resize = this.size;
+                this.resize = this.size
         },
         methods: {
             random(length) {
