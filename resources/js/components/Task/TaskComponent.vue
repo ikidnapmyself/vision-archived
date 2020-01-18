@@ -26,9 +26,17 @@
                         <avatar-component size="35" :user="model.created_by"></avatar-component>
                     </b-link>
                     <b-button-group :href="model.url" class="d-block text-left" v-else-if="item.i === 'task.name'">
-                        <b-badge v-if="isNew()">{{ $t('components.task.New') }}</b-badge>
                         <b-dropdown block split :text="model.name" menu-class="text-left" variant="muted" right>
+                            <b-dropdown-item v-if="isNew()">
+                                <b-badge>{{ $t('components.task.New') }}</b-badge>
+                            </b-dropdown-item>
                             <b-dropdown-item>
+                                <date-time-component
+                                    :date="model.updated_at"
+                                >
+                                </date-time-component>
+                            </b-dropdown-item>
+                            <b-dropdown-item :href="model.url">
                                 <i class="fa fa-link"></i>
                                 {{ $t('components.task.Go to task') }}
                             </b-dropdown-item>
