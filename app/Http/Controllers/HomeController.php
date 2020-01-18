@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\TaskService;
+use App\Interfaces\TaskServiceInterface;
 
 class HomeController extends Controller
 {
     /**
      * Task service.
      *
-     * @var TaskService
+     * @var TaskServiceInterface
      */
     private $service;
 
     /**
      * TaskController constructor.
      *
-     * @param TaskService $service
+     * @param TaskServiceInterface $service
      */
-    public function __construct(TaskService $service)
+    public function __construct(TaskServiceInterface $service)
     {
         $this->service = $service;
     }
