@@ -1,6 +1,8 @@
 <?php
 namespace App\Interfaces;
 
+use App\Http\Requests\AssigneeCreateRequest;
+use App\Http\Requests\AssigneeUpdateRequest;
 use App\Models\Assignee;
 
 interface AssigneeServiceInterface
@@ -16,37 +18,19 @@ interface AssigneeServiceInterface
     /**
      * Assign a model.
      *
-     * @param array|null $attributes
+     * @param AssigneeCreateRequest $request
      * @return Assignee
      */
-    public function create(?array $attributes = []): Assignee;
+    public function create(AssigneeCreateRequest $request): Assignee;
 
     /**
      * Update a model.
      *
+     * @param AssigneeUpdateRequest $request
      * @param string $id
-     * @param array|null $attributes
      * @return Assignee
      */
-    public function update(string $id, ?array $attributes = []): Assignee;
-
-    /**
-     * Complete a task.
-     *
-     * @param string $assignee
-     * @return Assignee
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function complete(string $assignee): Assignee;
-
-    /**
-     * Incomplete a task.
-     *
-     * @param string $assignee
-     * @return Assignee
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function incomplete(string $assignee): Assignee;
+    public function update(AssigneeUpdateRequest $request, string $id): Assignee;
 
     /**
      * Unassign a model.

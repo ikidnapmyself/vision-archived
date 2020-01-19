@@ -2,6 +2,7 @@
 namespace App\Interfaces;
 
 use App\Http\Requests\TaskRequest;
+use App\Http\Requests\TaskStatusRequest;
 use App\Models\Task;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -26,37 +27,20 @@ interface TaskServiceInterface
      * Utilize repository to create a model.
      *
      * @param TaskRequest $taskRequest,
-     * @param array|null $attributes
      * @return Task
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function create(TaskRequest $taskRequest, ?array $attributes = []): Task;
+    public function create(TaskRequest $taskRequest): Task;
 
     /**
      * Update a model.
      *
      * @param TaskRequest $taskRequest
      * @param string $id
-     * @param array|null $attributes
      * @return Task
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(TaskRequest $taskRequest, string $id, ?array $attributes = []): Task;
-
-    /**
-     * Flag a task to mark as important.
-     *
-     * @param string $task
-     * @param string $assignee
-     * @return Task
-     */
-    public function complete(string $task, string $assignee): Task;
-
-    /**
-     * Remove the flag of a task to mark as important.
-     *
-     * @param string $task
-     * @return Task
-     */
-    public function incomplete(string $task): Task;
+    public function update(TaskRequest $taskRequest, string $id): Task;
 
     /**
      * Delete a model.
@@ -65,4 +49,14 @@ interface TaskServiceInterface
      * @return Task
      */
     public function delete(string $id): Task;
+
+    /**
+     * Set status of a model.
+     *
+     * @param TaskStatusRequest $request
+     * @param string $id
+     * @return Task
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function status(TaskStatusRequest $request, string $id): Task;
 }
