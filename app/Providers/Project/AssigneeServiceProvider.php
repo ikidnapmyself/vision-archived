@@ -18,8 +18,7 @@ class AssigneeServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Interfaces\AssigneeServiceInterface', function ($app) {
             return new AssigneeService(
-                $app->make(AssigneeRepository::class),
-                $app->make(TaskServiceInterface::class)
+                $app->make(AssigneeRepository::class)
             );
         });
     }
