@@ -12,7 +12,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class TaskService implements TaskServiceInterface
 {
     /**
-     * @var TaskRepository $repository
+     * @var TaskRepository
      */
     public $repository;
 
@@ -36,7 +36,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -49,7 +49,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): Task
     {
@@ -62,7 +62,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function create(TaskRequest $taskRequest): Task
     {
@@ -72,7 +72,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function update(TaskRequest $taskRequest, string $id): Task
     {
@@ -82,7 +82,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function delete(string $id): Task
     {
@@ -93,11 +93,12 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function status(TaskStatusRequest $status, string $id): Task
     {
         $valid = $status->validated();
+
         return $this->repository->find($id)->setStatus($valid['status'], $valid['reason']);
     }
 }
