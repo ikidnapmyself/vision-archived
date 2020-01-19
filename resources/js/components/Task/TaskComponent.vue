@@ -3,8 +3,8 @@
         <grid-layout
             :class="'text-center border-5-left border-left border-' + colors[status]"
             :col-num="12"
-            :is-draggable="true"
-            :is-resizable="true"
+            :is-draggable="false"
+            :is-resizable="false"
             :margin="[2, 2]"
             :layout.sync="layout"
             :responsive="true"
@@ -231,7 +231,7 @@
             },
             handleSubmit() {
                 this.$nextTick(() => {
-                    this.$axios.put('/task/' + this.task.id + '/status/' + this.newStatus, {reason: this.newReason})
+                    this.$axios.put('/task/' + this.task.id + '/status', {status: this.newStatus, reason: this.newReason})
                         .then((response) => {
                             this.model = response.data;
                             this.$root.$emit('task-' + this.model.id, this.model);
