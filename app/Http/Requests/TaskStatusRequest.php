@@ -38,7 +38,7 @@ class TaskStatusRequest extends FormRequest
                 Rule::requiredIf($task->status()->name === $completed),
                 'max:100'
             ],
-            'assignee'   => "required_if:status,{$completed}|exists:App\Models\Assignees,id,task_id,{$task_id}",
+            'assignee'   => "required_if:status,{$completed}|exists:App\Models\Assignee,id,task_id,{$task_id}",
         ];
     }
 }
