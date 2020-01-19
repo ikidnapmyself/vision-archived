@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\TaskRequest;
+use App\Http\Requests\TaskStatusRequest;
 use App\Interfaces\TaskServiceInterface;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
@@ -48,10 +49,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * Display model.
-     *
-     * @param string $id
-     * @return mixed
+     * @inheritDoc
      */
     public function show(string $id): Task
     {
@@ -64,117 +62,42 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * Set status of a model.
-     *
-     * @param string $id
-     * @param string $name
-     * @param string|null $reason
-     * @return mixed
+     * @inheritDoc
      */
-    public function status(string $id, string $name, ?string $reason = null)
-    {
-        return $this->repository->find($id)->setStatus($name, $reason);
-    }
-
-    /**
-     * Set flag of a model.
-     *
-     * @param string $id
-     * @return mixed
-     */
-    public function flag(string $id)
-    {
-        $task = $this->repository->find($id);
-        $task->flagged = ! $task->flagged;
-        $task->save();
-        return $task;
-    }
-
-    /**
-     * Utilize repository to create a model.
-     *
-     * @param TaskRequest $taskRequest
-     * @param array|null $attributes
-     * @return mixed
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function create(TaskRequest $taskRequest, ?array $attributes = []): Task
+    public function create(TaskRequest $taskRequest): Task
     {
         $validated = $taskRequest->validated();
 
-        $attributes = array_merge($attributes, $validated);
-
-        return $this->repository->create($attributes);
+        return $this->repository->create($validated);
     }
 
     /**
-     * Update a model.
-     *
-     * @param TaskRequest $taskRequest
-     * @param string $id
-     * @param array|null $attributes
-     * @return Task
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @inheritDoc
      */
-    public function update(TaskRequest $taskRequest, string $id, ?array $attributes = []): Task
+    public function update(TaskRequest $taskRequest, string $id): Task
     {
         $validated = $taskRequest->validated();
 
-        $attributes = array_merge($attributes, $validated);
-
-        return $this->repository->update($attributes, $id);
+        return $this->repository->update($validated, $id);
     }
 
     /**
-     * Delete a model.
-     *
-     * @param string $id
-     * @return mixed
+     * @inheritDoc
      */
     public function delete(string $id): Task
     {
-        // TODO: Implement delete() method.
+        $model = $this->repository->find($id);
+        $model->delete($id);
+
+        return $model;
     }
 
     /**
-     * Flag a task to mark as important.
-     *
-     * @param string $task
-     * @param string $assignee
-     * @return Task
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @inheritDoc
      */
-    public function complete(string $task, string $assignee): Task
+    public function status(TaskStatusRequest $status, string $id): Task
     {
-        $complete = $this->repository->update([
-            'completed_by' => $assignee
-        ], $task);
-
-        /**
-         * @todo 'completed' must be const.
-         */
-        $complete->setStatus('completed', 'No reason yet.');
-
-        return $complete;
-    }
-
-    /**
-     * Remove the flag of a task to mark as important.
-     *
-     * @param string $task
-     * @return Task
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function incomplete(string $task): Task
-    {
-        $complete = $this->repository->update([
-            'completed_by' => null
-        ], $task);
-
-        dd($complete->status());
-
-        $complete->setStatus('completed', 'No reason yet.');
-
-        return $complete;
+        $valid = $status->validated();
+        return $this->repository->find($id)->setStatus($valid['status'], $valid['reason']);
     }
 }
