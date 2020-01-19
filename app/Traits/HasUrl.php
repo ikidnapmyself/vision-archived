@@ -25,7 +25,7 @@ trait HasUrl
     public function getUrlAttribute()
     {
         $class = (new \ReflectionClass($this))->getShortName();
-        $key   = Str::lower($class);
+        $key = Str::lower($class);
 
         return route("{$key}.show", [$key => $this->id]);
     }
