@@ -2,10 +2,11 @@
 
 namespace App\Providers\Project;
 
-use App\Interfaces\TaskServiceInterface;
+use App\Models\Assignee;
 use App\Repositories\AssigneeRepository;
 use App\Services\AssigneeService;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AssigneeServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,18 @@ class AssigneeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('assigned', function ($attribute, $value, $parameters, $validator) {
+            $count = Assignee::where(function ($q) use ($validator, $parameters) {
+                $where  = [];
+
+                foreach ($parameters as $parameter) {
+                    $where[$parameter] = $validator->getData()[$parameter] ?? false;
+                }
+
+                $q->where($where);
+            })->count();
+
+            return !$count;
+        });
     }
 }
