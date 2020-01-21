@@ -2,7 +2,7 @@
 
 namespace App\Providers\Project;
 
-use App\Http\Requests\TaskRequest;
+use App\Interfaces\AssigneeServiceInterface;
 use App\Repositories\TaskRepository;
 use App\Services\TaskService;
 use Illuminate\Support\ServiceProvider;
@@ -18,7 +18,8 @@ class TaskServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Interfaces\TaskServiceInterface', function ($app) {
             return new TaskService(
-                $app->make(TaskRepository::class)
+                $app->make(TaskRepository::class),
+                $app->make(AssigneeServiceInterface::class)
             );
         });
     }

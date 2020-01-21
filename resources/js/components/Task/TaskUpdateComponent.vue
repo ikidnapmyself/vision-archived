@@ -68,10 +68,9 @@
                 evt.preventDefault()
                 this.$nextTick(() => {
                     this.$axios.put('/task/' + this.task.id, this.form)
-                        .then(function (response) {
-                            this.form = response.data;
+                        .then((response) => {
                             this.toaster('components.task.tab-edit.Updated', 'success')
-                            this.$root.$emit('task-' + this.task.id, this.form);
+                            this.$root.$emit('task-' + this.task.id, response.data);
                         })
                         .catch(function (error) {
                             this.toaster('components.task.tab-edit.Failed', 'danger')

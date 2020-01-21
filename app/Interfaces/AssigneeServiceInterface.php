@@ -20,6 +20,7 @@ interface AssigneeServiceInterface
      *
      * @param AssigneeCreateRequest $request
      * @return Assignee
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function create(AssigneeCreateRequest $request): Assignee;
 
@@ -29,6 +30,7 @@ interface AssigneeServiceInterface
      * @param AssigneeUpdateRequest $request
      * @param string $id
      * @return Assignee
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(AssigneeUpdateRequest $request, string $id): Assignee;
 
@@ -39,4 +41,20 @@ interface AssigneeServiceInterface
      * @return Assignee
      */
     public function delete(string $id): Assignee;
+
+    /**
+     * Set completed at field.
+     *
+     * @param string $assignee
+     * @return bool
+     */
+    public function complete(string $assignee): bool;
+
+    /**
+     * Set completed at field null.
+     *
+     * @param string $assignee
+     * @return bool
+     */
+    public function incomplete(string $assignee): bool;
 }

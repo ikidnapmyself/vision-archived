@@ -270,6 +270,7 @@
                     { text: this.$t('components.task.assignees.No'), value: 0 },
                     { text: this.$t('components.task.assignees.Yes'), value: 1 }
                 ],
+                completedBy: true,
                 form: this.assignee,
                 friends: [],
                 friendSearch: '',
@@ -317,15 +318,14 @@
                     this.show = false
                 })
             },
+            // @todo Fix runComplete
             runComplete(event) {
                 event.preventDefault();
-
-                this.$axios.put('/assignee/' + this.assignee.id + '/complete')
+                // @todo Reason must be settable.
+                this.$axios.put('/task/' + this.assignee.task_id + '/status', {status: 'completed', assignee: this.assignee.id, reason: null})
                     .then((response) => {
-                        this.form = response.data;
-                        this.parent = this.form.task;
-                        this.$root.$emit('assignee-' + this.assignee.id, this.form);
-                        this.$root.$emit('task-' + this.assignee.task_id, this.parent);
+                        this.$root.$emit('assignee-' + this.assignee.id, response.data.completed_by);
+                        this.$root.$emit('task-' + this.assignee.task_id, response.data);
                         this.toaster('components.task.assignees.Completed', 'success', {task_name: this.parent.name, user_name: this.assignee.user.full_name});
                     })
                     .catch(error => {
@@ -349,13 +349,11 @@
 
             },
             runUpdate(event) {
-                event.preventDefault()
+                event.preventDefault();
 
                 this.$axios.put('/assignee/' + this.assignee.id, this.form)
                     .then(response => {
-                        this.form = response.data;
-
-                        this.$root.$emit('assignee-' + this.assignee.id, response);
+                        this.$root.$emit('assignee-' + this.assignee.id, response.data);
                         this.toaster('components.task.assignees.Updated', 'success');
                     })
                     .catch(error => {

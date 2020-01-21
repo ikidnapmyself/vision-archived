@@ -4,10 +4,13 @@ namespace App\Services;
 
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskStatusRequest;
+use App\Interfaces\AssigneeServiceInterface;
 use App\Interfaces\TaskServiceInterface;
+use App\Models\Status;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 
 class TaskService implements TaskServiceInterface
 {
@@ -15,6 +18,11 @@ class TaskService implements TaskServiceInterface
      * @var TaskRepository $repository
      */
     public $repository;
+
+    /**
+     * @var AssigneeServiceInterface $assigneeService
+     */
+    public $assigneeService;
 
     /**
      * The accessors to append to the model's array form.
@@ -29,10 +37,12 @@ class TaskService implements TaskServiceInterface
      * TaskService constructor.
      *
      * @param TaskRepository $repository
+     * @param AssigneeServiceInterface $assigneeService
      */
-    public function __construct(TaskRepository $repository)
+    public function __construct(TaskRepository $repository, AssigneeServiceInterface $assigneeService)
     {
         $this->repository = $repository;
+        $this->assigneeService = $assigneeService;
     }
 
     /**
@@ -94,10 +104,36 @@ class TaskService implements TaskServiceInterface
 
     /**
      * @inheritDoc
+     * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function status(TaskStatusRequest $status, string $id): Task
     {
-        $valid = $status->validated();
-        return $this->repository->find($id)->setStatus($valid['status'], $valid['reason']);
+        $valid    = $status->validated();
+        /**
+         * @var Task $task
+         */
+        $task     = $this->repository->find($id);
+        $assignee = Arr::get($valid, 'assignee', false);
+        $relation = null;
+
+        if (Status::COMPLETED === Arr::get($valid, 'status')) {
+            $complete = $task->fill(['completed_by' => $assignee])->save();
+            if (true === $complete) {
+                $relation = $this->assigneeService->show($assignee);
+                $assignee = $this->assigneeService->complete($assignee);
+            }
+        } elseif (Status::COMPLETED === $task->status) {
+            $complete = $task->fill(['completed_by' => null])->save();
+            if (true === $complete) {
+                $relation = $this->assigneeService->show($assignee);
+                $assignee = $this->assigneeService->incomplete($assignee);
+            }
+        }
+
+        if ($assignee) {
+            $task->setRelation('completedBy', $relation);
+        }
+
+        return $task->setStatus($valid['status'], $valid['reason']);
     }
 }

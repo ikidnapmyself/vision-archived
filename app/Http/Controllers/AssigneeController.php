@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssigneeCreateRequest;
+use App\Http\Requests\AssigneeUpdateRequest;
 use App\Models\Assignee;
 use App\Interfaces\AssigneeServiceInterface;
 
@@ -47,12 +49,13 @@ class AssigneeController extends Controller
     /**
      * Assign the specified resource in storage.
      *
+     * @param AssigneeCreateRequest $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store()
+    public function store(AssigneeCreateRequest $request)
     {
-        $assign = $this->service->create();
+        $assign = $this->service->create($request);
 
         return response($assign);
     }
@@ -80,27 +83,16 @@ class AssigneeController extends Controller
     }
 
     /**
-     * Complete the specified task.
-     *
-     * @param  string  $assignee
-     * @return \Illuminate\Http\Response
-     */
-    public function complete(string $assignee)
-    {
-        $update = $this->service->complete($assignee);
-
-        return response($update);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  string  $assignee
+     * @param AssigneeUpdateRequest $request
+     * @param string $assignee
      * @return \Illuminate\Http\Response
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(string $assignee)
+    public function update(AssigneeUpdateRequest $request, string $assignee)
     {
-        $update = $this->service->update($assignee);
+        $update = $this->service->update($request, $assignee);
 
         return response($update);
     }

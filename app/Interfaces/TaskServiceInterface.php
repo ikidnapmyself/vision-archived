@@ -28,7 +28,7 @@ interface TaskServiceInterface
      *
      * @param TaskRequest $taskRequest,
      * @return Task
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function create(TaskRequest $taskRequest): Task;
 
@@ -38,7 +38,7 @@ interface TaskServiceInterface
      * @param TaskRequest $taskRequest
      * @param string $id
      * @return Task
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(TaskRequest $taskRequest, string $id): Task;
 
@@ -56,7 +56,7 @@ interface TaskServiceInterface
      * @param TaskStatusRequest $request
      * @param string $id
      * @return Task
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function status(TaskStatusRequest $request, string $id): Task;
 }

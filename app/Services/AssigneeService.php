@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use App\Http\Requests\AssigneeCreateRequest;
+use App\Http\Requests\AssigneeUpdateRequest;
 use App\Interfaces\AssigneeServiceInterface;
-use App\Interfaces\TaskServiceInterface;
 use App\Models\Assignee;
 use App\Repositories\AssigneeRepository;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class AssigneeService implements AssigneeServiceInterface
 {
@@ -14,24 +16,6 @@ class AssigneeService implements AssigneeServiceInterface
      * @var AssigneeRepository $repository
      */
     public $repository;
-
-    /**
-     * @var TaskServiceInterface $taskService
-     */
-    public $taskService;
-
-    /**
-     * Validation base rules.
-     *
-     * @var array $rules
-     */
-    protected $rules = [
-        'due'            => 'sometimes|nullable|date_format:Y-m-d H:i:s',
-        'defer'          => 'sometimes|nullable|date_format:Y-m-d H:i:s',
-        'difficulty'     => 'sometimes|nullable|between:-10,10',
-        'estimated_time' => 'sometimes|nullable|integer',
-        'blocker'        => 'boolean',
-    ];
 
     /**
      * The accessors to append to the model's array form.
@@ -46,19 +30,14 @@ class AssigneeService implements AssigneeServiceInterface
      * AssigneeService constructor.
      *
      * @param AssigneeRepository $repository
-     * @param TaskServiceInterface $taskService
      */
-    public function __construct(AssigneeRepository $repository, TaskServiceInterface $taskService)
+    public function __construct(AssigneeRepository $repository)
     {
         $this->repository = $repository;
-        $this->taskService = $taskService;
     }
 
     /**
-     * Display model.
-     *
-     * @param string $id
-     * @return Assignee
+     * @inheritDoc
      */
     public function show(string $id): Assignee
     {
@@ -66,35 +45,27 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * Utilize repository to create a model.
-     *
-     * @param array|null $attributes
-     * @return Assignee
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @inheritDoc
      */
-    public function create(?array $attributes = []): Assignee
+    public function create(AssigneeCreateRequest $request): Assignee
     {
-        return $this->repository->create(\Request::all());
+        $validated = $request->validated();
+
+        return $this->repository->create($validated);
     }
 
     /**
-     * Update a model.
-     *
-     * @param string $id
-     * @param array|null $attributes
-     * @return mixed
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @inheritDoc
      */
-    public function update(string $id, ?array $attributes = []): Assignee
+    public function update(AssigneeUpdateRequest $request, string $id): Assignee
     {
-        return $this->repository->update(\Request::all(), $id);
+        $validated = $request->validated();
+
+        return $this->repository->update($validated, $id);
     }
 
     /**
-     * Delete a model.
-     *
-     * @param string $id
-     * @return mixed
+     * @inheritDoc
      */
     public function delete(string $id): Assignee
     {
@@ -105,42 +76,34 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * Complete a task.
-     *
-     * @param string $assignee
-     * @return mixed
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @inheritDoc
      */
-    public function complete(string $assignee): Assignee
+    public function complete(string $assignee): bool
     {
-        $complete = $this->repository->update([
-            'completed_at' => Carbon::now()
-        ], $assignee);
+        try {
+            $update = $this->repository->update(['completed_at' => Carbon::now()], $assignee);
 
-        $task = $this->taskService->complete($complete->task_id, $complete->id);
+            return is_a($update, 'App\Models\Assignee');
+        } catch (ValidatorException $e) {
+            report($e);
 
-        $complete->setRelation('task', $task);
-
-        return $complete;
+            return false;
+        }
     }
 
     /**
-     * Incomplete a task.
-     *
-     * @param string $assignee
-     * @return Assignee
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @inheritDoc
      */
-    public function incomplete(string $assignee): Assignee
+    public function incomplete(string $assignee): bool
     {
-        $incomplete = $this->repository->update([
-            'completed_at' => null
-        ], $assignee);
+        try {
+            $update = $this->repository->update(['completed_at' => null], $assignee);
 
-        $task = $this->taskService->incomplete($incomplete->task_id);
+            return is_a($update, 'App\Models\Assignee');
+        } catch (ValidatorException $e) {
+            report($e);
 
-        $incomplete->setRelation('task', $task);
-
-        return $incomplete;
+            return false;
+        }
     }
 }

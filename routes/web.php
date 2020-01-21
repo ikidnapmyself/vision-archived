@@ -14,8 +14,6 @@
 Auth::routes();
 Route::get('/', 'WelcomeController@welcome')->name('welcome');
 Route::middleware('auth')->group(function () {
-//    Route::resource('/board', 'BoardController');
-    Route::put('/assignee/{assignee}/complete', 'AssigneeController@complete');
     Route::resource('/assignee', 'AssigneeController');
     Route::resource('/board', 'BoardController');
     Route::get('/friendship/list', 'FriendshipController@list')->name('friend.list');
@@ -26,9 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('logout', 'Auth\LoginController@logout');
     Route::get('/task/list', 'TaskController@list')->name('task.list');
     Route::resource('/task', 'TaskController');
-//    Route::post('/task/{task}/assign/{user}', 'TaskController@assign');
-//    Route::delete('/task/{task}/assign/{user}', 'TaskController@unassign');
-    Route::put('/task/{task}/status/{status}', 'TaskController@status');
+    Route::put('/task/{task}/status', 'TaskController@status');
     Route::get('/user/list', 'UserController@list')->name('user.list');
     Route::resource('/user', 'UserController');
 });
