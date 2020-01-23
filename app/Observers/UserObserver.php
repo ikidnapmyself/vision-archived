@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Board;
 use App\Models\User;
 
 class UserObserver
@@ -14,7 +15,18 @@ class UserObserver
      */
     public function created(User $user)
     {
-        //
+        /**
+         * @todo not too sweet :(
+         */
+        $board = new Board();
+        $board->fill([
+                'name'        => $user->full_name,
+                'description' => 'Personal private board.',
+                'is_public'   => false,
+                'morph_type'  => User::class,
+                'morph_id'    => $user->id,
+            ])
+            ->save();
     }
 
     /**

@@ -20,18 +20,10 @@ class Board extends Model
     ];
 
     /**
-     * Get all of the projects of the board.
+     * Board owner. Get the owning morph model.
      */
-    public function projects()
+    public function morph()
     {
-        return $this->hasMany('App\Models\Project', 'board_id', 'id');
-    }
-
-    /**
-     * Board owner.
-     */
-    public function owner()
-    {
-        return $this->hasMany('App\Models\Project', 'board_id', 'id');
+        return $this->morphTo();
     }
 }
