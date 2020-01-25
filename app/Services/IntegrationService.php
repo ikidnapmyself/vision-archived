@@ -10,7 +10,7 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class IntegrationService implements IntegrationServiceInterface
 {
     /**
-     * @var IntegrationRepository $repository
+     * @var IntegrationRepository
      */
     public $repository;
 
@@ -25,7 +25,7 @@ class IntegrationService implements IntegrationServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function exists(SocialiteUser $user, string $provider): bool
     {
@@ -38,7 +38,7 @@ class IntegrationService implements IntegrationServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function retrieve(SocialiteUser $user, string $provider): Integration
     {
