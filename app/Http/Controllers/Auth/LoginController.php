@@ -31,67 +31,12 @@ class LoginController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Handle OAuth login.
-     *
-     * @var UserServiceInterface $userService
-     */
-    protected $userService;
-
-    /**
      * Create a new controller instance.
      *
-     * @param UserServiceInterface $userService
      * @return void
      */
-    public function __construct(UserServiceInterface $userService)
+    public function __construct()
     {
-        $this->userService = $userService;
         $this->middleware('guest')->except('logout');
-    }
-
-    /**
-     * Redirect the user to the GitHub authentication page.
-     *
-     * @param string $service
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function redirectToProvider(string $service)
-    {
-        $isExists = collect(
-            config('services')
-        )
-            ->has($service);
-
-        if ($isExists === true) {
-            return Socialite::driver($service)->redirect();
-        }
-
-        return redirect(route('login'));
-    }
-
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @param string $service
-     * @return \Illuminate\Http\Response
-     */
-    public function handleProviderCallback(string $service)
-    {
-        try {
-            $user = Socialite::driver($service)->user();
-        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
-            report($e);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            report($e);
-        }
-
-        if (isset($user)) {
-            $login = $this->userService->login($user);
-            if (is_a($login, 'App\Models\User')) {
-                redirect($this->redirectTo);
-            }
-        }
-
-        return redirect(route('login'));
     }
 }

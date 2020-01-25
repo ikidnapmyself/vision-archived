@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -70,7 +70,7 @@
                                 <label class="col-md-4 col-form-label text-md-right"></label>
 
                                 <div class="col-md-6">
-                                    <a href="{{ url('login/github') }}" class="btn btn-dark">
+                                    <a href="{{ url('integrate/github') }}" class="btn btn-dark">
                                         <i class="fab fa-github"></i>
                                         {{ __('Login with GitHub') }}
                                     </a>

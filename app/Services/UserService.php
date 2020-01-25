@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\UserCreateRequest;
+use App\Interfaces\IntegrationServiceInterface;
 use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -17,13 +18,20 @@ class UserService implements UserServiceInterface
     public $repository;
 
     /**
+     * @var IntegrationServiceInterface $integrationService
+     */
+    public $integrationService;
+
+    /**
      * UserService constructor.
      *
      * @param UserRepository $repository
+     * @param IntegrationServiceInterface $integrationService
      */
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $repository, IntegrationServiceInterface $integrationService)
     {
         $this->repository = $repository;
+        $this->integrationService = $integrationService;
     }
 
     /**
@@ -55,35 +63,37 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * Socialite based login.
-     *
-     * @param SocialiteUser $user
-     * @return User
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @inheritDoc
      */
-    public function login(SocialiteUser $user): User
+    public function integrate(SocialiteUser $user, string $provider): User
     {
-        $find = $this->repository->findByField('email', $user->getEmail())->first();
+        $exists = $this->integrationService->exists($user, $provider);
 
-        if ($find !== null) {
-            \Auth::login($find, true);
+        if ($exists) {
+            /**
+             * @var User $retrieve
+             */
+            $retrieve = $this->integrationService->retrieve($user, $provider);
 
-            return $find;
+            return $retrieve->user;
         } else {
             $username = collect(
                 explode(' ', $user->getName())
             );
 
-            $create = $this->repository->create([
-                'name'    => $username->first(),
-                'surname' => $username->last(),
-                'email'   => $user->getEmail(),
-                'password'=> \Hash::make($user->token)
-            ]);
+            $created = $this->repository
+                ->create([
+                    'name'    => $username->first(),
+                    'surname' => $username->last(),
+                    'email'   => $user->getEmail(),
+                ])
+                ->integrations()->create([
+                    'provider_name' => $provider,
+                    'provider_id'   => $user->getId(),
+                    'access_token'  => $user->token,
+                ]);
 
-            \Auth::login($create, true);
-
-            return $create;
+            return $created;
         }
     }
 

@@ -196,6 +196,7 @@ return [
          */
         App\Providers\Project\AssigneeServiceProvider::class,
         App\Providers\Project\BoardServiceProvider::class,
+        App\Providers\Project\IntegrationServiceProvider::class,
         App\Providers\Project\TaskServiceProvider::class,
         App\Providers\Project\StatusServiceProvider::class,
         App\Providers\Project\UserServiceProvider::class,
@@ -244,6 +245,7 @@ return [
         'Route' => Illuminate\Support\Facades\Route::class,
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'Str' => Illuminate\Support\Str::class,
         'URL' => Illuminate\Support\Facades\URL::class,

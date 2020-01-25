@@ -12,8 +12,8 @@
 */
 
 Auth::routes();
-Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
-Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('integrate/{provider}', 'Auth\IntegrationController@redirectToProvider');
+Route::get('integrate/{provider}/callback', 'Auth\IntegrationController@handleProviderCallback');
 
 Route::get('/', 'WelcomeController@welcome')->name('welcome');
 Route::middleware('auth')->group(function () {

@@ -33,12 +33,13 @@ interface UserServiceInterface
     public function create(UserCreateRequest $request): User;
 
     /**
-     * Socialite based login.
+     * Create a model to integrate a service.
      *
      * @param SocialiteUser $user
+     * @param string $provider
      * @return User
      */
-    public function login(SocialiteUser $user): User;
+    public function integrate(SocialiteUser $user, string $provider): User;
 
     /**
      * Update a model.

@@ -81,6 +81,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get integrated services.
+     */
+    public function integrations()
+    {
+        return $this->hasMany('App\Models\Integration');
+    }
+
+    /**
      * Get all of the teams for the user.
      */
     public function boards()
