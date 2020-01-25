@@ -33,7 +33,7 @@ class LoginController extends Controller
     /**
      * Handle OAuth login.
      *
-     * @var UserServiceInterface $userService
+     * @var UserServiceInterface
      */
     protected $userService;
 

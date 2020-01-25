@@ -12,7 +12,7 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class UserService implements UserServiceInterface
 {
     /**
-     * @var UserRepository $repository
+     * @var UserRepository
      */
     public $repository;
 
@@ -27,7 +27,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -35,7 +35,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): User
     {
@@ -78,7 +78,7 @@ class UserService implements UserServiceInterface
                 'name'    => $username->first(),
                 'surname' => $username->last(),
                 'email'   => $user->getEmail(),
-                'password'=> \Hash::make($user->token)
+                'password'=> \Hash::make($user->token),
             ]);
 
             \Auth::login($create, true);

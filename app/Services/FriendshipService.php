@@ -10,14 +10,14 @@ class FriendshipService extends BaseService
     /**
      * Validation base rules.
      *
-     * @var array $rules
+     * @var array
      */
     protected $rules = [
         'body' => 'BREAK',
     ];
 
     /**
-     * @var UserService $userService
+     * @var UserService
      */
     protected $userService;
 
@@ -29,19 +29,19 @@ class FriendshipService extends BaseService
      */
     public function __construct(FriendshipRepository $repository, UserService $userService)
     {
-        $this->repository  = $repository;
+        $this->repository = $repository;
         $this->userService = $userService;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id)
     {
         /**
-         * @var User $user
+         * @var User
          */
-        $user   = $this->userService->repository->find($id);
+        $user = $this->userService->repository->find($id);
         $models = $user->getFriends();
 
         return $models;
