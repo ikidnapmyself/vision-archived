@@ -178,6 +178,7 @@ return [
         /*
          * Package Service Providers...
          */
+        SocialiteProviders\Manager\ServiceProvider::class, // add
 
         /*
          * Application Service Providers...
@@ -197,6 +198,7 @@ return [
         App\Providers\Project\BoardServiceProvider::class,
         App\Providers\Project\TaskServiceProvider::class,
         App\Providers\Project\StatusServiceProvider::class,
+        App\Providers\Project\UserServiceProvider::class,
     ],
 
     /*

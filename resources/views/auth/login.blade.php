@@ -64,6 +64,19 @@
                                 @endif
                             </div>
                         </div>
+                        <hr>
+                        @if (config('services.github.client_id'))
+                            <div class="form-group row mb-0">
+                                <label class="col-md-4 col-form-label text-md-right"></label>
+
+                                <div class="col-md-6">
+                                    <a href="{{ url('login/github') }}" class="btn btn-dark">
+                                        <i class="fab fa-github"></i>
+                                        {{ __('Login with GitHub') }}
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>

@@ -12,11 +12,13 @@
         "fideloper/proxy": "^4.0",
         "hootlex/laravel-friendships": "^1.0",
         "laravel/framework": "^6.2",
+        "laravel/socialite": "^4.3",
         "laravel/telescope": "^2.1",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
         "prettus/l5-repository": "^2.6",
         "rackbeat/laravel-ui-avatars": "^0.8.4",
+        "socialiteproviders/github": "dev-master",
         "spatie/laravel-model-status": "^1.9",
         "spatie/laravel-permission": "^3.2"
     },
