@@ -65,33 +65,30 @@ class UserService implements UserServiceInterface
     /**
      * @inheritDoc
      */
-    public function integrate(SocialiteUser $user, string $provider): User
+    public function integrate(SocialiteUser $socialiteUser, string $provider): User
     {
-        $exists = $this->integrationService->exists($user, $provider);
+        $exists = $this->integrationService->exists($socialiteUser, $provider);
 
         if ($exists) {
             /**
              * @var User $retrieve
              */
-            $retrieve = $this->integrationService->retrieve($user, $provider);
+            $retrieve = $this->integrationService->retrieve($socialiteUser, $provider);
 
             return $retrieve->user;
         } else {
             $username = collect(
-                explode(' ', $user->getName())
+                explode(' ', $socialiteUser->getName())
             );
 
             $created = $this->repository
                 ->create([
-                    'name'    => $username->first(),
+                    'name' => $username->first(),
                     'surname' => $username->last(),
-                    'email'   => $user->getEmail(),
-                ])
-                ->integrations()->create([
-                    'provider_name' => $provider,
-                    'provider_id'   => $user->getId(),
-                    'access_token'  => $user->token,
+                    'email' => $socialiteUser->getEmail(),
                 ]);
+
+            $this->integrationService->integrate($created, $socialiteUser, $provider);
 
             return $created;
         }

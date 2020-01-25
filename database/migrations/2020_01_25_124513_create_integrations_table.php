@@ -20,6 +20,8 @@ class CreateIntegrationsTable extends Migration
             $table->string('provider_id')->unique()->nullable();
             $table->string('access_token')->nullable();
             $table->string('refresh_token')->nullable();
+            $table->timestamp('imported_at')->nullable();
+            $table->timestamp('exported_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -27,6 +29,7 @@ class CreateIntegrationsTable extends Migration
              * Indexes
              */
             $table->primary('id');
+            $table->unique(['provider_name', 'provider_id']);
             $table->index('user_id')->foreign('user_id')->references('id')->on('users');
         });
     }

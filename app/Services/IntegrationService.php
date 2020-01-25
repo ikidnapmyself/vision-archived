@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\IntegrationServiceInterface;
 use App\Models\Integration;
+use App\Models\User;
 use App\Repositories\IntegrationRepository;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
@@ -35,6 +36,21 @@ class IntegrationService implements IntegrationServiceInterface
         ])->count();
 
         return (bool) $find;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function integrate(User $user, SocialiteUser $socialiteUser, string $provider): Integration
+    {
+        $find = $this->repository->create([
+            'user_id'       => $user->id,
+            'provider_name' => $provider,
+            'provider_id'   => $socialiteUser->getId(),
+            'access_token'  => $socialiteUser->token,
+        ]);
+
+        return $find;
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace App\Interfaces;
 
 use App\Models\Integration;
+use App\Models\User;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 interface IntegrationServiceInterface
@@ -14,6 +15,16 @@ interface IntegrationServiceInterface
      * @return bool
      */
     public function exists(SocialiteUser $user, string $provider): bool;
+
+    /**
+     * Integrate and link to an account.
+     *
+     * @param User $user
+     * @param SocialiteUser $socialiteUser
+     * @param string $provider
+     * @return Integration
+     */
+    public function integrate(User $user, SocialiteUser $socialiteUser, string $provider): Integration;
 
     /**
      * Retrieve user.
