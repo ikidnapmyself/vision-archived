@@ -54,7 +54,8 @@ Vision will use [SemVer](http://semver.org/) for versioning. For the versions av
 
 ## Authors
 
-* **Burak** - *Initial work* - [PurpleBooth](https://github.com/ikidnapmyself)
+* **Burak** - *Initial work* - [IKidnapMyself](https://github.com/ikidnapmyself)
+* [Contributors page](https://github.com/ikidnapmyself/vision/graphs/contributors)
 
 See also the list of [contributors](https://github.com/ikidnapmyself/vision/contributors) who participated in this project.
 
