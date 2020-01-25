@@ -1,6 +1,12 @@
 <?php
 
 return [
+    /*
+     * Allowed statuses.
+     */
+    'allowed_statuses' => [
+        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
+    ],
 
     /*
      * The class name of the status model that holds all statuses.

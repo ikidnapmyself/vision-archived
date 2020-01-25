@@ -13,9 +13,7 @@ trait HasStatuses
      *
      * @var array $allowedStatuses
      */
-    private $allowedStatuses = [
-        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
-    ];
+    private $allowedStatuses = [];
 
     /**
      * This method is called upon instantiation of the Eloquent Model.
@@ -24,6 +22,7 @@ trait HasStatuses
      */
     public function initializeHasStatuses()
     {
+        $this->allowedStatuses = config('model-status.allowed_statuses');
         $this->append(['available_statuses', 'current_status']);
     }
 

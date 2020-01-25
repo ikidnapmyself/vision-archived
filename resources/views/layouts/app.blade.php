@@ -30,6 +30,7 @@
             locale: "{{ config('app.locale') }}",
             auth: {{ auth()->user() ? 'true' : 'false' }},
             statuses: {
+                list: @json(config('model-status.allowed_statuses')),
                 icons: @json(config('model-status.icons')),
                 colors: @json(config('model-status.colors'))
             }
