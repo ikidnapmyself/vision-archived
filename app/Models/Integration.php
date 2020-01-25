@@ -24,7 +24,7 @@ class Integration extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'provider_name', 'provider_id', 'access_token', 'refresh_token', 'imported_at', 'exported_at'
+        'user_id', 'provider_name', 'provider_id', 'access_token', 'refresh_token', 'imported_at', 'exported_at',
     ];
 
     /**
