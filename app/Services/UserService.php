@@ -13,12 +13,12 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class UserService implements UserServiceInterface
 {
     /**
-     * @var UserRepository $repository
+     * @var UserRepository
      */
     public $repository;
 
     /**
-     * @var IntegrationServiceInterface $integrationService
+     * @var IntegrationServiceInterface
      */
     public $integrationService;
 
@@ -35,7 +35,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -43,7 +43,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): User
     {
@@ -63,7 +63,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function integrate(SocialiteUser $socialiteUser, string $provider): User
     {
@@ -71,7 +71,7 @@ class UserService implements UserServiceInterface
 
         if ($exists) {
             /**
-             * @var User $retrieve
+             * @var User
              */
             $retrieve = $this->integrationService->retrieve($socialiteUser, $provider);
 

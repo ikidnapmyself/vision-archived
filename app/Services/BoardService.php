@@ -10,7 +10,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class BoardService implements BoardServiceInterface
 {
     /**
-     * @var BoardRepository $repository
+     * @var BoardRepository
      */
     public $repository;
 
@@ -34,7 +34,7 @@ class BoardService implements BoardServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -47,7 +47,7 @@ class BoardService implements BoardServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): Board
     {

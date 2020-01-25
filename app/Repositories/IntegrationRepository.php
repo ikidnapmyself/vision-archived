@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Integration;
@@ -6,7 +7,7 @@ use App\Models\Integration;
 class IntegrationRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
