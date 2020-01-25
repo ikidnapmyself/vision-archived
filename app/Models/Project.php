@@ -17,7 +17,7 @@ class Project extends Model
      */
     protected $fillable = [
         'board_id', 'name', 'type', 'due', 'defer', /* 'status', */ 'starred', 'flagged', 'last_action_complete',
-        'completed_at'
+        'completed_at',
     ];
 
     /**

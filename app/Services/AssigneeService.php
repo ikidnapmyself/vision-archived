@@ -13,7 +13,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class AssigneeService implements AssigneeServiceInterface
 {
     /**
-     * @var AssigneeRepository $repository
+     * @var AssigneeRepository
      */
     public $repository;
 
@@ -37,7 +37,7 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): Assignee
     {
@@ -45,7 +45,7 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function create(AssigneeCreateRequest $request): Assignee
     {
@@ -55,7 +55,7 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function update(AssigneeUpdateRequest $request, string $id): Assignee
     {
@@ -65,7 +65,7 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function delete(string $id): Assignee
     {
@@ -76,7 +76,7 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function complete(string $assignee): bool
     {
@@ -92,7 +92,7 @@ class AssigneeService implements AssigneeServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function incomplete(string $assignee): bool
     {
