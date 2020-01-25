@@ -48,6 +48,7 @@ class IntegrationService implements IntegrationServiceInterface
             'provider_name' => $provider,
             'provider_id'   => $socialiteUser->getId(),
             'access_token'  => $socialiteUser->token,
+            'profile'       => json_encode($socialiteUser),
         ]);
 
         return $find;

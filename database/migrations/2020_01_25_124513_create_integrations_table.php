@@ -20,6 +20,7 @@ class CreateIntegrationsTable extends Migration
             $table->string('provider_id')->unique()->nullable();
             $table->string('access_token')->nullable();
             $table->string('refresh_token')->nullable();
+            $table->json('profile');
             $table->timestamp('imported_at')->nullable();
             $table->timestamp('exported_at')->nullable();
             $table->timestamps();
