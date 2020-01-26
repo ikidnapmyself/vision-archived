@@ -36,7 +36,7 @@
                             <em>{{ user.name }}</em>
                         </template>
                         <b-dropdown-item :href="user.url">{{ user.name }}</b-dropdown-item>
-                        <b-dropdown-item href="logout">{{ $t('partials.navigation.Logout') }}</b-dropdown-item>
+                        <b-dropdown-item href="/logout">{{ $t('partials.navigation.Logout') }}</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
