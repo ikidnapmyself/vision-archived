@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/friendship/{user}/list', 'FriendshipController@showList')->name('friend.user.list');
     Route::resource('/friendship', 'FriendshipController');
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('integration', 'Auth\IntegrationController@integration')->name('home');
+    Route::get('integration/list', 'Auth\IntegrationController@integrationList')->name('home');
 //    Route::resource('/project', 'ProjectController');
     Route::get('logout', 'Auth\LoginController@logout');
     Route::get('status', 'StatusController@index');

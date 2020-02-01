@@ -4,6 +4,7 @@ namespace App\Interfaces;
 use App\Http\Requests\UserCreateRequest;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 interface UserServiceInterface
@@ -35,11 +36,20 @@ interface UserServiceInterface
     /**
      * Create a model to integrate a service.
      *
-     * @param SocialiteUser $user
+     * @param SocialiteUser $socialiteUser
      * @param string $provider
+     * @param null|User $user
      * @return User
      */
-    public function integrate(SocialiteUser $user, string $provider): User;
+    public function integrate(SocialiteUser $socialiteUser, string $provider, ?User $user = null): User;
+
+    /**
+     * Create a model to integrate a service.
+     *
+     * @param string $user
+     * @return Collection
+     */
+    public function integrations(string $user): Collection;
 
     /**
      * Update a model.

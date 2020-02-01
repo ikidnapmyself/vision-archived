@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\UserService;
+use App\Interfaces\UserServiceInterface;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +11,7 @@ class UserController extends Controller
     /**
      * User service.
      *
-     * @var UserService
+     * @var UserServiceInterface
      */
     private $service;
 
@@ -19,9 +19,9 @@ class UserController extends Controller
     /**
      * UserController constructor.
      *
-     * @param UserService $service
+     * @param UserServiceInterface $service
      */
-    public function __construct(UserService $service)
+    public function __construct(UserServiceInterface $service)
     {
         $this->service = $service;
     }
@@ -85,14 +85,15 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Integration list.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function integrations()
     {
-        //
+        $integrations = $this->service->integrations();
+
+        return response($integrations);
     }
 
     /**

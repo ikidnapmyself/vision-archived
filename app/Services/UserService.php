@@ -8,6 +8,7 @@ use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 class UserService implements UserServiceInterface
@@ -47,25 +48,13 @@ class UserService implements UserServiceInterface
      */
     public function show(string $id): User
     {
-        return $this->repository->with('friends')->find($id);
-    }
-
-    /**
-     * Utilize repository to create a model.
-     *
-     * @param UserCreateRequest $request
-     * @return User
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function create(UserCreateRequest $request): User
-    {
-        // TODO: Implement create() method.
+        return $this->repository->with(['boards', 'friends', 'groups', 'integrations'])->find($id);
     }
 
     /**
      * @inheritDoc
      */
-    public function integrate(SocialiteUser $socialiteUser, string $provider): User
+    public function integrate(SocialiteUser $socialiteUser, string $provider, ?User $user = null): User
     {
         $exists = $this->integrationService->exists($socialiteUser, $provider);
 
@@ -77,20 +66,22 @@ class UserService implements UserServiceInterface
 
             return $retrieve->user;
         } else {
-            $username = collect(
-                explode(' ', $socialiteUser->getName())
-            );
+            if ($user === null) {
+                $username = collect(
+                    explode(' ', $socialiteUser->getName())
+                );
 
-            $created = $this->repository
-                ->create([
-                    'name' => $username->first(),
-                    'surname' => $username->last(),
-                    'email' => $socialiteUser->getEmail(),
-                ]);
+                $user = $this->repository
+                    ->create([
+                        'name' => $username->first(),
+                        'surname' => $username->last(),
+                        'email' => $socialiteUser->getEmail(),
+                    ]);
+            }
 
-            $this->integrationService->integrate($created, $socialiteUser, $provider);
+            $this->integrationService->integrate($user, $socialiteUser, $provider);
 
-            return $created;
+            return $user;
         }
     }
 
@@ -104,5 +95,30 @@ class UserService implements UserServiceInterface
     public function update(string $id): User
     {
         // TODO: Implement update() method.
+    }
+
+    /**
+     * Create a model to integrate a service.
+     *
+     * @param string $user
+     * @return Collection
+     */
+    public function integrations(string $user): Collection
+    {
+        $find = $this->repository->find($user);
+
+        return $find->integrations;
+    }
+
+    /**
+     * Utilize repository to create a model.
+     *
+     * @param UserCreateRequest $request
+     * @return User
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function create(UserCreateRequest $request): User
+    {
+        // TODO: Implement create() method.
     }
 }

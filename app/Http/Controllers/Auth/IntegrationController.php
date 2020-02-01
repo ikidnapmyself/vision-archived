@@ -33,13 +33,41 @@ class IntegrationController extends Controller
             return redirect('/login');
         }
 
-        $auth = $service->integrate(
+        $auth = \Auth::user();
+
+        $login = $service->integrate(
             $user,
-            $provider
+            $provider,
+            $auth
         );
 
-        \Auth::login($auth, true);
+        if ($auth === null) {
+            \Auth::login($login, true);
+        }
 
         return redirect()->to('/home');
+    }
+
+    /**
+     * Integration page.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function integration()
+    {
+        return view('integrate.index');
+    }
+
+    /**
+     * Integration page.
+     *
+     * @param UserServiceInterface $service
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function integrationList(UserServiceInterface $service)
+    {
+        $user = \Auth::user();
+        $get = $service->integrations($user->id);
+        return response($get);
     }
 }
