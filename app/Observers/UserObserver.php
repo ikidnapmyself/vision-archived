@@ -20,12 +20,12 @@ class UserObserver
          */
         $board = new Board();
         $board->fill([
-                'name'        => $user->full_name,
-                'description' => 'Personal private board.',
-                'is_public'   => false,
-                'morph_type'  => User::class,
-                'morph_id'    => $user->id,
-            ])
+            'name'        => $user->full_name,
+            'description' => 'Personal private board.',
+            'is_public'   => false,
+            'morph_type'  => User::class,
+            'morph_id'    => $user->id,
+        ])
             ->save();
     }
 
