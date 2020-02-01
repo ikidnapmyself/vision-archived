@@ -9,7 +9,9 @@ return [
     ],
     'navigation' => [
         'Boards'   => 'Boards',
+        'Friends'   => 'Friends',
         'Groups'   => 'Groups',
+        'Integrations'   => 'Integrations',
         'Login'    => 'Login',
         'Logout'   => 'Logout',
         'Projects' => 'Projects',
