@@ -68,6 +68,7 @@ class IntegrationController extends Controller
     {
         $user = \Auth::user();
         $get = $service->integrations($user->id);
+
         return response($get);
     }
 }
