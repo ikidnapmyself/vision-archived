@@ -15,12 +15,12 @@ use Illuminate\Support\Arr;
 class TaskService implements TaskServiceInterface
 {
     /**
-     * @var TaskRepository $repository
+     * @var TaskRepository
      */
     public $repository;
 
     /**
-     * @var AssigneeServiceInterface $assigneeService
+     * @var AssigneeServiceInterface
      */
     public $assigneeService;
 
@@ -46,7 +46,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -59,7 +59,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): Task
     {
@@ -72,7 +72,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function create(TaskRequest $taskRequest): Task
     {
@@ -82,7 +82,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function update(TaskRequest $taskRequest, string $id): Task
     {
@@ -92,7 +92,7 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function delete(string $id): Task
     {
@@ -103,16 +103,16 @@ class TaskService implements TaskServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function status(TaskStatusRequest $status, string $id): Task
     {
-        $valid    = $status->validated();
+        $valid = $status->validated();
         /**
-         * @var Task $task
+         * @var Task
          */
-        $task     = $this->repository->find($id);
+        $task = $this->repository->find($id);
         $assignee = Arr::get($valid, 'assignee', false);
         $relation = null;
 

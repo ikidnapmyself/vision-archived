@@ -25,7 +25,6 @@ class TaskServiceProvider extends ServiceProvider
     }
 
     /**
-     *
      * @return void
      */
     public function boot()
