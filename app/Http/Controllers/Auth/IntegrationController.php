@@ -15,7 +15,9 @@ class IntegrationController extends Controller
      */
     public function redirectToProvider(string $provider)
     {
-        return \Socialite::driver($provider)->redirect();
+        return \Socialite::driver($provider)
+            ->scopes(config("services.{$provider}.scopes"))
+            ->redirect();
     }
 
     /**
