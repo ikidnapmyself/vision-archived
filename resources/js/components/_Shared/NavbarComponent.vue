@@ -9,6 +9,9 @@
                 <b-navbar-nav v-if="auth">
                     <b-nav-item href="/task">{{ $t('partials.navigation.Tasks') }}</b-nav-item>
                     <b-nav-item href="/board">{{ $t('partials.navigation.Boards') }}</b-nav-item>
+                    <b-nav-item href="/friend">{{ $t('partials.navigation.Friends') }}</b-nav-item>
+                    <b-nav-item href="/group">{{ $t('partials.navigation.Groups') }}</b-nav-item>
+                    <b-nav-item href="/integration">{{ $t('partials.navigation.Integrations') }}</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav v-else>
                     <b-nav-item href="/login">{{ $t('partials.navigation.Login') }}</b-nav-item>
