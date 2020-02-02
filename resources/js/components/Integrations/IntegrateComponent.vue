@@ -15,8 +15,9 @@
                 <i :class="integration.icon + ' fa-3x mr-3'"></i>
                 <div class="lh-100">
                     <h5 class="mb-0 lh-100">
-                    {{ $t('integration.' + index + '.name') }}
-                </h5>
+                        {{ $t('integration.' + index + '.name') }}
+                        <b-badge v-if="index !== 'github'">soon</b-badge>
+                    </h5>
                 <i :id="'toggle-' + index" class="fa fa-toggle-off"></i>
             </div>
             </b-card-header>

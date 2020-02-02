@@ -2,6 +2,9 @@
 
 return [
     'integrate' => 'Integrate',
+    'discord' => [
+        'name' => 'Discord',
+    ],
     'github' => [
         'name' => 'GitHub',
         'read more' => 'Understanding scopes for OAuth Apps...',
@@ -12,5 +15,20 @@ return [
             'read-user' => 'Grants access to read a user\'s profile data.',
             'read-org' => 'Read-only access to organization membership, organization projects, and team membership.',
         ]
+    ],
+    'hue' => [
+        'name' => 'Philips Hue',
+    ],
+    'linkedin' => [
+        'name' => 'LinkedIn',
+    ],
+    'medium' => [
+        'name' => 'Medium',
+    ],
+    'slack' => [
+        'name' => 'Slack',
+    ],
+    'spotify' => [
+        'name' => 'Spotify',
     ],
 ];
