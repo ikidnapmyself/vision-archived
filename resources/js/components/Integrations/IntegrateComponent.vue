@@ -15,10 +15,10 @@
                 <i :class="integration.icon + ' fa-3x mr-3'"></i>
                 <div class="lh-100">
                     <h5 class="mb-0 lh-100">
-                        {{ $t('integration.' + index + '.name') }}
-                    </h5>
-                    <i :id="'toggle-' + index" class="fa fa-toggle-off"></i>
-                </div>
+                    {{ $t('integration.' + index + '.name') }}
+                </h5>
+                <i :id="'toggle-' + index" class="fa fa-toggle-off"></i>
+            </div>
             </b-card-header>
             <b-collapse
                 :id="'accordion-' + index"
@@ -26,12 +26,12 @@
                 role="tabpanel"
             >
                 <b-card-body>
-                    <component
-                        v-bind:is="index + '-provider-component'"
-                        :index="index"
-                        :model="integration"
-                    >
-                    </component>
+                <component
+                    v-bind:is="index + '-provider-component'"
+                    :index="index"
+                    :model="integration"
+                >
+                </component>
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -42,15 +42,14 @@
         data: function() {
             return {
                 integrations: {
-                    discord: {icon: 'fab fa-discord', integrated: false},
-                    github: {icon: 'fab fa-github', integrated: false},
-                    medium: {icon: 'fab fa-medium', integrated: false},
-                    linkedin: {icon: 'fab fa-linkedin', integrated: false},
-                    hue: {icon: 'fa fa-lightbulb', integrated: false},
-                    slack: {icon: 'fab fa-slack', integrated: false},
-                    spotify: {icon: 'fab fa-spotify', integrated: false},
+                    discord: {icon: 'fab fa-discord'},
+                    github: {icon: 'fab fa-github'},
+                    medium: {icon: 'fab fa-medium'},
+                    linkedin: {icon: 'fab fa-linkedin'},
+                    hue: {icon: 'fa fa-lightbulb'},
+                    slack: {icon: 'fab fa-slack'},
+                    spotify: {icon: 'fab fa-spotify'},
                 },
-                providers: [],
                 url: '/integration/list'
             }
         },
@@ -62,8 +61,7 @@
                 this.$axios.get(this.url)
                     .then((response) => {
                         response.data.map((item) => {
-                            this.integrations[item.provider_name].integrated = true;
-                            this.providers[item.provider_name] = item;
+                            document.getElementById('accordion-' + item.provider_name).remove();
                             let provider  = document.getElementById('toggle-' + item.provider_name);
                             provider.classList.remove('fa-toggle-off');
                             provider.classList.add('fa-toggle-on');
