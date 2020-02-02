@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskStatusRequest;
-use App\Interfaces\TaskServiceInterface;
+use App\Interfaces\Services\TaskServiceInterface;
 
 class TaskController extends Controller
 {

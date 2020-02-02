@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Interfaces\IntegrationServiceInterface;
+use App\Interfaces\Services\IntegrationServiceInterface;
 use App\Models\Integration;
 use App\Models\User;
 use App\Repositories\IntegrationRepository;

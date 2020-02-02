@@ -1,5 +1,5 @@
 <?php
-namespace App\Interfaces;
+namespace App\Interfaces\Services;
 
 use App\Http\Requests\AssigneeCreateRequest;
 use App\Http\Requests\AssigneeUpdateRequest;

@@ -15,7 +15,7 @@ class BoardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Interfaces\BoardServiceInterface', function ($app) {
+        $this->app->bind('App\Interfaces\Services\BoardServiceInterface', function ($app) {
             return new BoardService(
                 $app->make(BoardRepository::class)
             );

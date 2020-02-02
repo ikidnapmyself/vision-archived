@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\StatusServiceInterface;
+use App\Interfaces\Services\StatusServiceInterface;
 
 class StatusController extends Controller
 {

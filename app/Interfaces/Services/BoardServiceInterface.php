@@ -1,5 +1,5 @@
 <?php
-namespace App\Interfaces;
+namespace App\Interfaces\Services;
 
 //use App\Http\Requests\BoardCreateRequest;
 //use App\Http\Requests\BoardUpdateRequest;

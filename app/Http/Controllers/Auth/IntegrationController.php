@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\UserServiceInterface;
+use App\Interfaces\Services\UserServiceInterface;
 
 class IntegrationController extends Controller
 {

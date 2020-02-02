@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskStatusRequest;
-use App\Interfaces\AssigneeServiceInterface;
-use App\Interfaces\TaskServiceInterface;
+use App\Interfaces\Services\AssigneeServiceInterface;
+use App\Interfaces\Services\TaskServiceInterface;
 use App\Models\Status;
 use App\Models\Task;
 use App\Repositories\TaskRepository;

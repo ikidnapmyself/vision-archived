@@ -15,7 +15,7 @@ class IntegrationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Interfaces\IntegrationServiceInterface', function ($app) {
+        $this->app->bind('App\Interfaces\Services\IntegrationServiceInterface', function ($app) {
             return new IntegrationService(
                 $app->make(IntegrationRepository::class)
             );

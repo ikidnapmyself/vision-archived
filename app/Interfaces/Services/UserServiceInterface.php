@@ -1,5 +1,5 @@
 <?php
-namespace App\Interfaces;
+namespace App\Interfaces\Services;
 
 use App\Http\Requests\UserCreateRequest;
 use App\Models\User;

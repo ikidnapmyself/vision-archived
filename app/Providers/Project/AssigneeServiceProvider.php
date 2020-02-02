@@ -17,7 +17,7 @@ class AssigneeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Interfaces\AssigneeServiceInterface', function ($app) {
+        $this->app->bind('App\Interfaces\Services\AssigneeServiceInterface', function ($app) {
             return new AssigneeService(
                 $app->make(AssigneeRepository::class)
             );

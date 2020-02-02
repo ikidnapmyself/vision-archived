@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\TaskServiceInterface;
+use App\Interfaces\Services\TaskServiceInterface;
 
 class HomeController extends Controller
 {

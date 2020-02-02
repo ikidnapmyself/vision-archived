@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Http\Requests\UserCreateRequest;
-use App\Interfaces\IntegrationServiceInterface;
-use App\Interfaces\UserServiceInterface;
+use App\Interfaces\Services\IntegrationServiceInterface;
+use App\Interfaces\Services\UserServiceInterface;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

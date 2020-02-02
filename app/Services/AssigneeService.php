@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\AssigneeCreateRequest;
 use App\Http\Requests\AssigneeUpdateRequest;
-use App\Interfaces\AssigneeServiceInterface;
+use App\Interfaces\Services\AssigneeServiceInterface;
 use App\Models\Assignee;
 use App\Repositories\AssigneeRepository;
 use Illuminate\Support\Carbon;

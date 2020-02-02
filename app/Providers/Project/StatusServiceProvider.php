@@ -14,7 +14,7 @@ class StatusServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Interfaces\StatusServiceInterface', function ($app) {
+        $this->app->bind('App\Interfaces\Services\StatusServiceInterface', function ($app) {
             return new StatusService();
         });
     }

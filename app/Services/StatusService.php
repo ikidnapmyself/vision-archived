@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Interfaces\StatusServiceInterface;
+use App\Interfaces\Services\StatusServiceInterface;
 use App\Repositories\TaskRepository;
 use Illuminate\Support\Collection;
 

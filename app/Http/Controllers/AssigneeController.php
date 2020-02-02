@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AssigneeCreateRequest;
 use App\Http\Requests\AssigneeUpdateRequest;
 use App\Models\Assignee;
-use App\Interfaces\AssigneeServiceInterface;
+use App\Interfaces\Services\AssigneeServiceInterface;
 
 class AssigneeController extends Controller
 {

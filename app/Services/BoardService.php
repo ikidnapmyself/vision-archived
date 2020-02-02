@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Interfaces\BoardServiceInterface;
+use App\Interfaces\Services\BoardServiceInterface;
 use App\Models\Board;
 use App\Repositories\BoardRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

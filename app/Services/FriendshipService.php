@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\FriendshipRepository;
 
-class FriendshipService extends BaseService
+class FriendshipService
 {
     /**
      * Validation base rules.
