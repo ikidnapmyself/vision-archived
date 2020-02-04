@@ -24,6 +24,7 @@ class FriendshipController extends Controller
     {
         $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *

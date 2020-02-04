@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use App\Http\Requests\UserCreateRequest;
@@ -68,6 +69,4 @@ interface UserServiceInterface
      * @throws \Illuminate\Validation\ValidationException
      */
     public function friends(string $id): LengthAwarePaginator;
-
-
 }
