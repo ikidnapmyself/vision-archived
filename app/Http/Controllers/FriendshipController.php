@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\Services\FriendshipServiceInterface;
 use App\Services\FriendshipService;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,9 @@ class FriendshipController extends Controller
     /**
      * FriendshipController constructor.
      *
-     * @param FriendshipService $service
+     * @param FriendshipServiceInterface $service
      */
-    public function __construct(FriendshipService $service)
+    public function __construct(FriendshipServiceInterface $service)
     {
         $this->service = $service;
     }
@@ -30,9 +31,7 @@ class FriendshipController extends Controller
      */
     public function index()
     {
-        return view('friendship.index', [
-            'friendships' => $this->service->index()
-        ]);
+        return view('friendship.index');
     }
 
     /**

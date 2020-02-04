@@ -196,6 +196,7 @@ return [
          */
         App\Providers\Project\AssigneeServiceProvider::class,
         App\Providers\Project\BoardServiceProvider::class,
+        App\Providers\Project\FriendshipServiceProvider::class,
         App\Providers\Project\IntegrationServiceProvider::class,
         App\Providers\Project\TaskServiceProvider::class,
         App\Providers\Project\StatusServiceProvider::class,

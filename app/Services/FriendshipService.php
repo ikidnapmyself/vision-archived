@@ -2,22 +2,20 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Interfaces\Services\FriendshipServiceInterface;
+use App\Interfaces\Services\UserServiceInterface;
 use App\Repositories\FriendshipRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-class FriendshipService
+class FriendshipService implements FriendshipServiceInterface
 {
     /**
-     * Validation base rules.
-     *
-     * @var array $rules
+     * @var FriendshipRepository $repository
      */
-    protected $rules = [
-        'body' => 'BREAK',
-    ];
+    public $repository;
 
     /**
-     * @var UserService $userService
+     * @var UserServiceInterface $userService
      */
     protected $userService;
 
@@ -25,9 +23,9 @@ class FriendshipService
      * FriendshipService constructor.
      *
      * @param FriendshipRepository $repository
-     * @param UserService $userService
+     * @param UserServiceInterface $userService
      */
-    public function __construct(FriendshipRepository $repository, UserService $userService)
+    public function __construct(FriendshipRepository $repository, UserServiceInterface $userService)
     {
         $this->repository  = $repository;
         $this->userService = $userService;
@@ -36,14 +34,10 @@ class FriendshipService
     /**
      * @inheritDoc
      */
-    public function show(string $id)
+    public function index(): LengthAwarePaginator
     {
-        /**
-         * @var User $user
-         */
-        $user   = $this->userService->repository->find($id);
-        $models = $user->getFriends();
+        $id = \Auth::user()->id;
 
-        return $models;
+        return $this->userService->friends($id);
     }
 }

@@ -121,4 +121,12 @@ class UserService implements UserServiceInterface
     {
         // TODO: Implement create() method.
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function friends(string $id): LengthAwarePaginator
+    {
+        return $this->repository->find($id)->friends()->paginate();
+    }
 }

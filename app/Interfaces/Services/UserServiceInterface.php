@@ -59,4 +59,15 @@ interface UserServiceInterface
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(string $id): User;
+
+    /**
+     * Friends of an user.
+     *
+     * @param string $id
+     * @return User
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function friends(string $id): LengthAwarePaginator;
+
+
 }
