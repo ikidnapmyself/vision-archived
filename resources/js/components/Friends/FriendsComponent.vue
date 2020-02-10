@@ -1,76 +1,70 @@
 <template>
     <div>
-        <b-pagination
-            v-model="currentPage"
-            :total-rows="items.total"
-            :per-page="items.per_page"
-            aria-controls="tasks-list"
-            align="center"
-            @change="onChange"
-        ></b-pagination>
-        <b-list-group>
-            <b-list-group-item
-                class="flex-column align-items-start"
-                href="#"
-                v-for="item in items"
-            >
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>3 days ago</small>
-                </div>
-
-                <p class="mb-1">
-                    Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                </p>
-
-                <small>Donec id elit non mi porta.</small>
-            </b-list-group-item>
-        </b-list-group>
-        <b-pagination
-            v-model="currentPage"
-            :total-rows="items.total"
-            :per-page="items.per_page"
-            aria-controls="tasks-list"
-            align="center"
-            @change="onChange"
-        ></b-pagination>
+        <b-tabs class="border border-muted bg-light" v-model="tabIndex" pills card>
+            <b-tab class="p-0" lazy>
+                <template v-slot:title>
+                    <span class="d-md-none d-lg-inline">
+                        <i :class="'fa fa-' + (friends < 2 ? 'user' : 'users')"></i>
+                    </span>
+                    <span class="d-none d-md-inline">
+                        {{ $t('friend.tabs.Friends') }}
+                    </span>
+                </template>
+                <b-card-text>
+                    <friend-list-tab :user="user"></friend-list-tab>
+                </b-card-text>
+            </b-tab>
+            <b-tab class="p-0">
+                <template v-slot:title>
+                    <span class="d-md-none d-lg-inline">
+                        <i class="fa fa-user-clock"></i>
+                    </span>
+                    <span class="d-none d-md-inline">
+                        {{ $t('friend.tabs.Pending') }}
+                    </span>
+                    <b-badge variant="light">
+                        {{ pending }}
+                        <span class="sr-only">{{ $t('friend.tabs.Pending') }}</span>
+                    </b-badge>
+                </template>
+                <b-card-text>
+                    <friend-pending-tab :user="user"></friend-pending-tab>
+                </b-card-text>
+            </b-tab>
+            <b-tab class="p-0" lazy>
+                <template v-slot:title>
+                    <span class="d-md-none d-lg-inline">
+                        <i class="fa fa-user-slash"></i>
+                    </span>
+                    <span class="d-none d-md-inline">
+                        {{ $t('friend.tabs.Blocked') }}
+                    </span>
+                </template>
+                <b-card-text>
+                    <friend-blocked-tab :user="user"></friend-blocked-tab>
+                </b-card-text>
+            </b-tab>
+        </b-tabs>
     </div>
 </template>
 
 <script>
     export default {
+        props: ['user'],
         data: () => {
             return {
-                currentPage: 1,
-                items: [],
+                blocked: 0,
+                connectionErrorRetry: 0,
+                friends: 0,
+                pending: 0,
+                tabIndex: 0,
             }
         },
         mounted(){
-            this.load()
+            //
         },
         methods: {
-            load(page) {
-                if('undefined' !== typeof page)
-                    this.currentPage = parseInt(page);
-                else
-                    this.currentPage = 1;
-
-                this.$axios.get('friendship/list?page=' + page)
-                    .then((response) => {
-                        this.currentPage = response.data.current_page;
-                        this.items = response.data;
-                    })
-                    .catch((error) => {
-                        this.connectionErrorRetry++;
-                    });
-            },
-            onChange(page) {
-                this.load(page)
-            },
+            //
         }
     }
 </script>
-
-<style scoped>
-
-</style>

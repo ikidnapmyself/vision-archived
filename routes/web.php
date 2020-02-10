@@ -20,9 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('/assignee', 'AssigneeController');
     Route::get('/board', 'BoardController@index');
     Route::get('/board/{board}', 'BoardController@show');
-    Route::get('/friendship/list', 'FriendshipController@list')->name('friend.list');
-    Route::get('/friendship/{user}/list', 'FriendshipController@showList')->name('friend.user.list');
-    Route::resource('/friendship', 'FriendshipController');
+    Route::get('/friendship/{user}/overview', 'FriendshipController@overview')->name('friendship.overview');
+    Route::get('/friendship/{user}/friend', 'FriendshipController@friend')->name('friendship.friend');
+    Route::get('/friendship/{user}/pending', 'FriendshipController@pending')->name('friendship.pending');
+    Route::get('/friendship/{user}/blocked', 'FriendshipController@blocked')->name('friendship.blocked');
+    Route::get('/friendship', 'FriendshipController@index')->name('friendship.index');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('integration', 'Auth\IntegrationController@integration')->name('home');
     Route::get('integration/list', 'Auth\IntegrationController@integrationList')->name('home');
