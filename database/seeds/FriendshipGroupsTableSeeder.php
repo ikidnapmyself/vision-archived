@@ -13,12 +13,12 @@ class FriendshipGroupsTableSeeder extends Seeder
     public function run()
     {
         for ($count = 0; $count < 50; $count++) {
-            $group   = collect(config('friendships.groups'))->keys()->random();
+            $group = collect(config('friendships.groups'))->keys()->random();
             /** @var User $user */
-            $user    = User::inRandomOrder()->first();
+            $user = User::inRandomOrder()->first();
             $friends = $user->getFriends();
             /** @var User $friend */
-            $friend  = $friends->count() ? $friends->random() : null;
+            $friend = $friends->count() ? $friends->random() : null;
 
             if (is_null($friend)) {
                 dump('User has no friend');

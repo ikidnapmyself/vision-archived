@@ -14,12 +14,12 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class UserService implements UserServiceInterface
 {
     /**
-     * @var UserRepository $repository
+     * @var UserRepository
      */
     public $repository;
 
     /**
-     * @var IntegrationServiceInterface $integrationService
+     * @var IntegrationServiceInterface
      */
     public $integrationService;
 
@@ -36,7 +36,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -44,7 +44,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): User
     {
@@ -52,7 +52,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function integrate(SocialiteUser $socialiteUser, string $provider, ?User $user = null): User
     {
@@ -60,7 +60,7 @@ class UserService implements UserServiceInterface
 
         if ($exists) {
             /**
-             * @var User $retrieve
+             * @var User
              */
             $retrieve = $this->integrationService->retrieve($socialiteUser, $provider);
 
@@ -123,7 +123,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function acceptedFriendships(string $id): Collection
     {
@@ -132,21 +132,21 @@ class UserService implements UserServiceInterface
         return $user->getAcceptedFriendships()->load([
             'sender' => function ($query) use ($id) {
                 /**
-                 * @var \Illuminate\Database\Query\Builder $query
+                 * @var \Illuminate\Database\Query\Builder
                  */
                 $query->where('id', '!=', $id);
             },
             'recipient' => function ($query) use ($id) {
                 /**
-                 * @var \Illuminate\Database\Query\Builder $query
+                 * @var \Illuminate\Database\Query\Builder
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function pendingFriendships(string $id): Collection
     {
@@ -155,21 +155,21 @@ class UserService implements UserServiceInterface
         return $user->getPendingFriendships()->load([
             'sender' => function ($query) use ($id) {
                 /**
-                 * @var \Illuminate\Database\Query\Builder $query
+                 * @var \Illuminate\Database\Query\Builder
                  */
                 $query->where('id', '!=', $id);
             },
             'recipient' => function ($query) use ($id) {
                 /**
-                 * @var \Illuminate\Database\Query\Builder $query
+                 * @var \Illuminate\Database\Query\Builder
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function blockedFriendships(string $id): Collection
     {
@@ -178,16 +178,16 @@ class UserService implements UserServiceInterface
         return $user->getBlockedFriendships()->load([
             'sender' => function ($query) use ($id) {
                 /**
-                 * @var \Illuminate\Database\Query\Builder $query
+                 * @var \Illuminate\Database\Query\Builder
                  */
                 $query->where('id', '!=', $id);
             },
             'recipient' => function ($query) use ($id) {
                 /**
-                 * @var \Illuminate\Database\Query\Builder $query
+                 * @var \Illuminate\Database\Query\Builder
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 }
