@@ -45,7 +45,7 @@ class FriendshipController extends Controller
      */
     public function overview()
     {
-        $user   = \Auth::user();
+        $user = \Auth::user();
         $models = $this->service->overview($user->id);
 
         return response($models);
@@ -59,7 +59,7 @@ class FriendshipController extends Controller
      */
     public function friend()
     {
-        $user   = \Auth::user();
+        $user = \Auth::user();
         $models = $this->service->friends($user->id);
 
         return response($models);
@@ -73,7 +73,7 @@ class FriendshipController extends Controller
      */
     public function pending()
     {
-        $user   = \Auth::user();
+        $user = \Auth::user();
         $models = $this->service->pending($user->id);
 
         return response($models);
@@ -87,7 +87,7 @@ class FriendshipController extends Controller
      */
     public function blocked()
     {
-        $user   = \Auth::user();
+        $user = \Auth::user();
         $models = $this->service->blocked($user->id);
 
         return response($models);
