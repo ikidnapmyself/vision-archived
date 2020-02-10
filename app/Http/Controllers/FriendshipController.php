@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\Services\FriendshipServiceInterface;
 use App\Services\FriendshipService;
-use Illuminate\Http\Request;
 
 class FriendshipController extends Controller
 {
@@ -24,6 +23,7 @@ class FriendshipController extends Controller
     {
         $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,98 +31,65 @@ class FriendshipController extends Controller
      */
     public function index()
     {
-        return view('friendship.index');
+        $user = \Auth::user();
+
+        return view('friendship.index', [
+            'user' => $user->id,
+        ]);
+    }
+
+    /**
+     * Return overview of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function overview()
+    {
+        $user   = \Auth::user();
+        $models = $this->service->overview($user->id);
+
+        return response($models);
     }
 
     /**
      * Return listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function list()
+    public function friend()
     {
-        $models = $this->service->index();
+        $user   = \Auth::user();
+        $models = $this->service->friends($user->id);
 
         return response($models);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Return listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function create()
+    public function pending()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  string $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(string $id)
-    {
-        $collection = $this->service->show($id);
-
-        return response($collection);
-    }
-
-    /**
-     * Return related listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showList(string $user)
-    {
-        $models = $this->service->show($user);
+        $user   = \Auth::user();
+        $models = $this->service->pending($user->id);
 
         return response($models);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Return listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function edit($id)
+    public function blocked()
     {
-        //
-    }
+        $user   = \Auth::user();
+        $models = $this->service->blocked($user->id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response($models);
     }
 }

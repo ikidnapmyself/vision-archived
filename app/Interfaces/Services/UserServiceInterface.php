@@ -4,7 +4,7 @@ namespace App\Interfaces\Services;
 use App\Http\Requests\UserCreateRequest;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 interface UserServiceInterface
@@ -64,10 +64,26 @@ interface UserServiceInterface
      * Friends of an user.
      *
      * @param string $id
-     * @return User
+     * @return Collection
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function friends(string $id): LengthAwarePaginator;
+    public function acceptedFriendships(string $id): Collection;
 
+    /**
+     * Pending friendships of an user.
+     *
+     * @param string $id
+     * @return Collection
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function pendingFriendships(string $id): Collection;
+    /**
+     * Blocked friends of an user.
+     *
+     * @param string $id
+     * @return Collection
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function blockedFriendships(string $id): Collection;
 
 }

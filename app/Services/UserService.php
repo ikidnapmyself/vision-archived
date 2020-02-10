@@ -8,7 +8,7 @@ use App\Interfaces\Services\UserServiceInterface;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 class UserService implements UserServiceInterface
@@ -125,8 +125,69 @@ class UserService implements UserServiceInterface
     /**
      * @inheritDoc
      */
-    public function friends(string $id): LengthAwarePaginator
+    public function acceptedFriendships(string $id): Collection
     {
-        return $this->repository->find($id)->friends()->paginate();
+        $user = $this->repository->find($id);
+
+        return $user->getAcceptedFriendships()->load([
+            'sender' => function ($query) use ($id) {
+                /**
+                 * @var \Illuminate\Database\Query\Builder $query
+                 */
+                $query->where('id', '!=', $id);
+            },
+            'recipient' => function ($query) use ($id) {
+                /**
+                 * @var \Illuminate\Database\Query\Builder $query
+                 */
+                $query->where('id', '!=', $id);
+            }
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function pendingFriendships(string $id): Collection
+    {
+        $user = $this->repository->find($id);
+
+        return $user->getPendingFriendships()->load([
+            'sender' => function ($query) use ($id) {
+                /**
+                 * @var \Illuminate\Database\Query\Builder $query
+                 */
+                $query->where('id', '!=', $id);
+            },
+            'recipient' => function ($query) use ($id) {
+                /**
+                 * @var \Illuminate\Database\Query\Builder $query
+                 */
+                $query->where('id', '!=', $id);
+            }
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function blockedFriendships(string $id): Collection
+    {
+        $user = $this->repository->find($id);
+
+        return $user->getBlockedFriendships()->load([
+            'sender' => function ($query) use ($id) {
+                /**
+                 * @var \Illuminate\Database\Query\Builder $query
+                 */
+                $query->where('id', '!=', $id);
+            },
+            'recipient' => function ($query) use ($id) {
+                /**
+                 * @var \Illuminate\Database\Query\Builder $query
+                 */
+                $query->where('id', '!=', $id);
+            }
+        ]);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Interfaces\Services\FriendshipServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Repositories\FriendshipRepository;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class FriendshipService implements FriendshipServiceInterface
 {
@@ -34,10 +34,24 @@ class FriendshipService implements FriendshipServiceInterface
     /**
      * @inheritDoc
      */
-    public function index(): LengthAwarePaginator
+    public function friends(string $id): Collection
     {
-        $id = \Auth::user()->id;
+        return $this->userService->acceptedFriendships($id);
+    }
 
-        return $this->userService->friends($id);
+    /**
+     * @inheritDoc
+     */
+    public function pending(string $id): Collection
+    {
+        return $this->userService->pendingFriendships($id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function blocked(string $id): Collection
+    {
+        return $this->userService->blockedFriendships($id);
     }
 }
