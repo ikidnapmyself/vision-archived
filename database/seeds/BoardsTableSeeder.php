@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Board;
 use Illuminate\Database\Seeder;
 
 class BoardsTableSeeder extends Seeder
@@ -11,6 +12,9 @@ class BoardsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Board::class, 14)->create();
+        /**
+         * each user has ~5 boards.
+         */
+        factory(Board::class, 1000)->create();
     }
 }
