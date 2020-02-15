@@ -5,7 +5,8 @@ namespace App\Services;
 use App\Interfaces\Services\BoardServiceInterface;
 use App\Models\Board;
 use App\Repositories\BoardRepository;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class BoardService implements BoardServiceInterface
 {
@@ -36,14 +37,13 @@ class BoardService implements BoardServiceInterface
     /**
      * @inheritDoc
      */
-    public function index(): LengthAwarePaginator
+    public function index(Model $model): Collection
     {
         return $this->repository
-//            ->with([
-//                'assignees.user',
-//                'createdBy',
-//            ])
-            ->paginate();
+            ->findWhere([
+                'morph_type' => get_class($model),
+                'morph_id'   => $model->id,
+            ]);
     }
 
     /**

@@ -35,6 +35,19 @@ class BoardController extends Controller
     }
 
     /**
+     * Return listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        $user = \Auth::user();
+        $boards = $this->service->index($user);
+
+        return response($boards);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

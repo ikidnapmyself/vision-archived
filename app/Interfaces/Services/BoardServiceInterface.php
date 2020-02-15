@@ -1,19 +1,20 @@
 <?php
 namespace App\Interfaces\Services;
 
-//use App\Http\Requests\BoardCreateRequest;
-//use App\Http\Requests\BoardUpdateRequest;
 use App\Models\Board;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 interface BoardServiceInterface
 {
     /**
      * Paginate models.
      *
+     * @param Model $model
      * @return LengthAwarePaginator
      */
-    public function index(): LengthAwarePaginator;
+    public function index(Model $model): Collection;
 
     /**
      * Display model.
