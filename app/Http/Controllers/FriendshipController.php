@@ -24,6 +24,17 @@ class FriendshipController extends Controller
         $this->service = $service;
     }
 
+
+    /**
+     * Authenticated user.
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    private function user()
+    {
+        return \Auth::user();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,24 +42,9 @@ class FriendshipController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user();
-
         return view('friendship.index', [
-            'user' => $user->id,
+            'user' => $this->user()->id,
         ]);
-    }
-
-    /**
-     * Return overview of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function overview()
-    {
-        $user   = \Auth::user();
-        $models = $this->service->overview($user->id);
-
-        return response($models);
     }
 
     /**
@@ -59,8 +55,7 @@ class FriendshipController extends Controller
      */
     public function friend()
     {
-        $user   = \Auth::user();
-        $models = $this->service->friends($user->id);
+        $models = $this->service->friends($this->user()->id);
 
         return response($models);
     }
@@ -73,8 +68,7 @@ class FriendshipController extends Controller
      */
     public function pending()
     {
-        $user   = \Auth::user();
-        $models = $this->service->pending($user->id);
+        $models = $this->service->pending($this->user()->id);
 
         return response($models);
     }
@@ -87,8 +81,7 @@ class FriendshipController extends Controller
      */
     public function blocked()
     {
-        $user   = \Auth::user();
-        $models = $this->service->blocked($user->id);
+        $models = $this->service->blocked($this->user()->id);
 
         return response($models);
     }
