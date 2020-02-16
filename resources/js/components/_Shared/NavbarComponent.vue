@@ -1,5 +1,11 @@
 <template>
     <div>
+        <b-input
+            class="m-0 p-3 w-100 bg-dark font-light border-0 rounded-0"
+            :placeholder="$t('partials.navigation.search or run')"
+            size="lg"
+        >
+        </b-input>
         <b-navbar toggleable="md" type="dark" variant="dark">
             <b-navbar-brand href="#">Vision</b-navbar-brand>
 
@@ -31,7 +37,6 @@
                         <b-dropdown-item href="#">RU</b-dropdown-item>
                         <b-dropdown-item href="#">FA</b-dropdown-item>
                     </b-nav-item-dropdown>
-
                     <b-nav-item-dropdown right v-if="user">
                         <!-- Using 'button-content' slot -->
                         <template v-slot:button-content>

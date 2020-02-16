@@ -17,6 +17,7 @@ return [
         'Projects' => 'Projects',
         'Register' => 'Register',
         'Tasks'    => 'Tasks',
+        'search or run'    => 'search or run command...',
     ],
     'search' => [
         'Filter' => 'Filter',
