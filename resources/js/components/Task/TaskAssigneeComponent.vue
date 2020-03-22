@@ -359,7 +359,9 @@
                     .catch(error => {
                         this.toaster('components.task.assignees.Update Failed', 'danger');
                     });
-
+                this.$nextTick(() => {
+                    this.show = false
+                })
             },
             toaster(message, variant = null, vars = null, title = null) {
                 this.$bvToast.toast(this.$t(message, vars), {
