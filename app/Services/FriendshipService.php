@@ -10,12 +10,12 @@ use Illuminate\Support\Collection;
 class FriendshipService implements FriendshipServiceInterface
 {
     /**
-     * @var FriendshipRepository $repository
+     * @var FriendshipRepository
      */
     public $repository;
 
     /**
-     * @var UserServiceInterface $userService
+     * @var UserServiceInterface
      */
     protected $userService;
 
@@ -27,12 +27,12 @@ class FriendshipService implements FriendshipServiceInterface
      */
     public function __construct(FriendshipRepository $repository, UserServiceInterface $userService)
     {
-        $this->repository  = $repository;
+        $this->repository = $repository;
         $this->userService = $userService;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function friends(string $id): Collection
     {
@@ -40,7 +40,7 @@ class FriendshipService implements FriendshipServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function pending(string $id): Collection
     {
@@ -48,7 +48,7 @@ class FriendshipService implements FriendshipServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function blocked(string $id): Collection
     {
