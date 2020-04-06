@@ -26,4 +26,12 @@ class Board extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * Get tasks of a board.
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

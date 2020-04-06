@@ -51,11 +51,19 @@ class BoardService implements BoardServiceInterface
      */
     public function show(string $id): Board
     {
-        return $this->repository
-//            ->with([
-//                'assignees.user',
-//                'createdBy',
-//            ])
+        /**
+         * @var Board $retrieve
+         */
+        $retrieve = $this->repository
+            ->with([
+                'morph',
+                'tasks.createdBy',
+            ])
             ->find($id);
+
+        $grouped = $retrieve->tasks->groupBy('current_status.name');
+        $retrieve->setAttribute('tasks', $grouped);
+
+        return $retrieve;
     }
 }

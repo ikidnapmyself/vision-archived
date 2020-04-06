@@ -22,11 +22,19 @@ class Task extends Model
     ];
 
     /**
+     * Get board.
+     */
+    public function board()
+    {
+        return $this->belongsTo(Board::class);
+    }
+
+    /**
      * Get project.
      */
     public function project()
     {
-        return $this->belongsTo('App\Models\Project');
+        return $this->belongsTo(Project::class);
     }
 
     /**
@@ -34,7 +42,7 @@ class Task extends Model
      */
     public function assignees()
     {
-        return $this->hasMany('App\Models\Assignee', 'task_id');
+        return $this->hasMany(Assignee::class, 'task_id');
     }
 
     /**
@@ -42,7 +50,7 @@ class Task extends Model
      */
     public function createdBy()
     {
-        return $this->hasOne('App\Models\User', 'id', 'created_by');
+        return $this->hasOne(User::class, 'id', 'created_by');
     }
 
     /**
@@ -50,7 +58,7 @@ class Task extends Model
      */
     public function completedBy()
     {
-        return $this->hasOne('App\Models\Assignee', 'completed_by');
+        return $this->hasOne(Assignee::class, 'completed_by');
     }
 
     /**
@@ -58,6 +66,6 @@ class Task extends Model
      */
     public function files()
     {
-        return $this->morphMany('App\Models\File', 'parent');
+        return $this->morphMany(File::class, 'parent');
     }
 }

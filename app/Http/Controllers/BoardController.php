@@ -25,6 +25,16 @@ class BoardController extends Controller
     }
 
     /**
+     * Authenticated user.
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    private function user()
+    {
+        return \Auth::user();
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -41,8 +51,7 @@ class BoardController extends Controller
      */
     public function list()
     {
-        $user = \Auth::user();
-        $boards = $this->service->index($user);
+        $boards = $this->service->index($this->user());
 
         return response($boards);
     }

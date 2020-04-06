@@ -138,6 +138,15 @@ return [
         ],
     ],
 
+    'user' => [
+        'no friend yet' => 'No Friend',
+        'number of friends' => ':friends_length Friends',
+        'no groups yet' => 'No Group',
+        'number of groups' => ':groups_length Groups',
+        'no boards yet' => 'No Board',
+        'number of boards' => ':boards_length Boards',
+    ],
+
     'toaster' => [
         'primary'   => 'Primary',
         'secondary' => 'Secondary',
