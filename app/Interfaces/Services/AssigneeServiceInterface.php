@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use App\Http\Requests\AssigneeCreateRequest;
