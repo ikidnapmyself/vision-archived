@@ -9,12 +9,12 @@ use Illuminate\Support\Collection;
 class StatusService implements StatusServiceInterface
 {
     /**
-     * @var TaskRepository $repository
+     * @var TaskRepository
      */
     public $repository;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): Collection
     {

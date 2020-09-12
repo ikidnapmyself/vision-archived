@@ -34,7 +34,7 @@ class Integration extends Model
      */
     protected $fillable = [
         'user_id', 'provider_name', 'provider_id', 'access_token',
-        'refresh_token', 'profile', 'imported_at', 'exported_at'
+        'refresh_token', 'profile', 'imported_at', 'exported_at',
     ];
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use Illuminate\Support\Collection;
@@ -22,6 +23,7 @@ interface FriendshipServiceInterface
      * @throws \Illuminate\Validation\ValidationException
      */
     public function pending(string $id): Collection;
+
     /**
      * Blocked list of a model.
      *

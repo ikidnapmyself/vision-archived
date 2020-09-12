@@ -34,7 +34,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'full_name'
+        'full_name',
     ];
 
     /**

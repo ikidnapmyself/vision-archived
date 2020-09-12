@@ -5,7 +5,7 @@ return [
      * Allowed statuses.
      */
     'allowed_statuses' => [
-        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed'
+        'inbox', 'backlog', 'todo', 'progressing', 'completed', 'canceled', 'archived', 'deleted', 'failed',
     ],
 
     /*

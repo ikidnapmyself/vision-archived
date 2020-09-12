@@ -14,12 +14,12 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class UserService implements UserServiceInterface
 {
     /**
-     * @var UserRepository $repository
+     * @var UserRepository
      */
     public $repository;
 
     /**
-     * @var IntegrationServiceInterface $integrationService
+     * @var IntegrationServiceInterface
      */
     public $integrationService;
 
@@ -36,7 +36,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index(): LengthAwarePaginator
     {
@@ -44,7 +44,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function show(string $id): User
     {
@@ -52,7 +52,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function integrate(SocialiteUser $socialiteUser, string $provider, ?User $user = null): User
     {
@@ -123,7 +123,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function acceptedFriendships(string $id): Collection
     {
@@ -141,12 +141,12 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function pendingFriendships(string $id): Collection
     {
@@ -164,12 +164,12 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function blockedFriendships(string $id): Collection
     {
@@ -187,7 +187,7 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 }

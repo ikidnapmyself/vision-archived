@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Friendship;
 
 class FriendshipRepository extends Repository
 {
-
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -17,7 +17,7 @@ class FriendshipRepository extends Repository
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function index()
     {
