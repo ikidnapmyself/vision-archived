@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use App\Http\Requests\UserCreateRequest;
@@ -77,6 +78,7 @@ interface UserServiceInterface
      * @throws \Illuminate\Validation\ValidationException
      */
     public function pendingFriendships(string $id): Collection;
+
     /**
      * Blocked friends of an user.
      *
@@ -85,5 +87,4 @@ interface UserServiceInterface
      * @throws \Illuminate\Validation\ValidationException
      */
     public function blockedFriendships(string $id): Collection;
-
 }
