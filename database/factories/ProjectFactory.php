@@ -8,26 +8,23 @@ use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(Project::class, function (Faker $faker) {
-
     $condition = $faker->boolean;
 
-    if($condition)
-    {
-        $now    = Carbon::now();
+    if ($condition) {
+        $now = Carbon::now();
         $future = $faker->boolean;
-        if($future)
-        {
-            $when   = rand(1, 30);
+        if ($future) {
+            $when = rand(1, 30);
             $length = rand(1, 14);
-            $defer  = $faker->boolean ? $now->addDays($when) : null;
-            $due    = (null !== $defer ? $defer : $now)->addDays($length);
+            $defer = $faker->boolean ? $now->addDays($when) : null;
+            $due = (null !== $defer ? $defer : $now)->addDays($length);
         }
     }
 
-    $starred = (boolean) rand(0, 5);
-    $flagged = (boolean) rand(0, 5);
+    $starred = (bool) rand(0, 5);
+    $flagged = (bool) rand(0, 5);
 
-    $board   = Board::inRandomOrder()->first();
+    $board = Board::inRandomOrder()->first();
 
     return [
         'board_id'   => $faker->boolean ? $board->id : null,

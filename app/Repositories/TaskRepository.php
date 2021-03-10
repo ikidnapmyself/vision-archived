@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Task;
 
 class TaskRepository extends Repository
 {
-
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
