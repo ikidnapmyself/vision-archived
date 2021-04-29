@@ -14,12 +14,12 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class UserService implements UserServiceInterface
 {
     /**
-     * @var UserRepository $repository
+     * @var UserRepository
      */
     public $repository;
 
     /**
-     * @var IntegrationServiceInterface $integrationService
+     * @var IntegrationServiceInterface
      */
     public $integrationService;
 
@@ -141,7 +141,7 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
@@ -164,7 +164,7 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
@@ -187,7 +187,7 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 }
