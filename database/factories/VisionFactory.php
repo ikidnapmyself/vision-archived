@@ -5,7 +5,6 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Vision::class, function (Faker $faker) {
-
     $creator = \App\Models\User::inRandomOrder()->first()->id;
 
     return [

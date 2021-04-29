@@ -12,7 +12,7 @@ class FriendshipsTableSeeder extends Seeder
      */
     public function run()
     {
-        $test     = User::where('email', 'test@test.com')->first();
+        $test = User::where('email', 'test@test.com')->first();
         User::all()->each(function ($user) use ($test) {
             /**
              * @var User $test
@@ -24,7 +24,7 @@ class FriendshipsTableSeeder extends Seeder
 
         for ($count = 0; $count < 350; $count++) {
             /** @var User $sender */
-            $sender    = User::inRandomOrder()->first();
+            $sender = User::inRandomOrder()->first();
             /** @var User $recipient */
             $recipient = User::inRandomOrder()->first();
 

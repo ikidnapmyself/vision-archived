@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Project;
 
 class ProjectRepository extends Repository
 {
-
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */

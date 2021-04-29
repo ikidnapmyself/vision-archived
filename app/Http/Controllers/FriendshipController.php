@@ -24,7 +24,6 @@ class FriendshipController extends Controller
         $this->service = $service;
     }
 
-
     /**
      * Authenticated user.
      *

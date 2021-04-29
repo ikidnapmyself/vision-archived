@@ -13,7 +13,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class AssigneeService implements AssigneeServiceInterface
 {
     /**
-     * @var AssigneeRepository $repository
+     * @var AssigneeRepository
      */
     public $repository;
 
