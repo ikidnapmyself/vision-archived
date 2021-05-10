@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class BoardService implements BoardServiceInterface
 {
     /**
-     * @var BoardRepository $repository
+     * @var BoardRepository
      */
     public $repository;
 
