@@ -18,9 +18,9 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $name    = $faker->firstName;
+    $name = $faker->firstName;
     $surname = $faker->lastName;
-    $email   = Str::slug("{$name} {$surname}", '.');
+    $email = Str::slug("{$name} {$surname}", '.');
 
     return [
         'name'              => $name,
