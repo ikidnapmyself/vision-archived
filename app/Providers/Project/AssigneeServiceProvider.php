@@ -5,8 +5,8 @@ namespace App\Providers\Project;
 use App\Models\Assignee;
 use App\Repositories\AssigneeRepository;
 use App\Services\AssigneeService;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
 
 class AssigneeServiceProvider extends ServiceProvider
 {
@@ -33,7 +33,7 @@ class AssigneeServiceProvider extends ServiceProvider
     {
         Validator::extend('assigned', function ($attribute, $value, $parameters, $validator) {
             $count = Assignee::where(function ($q) use ($validator, $parameters) {
-                $where  = [];
+                $where = [];
 
                 foreach ($parameters as $parameter) {
                     $where[$parameter] = $validator->getData()[$parameter] ?? false;
@@ -42,7 +42,7 @@ class AssigneeServiceProvider extends ServiceProvider
                 $q->where($where);
             })->count();
 
-            return !$count;
+            return ! $count;
         });
     }
 }
