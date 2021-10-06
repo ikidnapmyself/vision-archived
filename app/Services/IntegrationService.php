@@ -11,14 +11,14 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class IntegrationService implements IntegrationServiceInterface
 {
     /**
-     * @var IntegrationRepository $repository
+     * @var IntegrationRepository
      */
     public $repository;
 
     /**
      * IntegrationService constructor.
      *
-     * @param IntegrationRepository $repository
+     * @param  IntegrationRepository  $repository
      */
     public function __construct(IntegrationRepository $repository)
     {
