@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class BoardService implements BoardServiceInterface
 {
     /**
-     * @var BoardRepository $repository
+     * @var BoardRepository
      */
     public $repository;
 
@@ -27,7 +27,7 @@ class BoardService implements BoardServiceInterface
     /**
      * BoardService constructor.
      *
-     * @param BoardRepository $repository
+     * @param  BoardRepository  $repository
      */
     public function __construct(BoardRepository $repository)
     {
