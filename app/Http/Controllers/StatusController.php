@@ -16,12 +16,13 @@ class StatusController extends Controller
     /**
      * StatusController constructor.
      *
-     * @param StatusServiceInterface $service
+     * @param  StatusServiceInterface  $service
      */
     public function __construct(StatusServiceInterface $service)
     {
         $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *
