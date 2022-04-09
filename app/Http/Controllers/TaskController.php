@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
@@ -17,7 +18,7 @@ class TaskController extends Controller
     /**
      * TaskController constructor.
      *
-     * @param TaskServiceInterface $service
+     * @param  TaskServiceInterface  $service
      */
     public function __construct(TaskServiceInterface $service)
     {
@@ -59,8 +60,9 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param TaskRequest $request
+     * @param  TaskRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(TaskRequest $request)
@@ -81,16 +83,17 @@ class TaskController extends Controller
     public function show(string $id)
     {
         return view('task.show', [
-            'task'    => $this->service->show($id)
+            'task'    => $this->service->show($id),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param TaskRequest $request
-     * @param string $id
+     * @param  TaskRequest  $request
+     * @param  string  $id
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function update(TaskRequest $request, string $id)
@@ -103,9 +106,10 @@ class TaskController extends Controller
     /**
      * Update status of a resource.
      *
-     * @param TaskStatusRequest $request
-     * @param string $task
+     * @param  TaskStatusRequest  $request
+     * @param  string  $task
      * @return \Illuminate\Http\Response
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function status(TaskStatusRequest $request, string $task)

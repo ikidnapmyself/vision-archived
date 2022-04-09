@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
     /**
      * User service.
      *
@@ -15,11 +14,10 @@ class UserController extends Controller
      */
     private $service;
 
-
     /**
      * UserController constructor.
      *
-     * @param UserServiceInterface $service
+     * @param  UserServiceInterface  $service
      */
     public function __construct(UserServiceInterface $service)
     {
@@ -34,7 +32,7 @@ class UserController extends Controller
     public function index()
     {
         return view('user.index', [
-            'users'   => $this->service->index()
+            'users'   => $this->service->index(),
         ]);
     }
 
@@ -80,7 +78,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         return view('user.show', [
-            'user' => $this->service->show($id)
+            'user' => $this->service->show($id),
         ]);
     }
 

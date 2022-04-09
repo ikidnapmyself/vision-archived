@@ -15,12 +15,12 @@ use Illuminate\Support\Arr;
 class TaskService implements TaskServiceInterface
 {
     /**
-     * @var TaskRepository $repository
+     * @var TaskRepository
      */
     public $repository;
 
     /**
-     * @var AssigneeServiceInterface $assigneeService
+     * @var AssigneeServiceInterface
      */
     public $assigneeService;
 
@@ -36,8 +36,8 @@ class TaskService implements TaskServiceInterface
     /**
      * TaskService constructor.
      *
-     * @param TaskRepository $repository
-     * @param AssigneeServiceInterface $assigneeService
+     * @param  TaskRepository  $repository
+     * @param  AssigneeServiceInterface  $assigneeService
      */
     public function __construct(TaskRepository $repository, AssigneeServiceInterface $assigneeService)
     {
@@ -104,15 +104,16 @@ class TaskService implements TaskServiceInterface
 
     /**
      * @inheritDoc
+     *
      * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function status(TaskStatusRequest $status, string $id): Task
     {
-        $valid    = $status->validated();
+        $valid = $status->validated();
         /**
          * @var Task $task
          */
-        $task     = $this->repository->find($id);
+        $task = $this->repository->find($id);
         $assignee = Arr::get($valid, 'assignee', false);
         $relation = null;
 
