@@ -16,7 +16,7 @@ class HomeController extends Controller
     /**
      * TaskController constructor.
      *
-     * @param TaskServiceInterface $service
+     * @param  TaskServiceInterface  $service
      */
     public function __construct(TaskServiceInterface $service)
     {
