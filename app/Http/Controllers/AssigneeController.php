@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AssigneeCreateRequest;
 use App\Http\Requests\AssigneeUpdateRequest;
-use App\Models\Assignee;
 use App\Interfaces\Services\AssigneeServiceInterface;
+use App\Models\Assignee;
 
 class AssigneeController extends Controller
 {
@@ -19,7 +19,7 @@ class AssigneeController extends Controller
     /**
      * AssigneeController constructor.
      *
-     * @param AssigneeServiceInterface $service
+     * @param  AssigneeServiceInterface  $service
      */
     public function __construct(AssigneeServiceInterface $service)
     {
@@ -49,8 +49,9 @@ class AssigneeController extends Controller
     /**
      * Assign the specified resource in storage.
      *
-     * @param AssigneeCreateRequest $request
+     * @param  AssigneeCreateRequest  $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(AssigneeCreateRequest $request)
@@ -85,9 +86,10 @@ class AssigneeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AssigneeUpdateRequest $request
-     * @param string $assignee
+     * @param  AssigneeUpdateRequest  $request
+     * @param  string  $assignee
      * @return \Illuminate\Http\Response
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function update(AssigneeUpdateRequest $request, string $assignee)
@@ -100,7 +102,7 @@ class AssigneeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string $assignee
+     * @param  string  $assignee
      * @return \Illuminate\Http\Response
      */
     public function destroy(string $assignee)

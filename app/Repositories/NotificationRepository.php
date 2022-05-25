@@ -1,16 +1,17 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Notification;
 
-class NotificationRepository extends Repository {
-
+class NotificationRepository extends Repository
+{
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
-    function model()
+    public function model()
     {
         return Notification::class;
     }
