@@ -14,7 +14,7 @@ return [
             and organizations. Also required for starring public repositories.',
             'read-user' => 'Grants access to read a user\'s profile data.',
             'read-org' => 'Read-only access to organization membership, organization projects, and team membership.',
-        ]
+        ],
     ],
     'hue' => [
         'name' => 'Philips Hue',

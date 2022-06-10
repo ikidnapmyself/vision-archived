@@ -17,13 +17,12 @@ class FriendshipController extends Controller
     /**
      * FriendshipController constructor.
      *
-     * @param FriendshipServiceInterface $service
+     * @param  FriendshipServiceInterface  $service
      */
     public function __construct(FriendshipServiceInterface $service)
     {
         $this->service = $service;
     }
-
 
     /**
      * Authenticated user.
@@ -51,6 +50,7 @@ class FriendshipController extends Controller
      * Return listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function friend()
@@ -64,6 +64,7 @@ class FriendshipController extends Controller
      * Return listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function pending()
@@ -77,6 +78,7 @@ class FriendshipController extends Controller
      * Return listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function blocked()
