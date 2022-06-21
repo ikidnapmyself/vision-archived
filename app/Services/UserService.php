@@ -14,20 +14,20 @@ use Laravel\Socialite\Contracts\User as SocialiteUser;
 class UserService implements UserServiceInterface
 {
     /**
-     * @var UserRepository $repository
+     * @var UserRepository
      */
     public $repository;
 
     /**
-     * @var IntegrationServiceInterface $integrationService
+     * @var IntegrationServiceInterface
      */
     public $integrationService;
 
     /**
      * UserService constructor.
      *
-     * @param UserRepository $repository
-     * @param IntegrationServiceInterface $integrationService
+     * @param  UserRepository  $repository
+     * @param  IntegrationServiceInterface  $integrationService
      */
     public function __construct(UserRepository $repository, IntegrationServiceInterface $integrationService)
     {
@@ -88,8 +88,9 @@ class UserService implements UserServiceInterface
     /**
      * Update a model.
      *
-     * @param string $id
+     * @param  string  $id
      * @return User
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(string $id): User
@@ -100,7 +101,7 @@ class UserService implements UserServiceInterface
     /**
      * Create a model to integrate a service.
      *
-     * @param string $user
+     * @param  string  $user
      * @return Collection
      */
     public function integrations(string $user): Collection
@@ -113,8 +114,9 @@ class UserService implements UserServiceInterface
     /**
      * Utilize repository to create a model.
      *
-     * @param UserCreateRequest $request
+     * @param  UserCreateRequest  $request
      * @return User
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function create(UserCreateRequest $request): User
@@ -141,7 +143,7 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
@@ -164,7 +166,7 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 
@@ -187,7 +189,7 @@ class UserService implements UserServiceInterface
                  * @var \Illuminate\Database\Query\Builder $query
                  */
                 $query->where('id', '!=', $id);
-            }
+            },
         ]);
     }
 }
