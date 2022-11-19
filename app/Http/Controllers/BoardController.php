@@ -17,7 +17,7 @@ class BoardController extends Controller
     /**
      * BoardController constructor.
      *
-     * @param BoardServiceInterface $service
+     * @param  BoardServiceInterface  $service
      */
     public function __construct(BoardServiceInterface $service)
     {
@@ -70,7 +70,7 @@ class BoardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
     public function show(string $id)

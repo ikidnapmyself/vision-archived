@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use App\Http\Requests\AssigneeCreateRequest;
@@ -10,7 +11,7 @@ interface AssigneeServiceInterface
     /**
      * Display model.
      *
-     * @param string $id
+     * @param  string  $id
      * @return Assignee
      */
     public function show(string $id): Assignee;
@@ -18,8 +19,9 @@ interface AssigneeServiceInterface
     /**
      * Assign a model.
      *
-     * @param AssigneeCreateRequest $request
+     * @param  AssigneeCreateRequest  $request
      * @return Assignee
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function create(AssigneeCreateRequest $request): Assignee;
@@ -27,9 +29,10 @@ interface AssigneeServiceInterface
     /**
      * Update a model.
      *
-     * @param AssigneeUpdateRequest $request
-     * @param string $id
+     * @param  AssigneeUpdateRequest  $request
+     * @param  string  $id
      * @return Assignee
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(AssigneeUpdateRequest $request, string $id): Assignee;
@@ -37,7 +40,7 @@ interface AssigneeServiceInterface
     /**
      * Unassign a model.
      *
-     * @param string $id
+     * @param  string  $id
      * @return Assignee
      */
     public function delete(string $id): Assignee;
@@ -45,7 +48,7 @@ interface AssigneeServiceInterface
     /**
      * Set completed at field.
      *
-     * @param string $assignee
+     * @param  string  $assignee
      * @return bool
      */
     public function complete(string $assignee): bool;
@@ -53,7 +56,7 @@ interface AssigneeServiceInterface
     /**
      * Set completed at field null.
      *
-     * @param string $assignee
+     * @param  string  $assignee
      * @return bool
      */
     public function incomplete(string $assignee): bool;
