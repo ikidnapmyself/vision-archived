@@ -31,13 +31,13 @@ class Assignee extends Model
         'completed_at',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
      * Make the field human readable.
      *
-     * @var string $date_field
+     * @var string
      */
     protected $date_field = 'due';
 
@@ -59,6 +59,7 @@ class Assignee extends Model
      * Determine if assignation has been expired.
      *
      * @return bool
+     *
      * @throws \Exception
      */
     public function getExpiredAttribute(): bool
@@ -74,6 +75,7 @@ class Assignee extends Model
      * Calculates due date - estimated time.
      *
      * @return null|string
+     *
      * @throws \Exception
      */
     public function getMustStartUntilAttribute(): ?string
@@ -92,6 +94,7 @@ class Assignee extends Model
      * Determine if assignation is deferred.
      *
      * @return bool
+     *
      * @throws \Exception
      */
     public function getDeferredAttribute(): bool
