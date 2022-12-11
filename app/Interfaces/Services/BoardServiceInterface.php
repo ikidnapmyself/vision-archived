@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use App\Models\Board;
@@ -11,7 +12,7 @@ interface BoardServiceInterface
     /**
      * Paginate models.
      *
-     * @param Model $model
+     * @param  Model  $model
      * @return LengthAwarePaginator
      */
     public function index(Model $model): Collection;
@@ -19,7 +20,7 @@ interface BoardServiceInterface
     /**
      * Display model.
      *
-     * @param string $id
+     * @param  string  $id
      * @return Board
      */
     public function show(string $id): Board;
@@ -27,8 +28,9 @@ interface BoardServiceInterface
     /**
      * Assign a model.
      *
-     * @param BoardCreateRequest $request
+     * @param  BoardCreateRequest  $request
      * @return Board
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
 //    public function create(BoardCreateRequest $request): Board;
@@ -36,9 +38,10 @@ interface BoardServiceInterface
     /**
      * Update a model.
      *
-     * @param BoardUpdateRequest $request
-     * @param string $id
+     * @param  BoardUpdateRequest  $request
+     * @param  string  $id
      * @return Board
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
 //    public function update(BoardUpdateRequest $request, string $id): Board;
@@ -46,7 +49,7 @@ interface BoardServiceInterface
     /**
      * Unassign a model.
      *
-     * @param string $id
+     * @param  string  $id
      * @return Board
      */
 //    public function delete(string $id): Board;

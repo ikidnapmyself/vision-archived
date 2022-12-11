@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use App\Http\Requests\TaskRequest;
@@ -18,7 +19,7 @@ interface TaskServiceInterface
     /**
      * Display model.
      *
-     * @param string $id
+     * @param  string  $id
      * @return Task
      */
     public function show(string $id): Task;
@@ -26,8 +27,9 @@ interface TaskServiceInterface
     /**
      * Utilize repository to create a model.
      *
-     * @param TaskRequest $taskRequest,
+     * @param  TaskRequest  $taskRequest,
      * @return Task
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function create(TaskRequest $taskRequest): Task;
@@ -35,9 +37,10 @@ interface TaskServiceInterface
     /**
      * Update a model.
      *
-     * @param TaskRequest $taskRequest
-     * @param string $id
+     * @param  TaskRequest  $taskRequest
+     * @param  string  $id
      * @return Task
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(TaskRequest $taskRequest, string $id): Task;
@@ -45,7 +48,7 @@ interface TaskServiceInterface
     /**
      * Delete a model.
      *
-     * @param string $id
+     * @param  string  $id
      * @return Task
      */
     public function delete(string $id): Task;
@@ -53,9 +56,10 @@ interface TaskServiceInterface
     /**
      * Set status of a model.
      *
-     * @param TaskStatusRequest $request
-     * @param string $id
+     * @param  TaskStatusRequest  $request
+     * @param  string  $id
      * @return Task
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function status(TaskStatusRequest $request, string $id): Task;
