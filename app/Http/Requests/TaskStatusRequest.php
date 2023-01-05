@@ -22,21 +22,21 @@ class TaskStatusRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @param TaskServiceInterface $service
+     * @param  TaskServiceInterface  $service
      * @return array
      */
     public function rules(TaskServiceInterface $service)
     {
-        $task_id   = $this->route('task');
-        $task      = $service->show($task_id);
+        $task_id = $this->route('task');
+        $task = $service->show($task_id);
         $completed = Status::COMPLETED;
-        $allowed   = implode(',', $task->availableStatuses());
+        $allowed = implode(',', $task->availableStatuses());
 
         return [
             'status'     => "required|in:{$allowed}",
             'reason'     => [
                 Rule::requiredIf($task->status()->name === $completed),
-                'max:100'
+                'max:100',
             ],
             'assignee'   => "required_if:status,{$completed}|exists:App\Models\Assignee,id,task_id,{$task_id}",
         ];

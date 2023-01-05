@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces\Services;
 
 use App\Models\Integration;
@@ -10,8 +11,8 @@ interface IntegrationServiceInterface
     /**
      * Determine if this integration exists.
      *
-     * @param SocialiteUser $user
-     * @param string $provider
+     * @param  SocialiteUser  $user
+     * @param  string  $provider
      * @return bool
      */
     public function exists(SocialiteUser $user, string $provider): bool;
@@ -19,9 +20,9 @@ interface IntegrationServiceInterface
     /**
      * Integrate and link to an account.
      *
-     * @param User $user
-     * @param SocialiteUser $socialiteUser
-     * @param string $provider
+     * @param  User  $user
+     * @param  SocialiteUser  $socialiteUser
+     * @param  string  $provider
      * @return Integration
      */
     public function integrate(User $user, SocialiteUser $socialiteUser, string $provider): Integration;
@@ -29,8 +30,8 @@ interface IntegrationServiceInterface
     /**
      * Retrieve user.
      *
-     * @param SocialiteUser $user
-     * @param string $provider
+     * @param  SocialiteUser  $user
+     * @param  string  $provider
      * @return Integration
      */
     public function retrieve(SocialiteUser $user, string $provider): Integration;
