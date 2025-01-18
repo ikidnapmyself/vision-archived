@@ -22,15 +22,6 @@
         "spatie/laravel-model-status": "^1.9",
         "spatie/laravel-permission": "^3.2"
     },
-    "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.6",
-        "facade/ignition": "^1.4",
-        "fzaninotto/faker": "^1.4",
-        "martinlindhe/laravel-vue-i18n-generator": "^0.1.42",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
-    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
