@@ -18,7 +18,7 @@
         "laravel/ui": "^1.1",
         "prettus/l5-repository": "^2.6",
         "rackbeat/laravel-ui-avatars": "^0.8.4",
-        "socialiteproviders/github": "dev-master",
+        "socialiteproviders/github": "4.1.0",
         "spatie/laravel-model-status": "^1.9",
         "spatie/laravel-permission": "^3.2"
     },
@@ -51,8 +51,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan vue-i18n:generate"
+            "@php artisan package:discover --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
