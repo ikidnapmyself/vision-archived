@@ -10,7 +10,6 @@ window.Vue = require('vue');
 
 import BootstrapVue from 'bootstrap-vue'
 import Clipboard from 'v-clipboard'
-import Grid from 'simple-xgrid'
 import Locale from './vue-i18n-locales.generated';
 import Skeleton from 'tb-skeleton'
 import VueInternationalization from 'vue-i18n';
@@ -32,7 +31,6 @@ Vue.component('b-typeahead', VueBootstrapTypeahead)
 
 Vue.use(BootstrapVue)
 Vue.use(Clipboard)
-Vue.use(Grid)
 Vue.use(Skeleton)
 Vue.use(VueInternationalization)
 Vue.use(VueGridLayout)
