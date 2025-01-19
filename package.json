@@ -26,8 +26,6 @@
     "dependencies": {
         "bootstrap-vue": "^2.1.0",
         "moment": "^2.24.0",
-        "simple-grid": "^1.0.1",
-        "simple-xgrid": "^1.2.5",
         "tb-skeleton": "^0.3.6",
         "v-clipboard": "^2.2.2",
         "vue-bootstrap-typeahead": "^0.2.6",
