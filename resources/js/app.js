@@ -10,7 +10,6 @@ window.Vue = require('vue');
 
 import BootstrapVue from 'bootstrap-vue'
 import Clipboard from 'v-clipboard'
-import Locale from './vue-i18n-locales.generated';
 import Skeleton from 'tb-skeleton'
 import VueInternationalization from 'vue-i18n';
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
